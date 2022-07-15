@@ -1,0 +1,25 @@
+.all-stuff {
+  font-size: 0.6em;
+}
+
+header .title {
+  padding-top: 50px;
+}
+
+header .title span {
+  color: green;
+  font-family: Arial, sans-serif;
+  font-size: 3rem;
+}
+
+.box {
+  padding: 6px;
+  margin: 6px;
+  border: solid 1px silver;
+  border-radius: 16px;
+}
+
+.box img {
+  height: 200px;
+  width: 200px;
+}

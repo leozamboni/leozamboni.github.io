@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>leonardo</title>
+<style>
+
+footer {
+text-align: center;
+}
+
+</style>
+<link rel="stylesheet" href="../template/styles/global.css">
+<link rel="stylesheet" href="../template/styles/posts.css">
+</head>
+<html><body><h1 id="baixarinstalarecustomizarosucklessterminal">Baixar, instalar e customizar o suckless terminal</h1>
+<h1 id="sucklessterminal">Suckless Terminal</h1>
+<p>antes de tudo se você nunca ouviu falar no <a href="https://st.suckless.org/">suckless terminal</a>, também conhecido como simple terminal ou simplesmente st, ele é um emulador de terminal para <a href="https://en.wikipedia.org/wiki/X_Window_System">X Window System</a> escrito em C que tem como motivacão criar um terminal simples para substituir o <a href="https://en.wikipedia.org/wiki/Xterm">xterm</a> e o <a href="https://en.wikipedia.org/wiki/Rxvt">rxvt</a>.</p>
+<h1 id="baixareinstalar">Baixar e Instalar</h1>
+<p>para baixar e instalar você vai precisar dos pacotes build-essential (base-devel no arch) e git</p>
+<p>| Debian | Arch | 
+|---|---|
+| <code>sudo apt install build-essential git</code> | <code>sudo pacman -S base-devel git</code>   |</p>
+<p>para baixar, clone o repositório oficial em algum lugar que você desejar no seu computador</p>
+<pre><code>git clone https://git.suckless.org/st
+</code></pre>
+<p>para instalar compile</p>
+<pre><code>sudo make clean install
+</code></pre>
+<p>pronto, agora é só digitar <code>st</code> para abrir</p>
+<h1 id="configuracesecustomizaces">Configuracões e Customizacões</h1>
+<p>o arquivo de configuracão <code>config.h</code> é localizado dentro do repositório.
+<em>lembrando que assim como xterm ele é um terminal compatível com X então você também pode usar .Xresources</em></p>
+<p>dentro dele você encontra uma váriavel para cada um dos vários aspectos do terminal como: font, shell, tabspaces, …</p>
+<p>aqui vamos trocar a fonte do terminal mas o processo é o mesmo para fazer qualquer outra customizacão, inclusive 
+o próprio site oferece vários <a href="https://st.suckless.org/patches/">conjuntos de alteracões</a> (patch) que você pode instalar, basta baixar o arquivo .diff (utilizando wget ou salvando com o botão direito no link) dentro do repo e aplicar as alteracões com o comando</p>
+<pre><code>patch -i nome-do-patch.diff
+</code></pre>
+<p>e seguir o mesmo passo para alteracões no arquivo:</p>
+<p>Para trocar a fonte vamos alterar a variável <code>static char *font</code>
+na mesma string podemos alterar algumas outras configuracões da fonte como pixel size, antialias e font hinting. Vou usar minha fonte favorita <a href="https://dtinth.github.io/comic-mono-font/">Comic Mono</a></p>
+<p>{% highlight c %}
+static char *font = "Comic Mono:pixelsize=12:antialias=false:autohint=false"; 
+{% endhighlight %}</p>
+<p>após isso basta salvar o arquivo e recompilar o terminal</p>
+<pre><code>sudo make clean install
+</code></pre>
+<p>no caso dos patches, antes de recompilar você deve <a href="https://git-scm.com/book/pt-br/v2/Branches-no-Git-O-b%C3%A1sico-de-Ramifica%C3%A7%C3%A3o-Branch-e-Mesclagem-Merge#r_basic_merge_conflicts">resolver os arquivos conflitantes</a></p>
+<footer>
+<hr>
+<!-- page meta infos -->
+<p>page generated 15/07/2022 using <a href="https://github.com/leozamboni/ws-gen">ws-gen</a>.</p>
+<p>2022 © Leonardo Z. N.</p>
+</footer>
+</body></html>

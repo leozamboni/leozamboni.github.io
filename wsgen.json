@@ -1,0 +1,15 @@
+{
+  "title": "leonardo",
+  "outputdir": "./",
+  "assetsdir": "./assets/",
+  "template": {
+    "path": "ws-gen/src/template/css/"
+  },
+  "index": {
+    "template": "index.css"
+  },
+  "posts": { 
+    "path": "./posts-md/",
+    "template": "posts.css"
+  }
+}
