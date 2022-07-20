@@ -1,5 +1,9 @@
-# HolyC Interpreter
-
+---
+layout: post
+title:  "HolyC Interpreter"
+date:   2022-03-01 20:10:46 -0300
+categories: compilers holyc javascript
+---
 I've been writing a HolyC interpreter in JavaScript just for fun, my motivation came after a long interest in Terry Davis and TempleOS I really find him and his work fascinating and it inspires me to create my own universe inside a computer.
 
 My goal is to contribute to your work in such a way that when someone arrives here, randomly or intentionally, they can know and/or delve into the language in which the temple of God was written.

@@ -1,0 +1,97 @@
+:root {
+  --comic-mono-font: url(assets/ComicMono.ttf);
+  --background-color: #fff3dd;
+  --fetch-background-color: #a18e72;
+  --icons-color: #6a784a;
+}
+
+@font-face {
+  font-family: 'Comic Mono';
+  src: url(assets/ComicMono.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+header {
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 3vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline dotted 2px;
+}
+
+header .nav-bar ul li {
+  display: inline-block;
+  padding-inline: 2vw;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+main .container {
+  padding-top: 4vh;
+  height: 600px;
+  width: 500px;
+}
+
+main .container .fetch {
+  font-family: 'Comic Mono';
+  background-color: var(--fetch-background-color);
+  border-radius: 25px;
+  height: 250px;
+  width: 100%;
+}
+
+main .container .distro {
+  float: left;
+  padding-left: 10px;
+  height: 100%;
+  width: 50%;
+}
+
+main .container .info ul {
+  padding: 20px 0 0 60%;
+  list-style: none;
+}
+
+main .container .social {
+  padding-top: 1vh;
+}
+
+main .container .social ul {
+  list-style: none;
+}
+
+main .container .social ul li {
+  display: inline-block;
+ 
+}
+
+.emojis {
+  height: 1em;
+  vertical-align: middle;
+}
+
+.icons {
+  color: var(--icons-color) !important;
+}

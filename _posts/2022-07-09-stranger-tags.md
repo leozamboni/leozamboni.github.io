@@ -1,5 +1,9 @@
-# Stranger Tags: HTML tags you maybe missed
-
+---
+layout: post
+title:  "Stranger Tags: HTML tags you maybe missed"
+date:   2022-07-09 20:10:46 -0300
+categories: web html
+---
 HTML started in 1991 and here are some tags you may not have known about:
 
 # HTML 1: ```<ISINDEX>``` (Deprecated)

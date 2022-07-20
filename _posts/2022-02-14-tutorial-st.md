@@ -1,6 +1,9 @@
-# Baixar, instalar e customizar o suckless terminal
-
-# Suckless Terminal
+---
+layout: post
+title:  "Baixar, instalar e customizar o suckless terminal"
+date:   2022-02-14 20:10:46 -0300
+categories: tutorials C 
+---
 antes de tudo se você nunca ouviu falar no [suckless terminal](https://st.suckless.org/), também conhecido como simple terminal ou simplesmente st, ele é um emulador de terminal para [X Window System](https://en.wikipedia.org/wiki/X_Window_System) escrito em C que tem como motivacão criar um terminal simples para substituir o [xterm](https://en.wikipedia.org/wiki/Xterm) e o [rxvt](https://en.wikipedia.org/wiki/Rxvt).
 
 # Baixar e Instalar
