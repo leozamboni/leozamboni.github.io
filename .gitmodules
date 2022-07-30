@@ -1,0 +1,3 @@
+[submodule "fav-albums"] 
+  path = fav-albums
+  url = https://git.leonardo.moe/leonardo/fav-albums
