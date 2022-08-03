@@ -1,102 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/43be276975.js" crossorigin="anonymous"></script>
-  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-  <title>Leonardo</title>
-</head>
-
-<body>
-  <header>
-    <div class="nav-bar">
+---
+layout: index
+---
+<div class="container">
+  <div class="fetch">
+    <div class="distro">
+      <svg style="color: #7da4b6;" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <title>NixOS</title>
+        <path
+          d="M7.352 1.592l-1.364.002L5.32 2.75l1.557 2.713-3.137-.008-1.32 2.34H14.11l-1.353-2.332-3.192-.006-2.214-3.865zm6.175 0l-2.687.025 5.846 10.127 1.341-2.34-1.59-2.765 2.24-3.85-.683-1.182h-1.336l-1.57 2.705-1.56-2.72zm6.887 4.195l-5.846 10.125 2.696-.008 1.601-2.76 4.453.016.682-1.183-.666-1.157-3.13-.008L21.778 8.1l-1.365-2.313zM9.432 8.086l-2.696.008-1.601 2.76-4.453-.016L0 12.02l.666 1.157 3.13.008-1.575 2.71 1.365 2.315L9.432 8.086zM7.33 12.25l-.006.01-.002-.004-1.342 2.34 1.59 2.765-2.24 3.85.684 1.182H7.35l.004-.006h.001l1.567-2.698 1.558 2.72 2.688-.026-.004-.006h.01L7.33 12.25zm2.55 3.93l1.354 2.332 3.192.006 2.215 3.865 1.363-.002.668-1.156-1.557-2.713 3.137.008 1.32-2.34H9.881Z"
+          fill="#7da4b6"></path>
+      </svg>
+    </div>
+    <div class="info">
       <ul>
-        <li title="me">
-          <h1>Leonardo</h1>
+        <li title="software that I use">
+          <p>Software</p>
         </li>
-        <li title="not yet">
-          <a href="/about.html">About</a>
+        <li title="OS">
+          <p>NixOS</p>
         </li>
-        <li title="not yet">
-          <a href="">Projects</a>
+        <li title="WM">
+          <p>Window manager: dwm</p>
         </li>
-        <li title="my blog">
-          <a href="/blog">Posts</a>
+        <li title="Shell">
+          <p>Shell: fish</p>
         </li>
-        <li title="Page source code">
-          <i class="fa fa-github fab"></i> <a href="https://github.com/leozamboni/leozamboni.github.io">Source</a>
+        <li title="Terminal">
+          <p>Terminal: kitty</p>
+        </li>
+        <li title="Code font">
+          <p>Font: <a href="https://tosche.net/fonts/comic-code">Comic Code</a></p>
+        </li>
+        <li title="Code editor">
+          <p>Editor: Emacs</p>
         </li>
       </ul>
     </div>
-  </header>
-  <main>
-    <div class="container">
-      <div class="fetch">
-        <div class="distro">
-          <svg style="color: #7da4b6;" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <title>NixOS</title>
-            <path
-              d="M7.352 1.592l-1.364.002L5.32 2.75l1.557 2.713-3.137-.008-1.32 2.34H14.11l-1.353-2.332-3.192-.006-2.214-3.865zm6.175 0l-2.687.025 5.846 10.127 1.341-2.34-1.59-2.765 2.24-3.85-.683-1.182h-1.336l-1.57 2.705-1.56-2.72zm6.887 4.195l-5.846 10.125 2.696-.008 1.601-2.76 4.453.016.682-1.183-.666-1.157-3.13-.008L21.778 8.1l-1.365-2.313zM9.432 8.086l-2.696.008-1.601 2.76-4.453-.016L0 12.02l.666 1.157 3.13.008-1.575 2.71 1.365 2.315L9.432 8.086zM7.33 12.25l-.006.01-.002-.004-1.342 2.34 1.59 2.765-2.24 3.85.684 1.182H7.35l.004-.006h.001l1.567-2.698 1.558 2.72 2.688-.026-.004-.006h.01L7.33 12.25zm2.55 3.93l1.354 2.332 3.192.006 2.215 3.865 1.363-.002.668-1.156-1.557-2.713 3.137.008 1.32-2.34H9.881Z"
-              fill="#7da4b6"></path>
-          </svg>
-        </div>
-        <div class="info">
-          <ul>
-            <li title="software that I use">
-              <p>Software</p>
-            </li>
-            <li title="os">
-              <p>NixOS</p>
-            </li>
-            <li title="wm">
-              <p>Window manager: dwm</p>
-            </li>
-            <li title="shell">
-              <p>Shell: fish</p>
-            </li>
-            <li title="terminal">
-              <p>Terminal: kitty</p>
-            </li>
-            <li title="terminal font">
-              <p>Font: <a href="https://dtinth.github.io/comic-mono-font/">Comic Mono</a></p>
-            </li>
-            <li title="code editor">
-              <p>Editor: Neovim</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <ul class="reach-me">
-        <li title="irc server">
-          <p>IRC: leonardo in #main on irc.leonardo.moe <span>Safe place, be kind</span></p>
-        </li>
-      </ul>
-      <div class="social">
-        <ul>
-          <li title="Git">
-            <a class="icons" href="https://git.leonardo.moe/leonardo"><i class="fa-git-alt fab"></i></a>
-          </li>
-          <li title="GitHub">
-            <a class="icons" href="https://github.com/leozamboni"><i class="fa-github fab"></i></a>
-          </li>
-          <li title="Twitter">
-            <a class="icons" href="https://twitter.com/intent/user?user_id=4700433616"><i class="fa-twitter fab"></i></a>
-          </li>
-          <li title="Arco-íris">
-            &#127987;&#65039;&#8205;&#127752;
-          </li>
-        </ul>
-      </div>
-    </div>
-  </main>
-  <script>
-    twemoji.parse(document.body, {
-      className: "emojis",
-    });
-  </script>
-</body>
-
-</html>
+  </div>
+  <ul class="reach-me">
+    <li title="IRC server">
+      <p>IRC: leonardo in #main on irc.leonardo.moe</p>
+    </li>
+  </ul>
+  <div class="social">
+    <ul>
+      <li title="Git">
+        <a class="icons" href="https://git.leonardo.moe/leonardo"><i class="fa-git-alt fab"></i></a>
+      </li>
+      <li title="GitHub">
+        <a class="icons" href="https://github.com/leozamboni"><i class="fa-github fab"></i></a>
+      </li>
+      <li title="Twitter">
+        <a class="icons" href="https://twitter.com/intent/user?user_id=4700433616"><i class="fa-twitter fab"></i></a>
+      </li>
+      <li title="Arco-íris">
+        &#127987;&#65039;&#8205;&#127752;
+      </li>
+    </ul>
+  </div>
+</div>
