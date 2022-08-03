@@ -1,0 +1,49 @@
+---
+layout: index
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/43be276975.js" crossorigin="anonymous"></script>
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Leonardo</title>
+</head>
+
+<body>
+  <header>
+    <div class="nav-bar">
+      <ul>
+        <li title="Me" class="leonardo">
+          <h1><a href="/">Leonardo</a></h1>
+        </li>
+        <li title="About me">
+          <a href="/about">About</a>
+        </li>
+        <li title="My projects">
+          <a href="">Projects</a>
+        </li>
+        <li title="My blog">
+          <a href="/blog">Posts</a>
+        </li>
+        <li title="Page source code">
+          <i class="fa fa-github fab"></i> <a href="https://github.com/leozamboni/leozamboni.github.io">Source</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    {{ content }}
+  </main>
+  <script>
+    twemoji.parse(document.body, {
+      className: "emojis",
+    });
+  </script>
+</body>
+
+</html>
