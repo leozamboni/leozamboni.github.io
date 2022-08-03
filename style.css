@@ -1,25 +1,15 @@
 :root {
-  --comic-mono-font: url(assets/ComicMono.ttf);
-  --background-color: #eae6dd;
-  --fetch-background-color: #414141;
-  --icons-color: #78544a;
-  --text-color: #2e2e2e;
-  --fetch-text-color: #cdcdcd;
-}
-
-@font-face {
-  font-family: "Comic Mono";
-  src: url(assets/ComicMono.ttf);
+  --green: #00cc00;
+  --black: #000000;
+  --blue: #618cae;
+  --red: #cf5a5a;
 }
 
 * {
   margin: 0;
   padding: 0;
   font-size: 1em;
-}
-
-body {
-  background-color: var(--background-color);
+  font-family: sans-serif;
 }
 
 header {
@@ -30,15 +20,19 @@ header {
 
 a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--black);
 }
 
 a:visited {
-  color: var(--text-color);
+  color: var(--red);
 }
 
 a:hover {
-  text-decoration: underline dotted 2px;
+  text-decoration: underline dotted 2px var(--green);
+}
+
+.leonardo h1 a:visited {
+  color: var(--black);
 }
 
 header .nav-bar ul li {
@@ -58,8 +52,7 @@ main .container {
 }
 
 main .container .fetch {
-  font-family: "Comic Mono";
-  background-color: var(--fetch-background-color);
+  border: solid 2px var(--black);
   border-radius: 25px;
   height: 250px;
   width: 100%;
@@ -73,13 +66,8 @@ main .container .distro {
 }
 
 main .container .info ul {
-  color: var(--fetch-text-color);
   padding: 20px 0 0 60%;
   list-style: none;
-}
-
-main .container .info a:visited {
-  color: var(--fetch-text-color);
 }
 
 main .container .social {
@@ -96,7 +84,6 @@ main .container .social ul li {
 }
 
 main .container .reach-me {
-  font-family: sans-serif;
   padding-top: 10px;
   list-style: none;
 }
