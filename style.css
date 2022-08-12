@@ -12,10 +12,16 @@
   font-family: sans-serif;
 }
 
-header {
-  font-family: sans-serif;
-  text-align: center;
+.header-style-container {
   padding-top: 3vh;
+  display: flex;
+  justify-content: center;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.header-style-nav-bar .leonardo a {
+  color: var(--black);
 }
 
 a {
@@ -35,7 +41,7 @@ a:hover {
   color: var(--black);
 }
 
-header .nav-bar ul li {
+.header-style-container .header-style-nav-bar ul li {
   display: inline-block;
   padding-inline: 2vw;
 }
