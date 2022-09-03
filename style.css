@@ -66,7 +66,6 @@ a:hover {
 }
 
 .nav-header2 {
-  padding: 20px 0px 0px 100px;
   font-family: 'Computer Modern Serif italic';
 }
 
@@ -75,7 +74,7 @@ a:hover {
 }
 
 .software-i-use .container {
-  padding-left: 100px;
+  /* padding-left: 100px; */
   /* height: 600px; */
   width: 500px;
 }
@@ -99,10 +98,6 @@ a:hover {
   list-style: none;
 }
 
-.social {
-  padding-left: 120px;
-}
-
 .social ul {
   list-style: none;
 }
@@ -119,4 +114,13 @@ a:hover {
 
 .icons {
   color: var(--icons-color) !important;
+}
+
+main {
+  padding-left: 100px;
+  font-family: 'Computer Modern Serif';
+}
+
+pre {
+  font-family: 'Computer Modern Serif';
 }
