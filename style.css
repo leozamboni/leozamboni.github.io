@@ -1,119 +1,115 @@
-:root {
-  --green: #00cc00;
-  --black: #000000;
-  --blue: #618cae;
-  --red: #cf5a5a;
+@font-face {
+	font-family: 'Computer Modern Serif bold';
+	src: url('./font/cmunbx.eot');
+	src: url('./font/cmunbx.eot?#iefix') format('embedded-opentype'),
+		 url('./font/cmunbx.woff') format('woff'),
+		 url('./font/cmunbx.ttf') format('truetype'),
+		 url('./font/cmunbx.svg#cmunbx') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Computer Modern Serif';
+	src: url('./font/cmunrm.eot');
+	src: url('./font/cmunrm.eot?#iefix') format('embedded-opentype'),
+		 url('./font/cmunrm.woff') format('woff'),
+		 url('./font/cmunrm.ttf') format('truetype'),
+		 url('./font/cmunrm.svg#cmunrm') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Computer Modern Serif italic';
+	src: url('./font/cmunbi.eot');
+	src: url('./font/cmunbi.eot?#iefix') format('embedded-opentype'),
+		 url('./font/cmunbi.woff') format('woff'),
+		 url('./font/cmunbi.ttf') format('truetype'),
+		 url('./font/cmunbi.svg#cmunbi') format('svg');
+	font-weight: bold;
+	font-style: italic;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-  font-family: sans-serif;
-}
-
-.header-style-container {
-  padding-top: 3vh;
-  display: flex;
-  justify-content: center;
-  margin-left: 30%;
-  margin-right: 30%;
-}
-
-.header-style-nav-bar .leonardo a {
-  color: var(--black);
+  padding: 0px;
+  margin: 0px;
 }
 
 a {
   text-decoration: none;
-  color: var(--black);
+  color: black;
 }
 
 a:visited {
-  color: var(--red);
+  color: brown;
 }
 
 a:hover {
-  text-decoration: underline dotted 2px var(--green);
+  text-decoration: underline dotted 2px chartreuse;
 }
 
-.leonardo h1 a:visited {
-  color: var(--black);
+.nav-header {
+  padding: 100px 0px 0px 100px;
+  font-family: 'Computer Modern Serif italic';
+  font-size: 32pt;
 }
 
-.header-style-container .header-style-nav-bar ul li {
+.nav-links {
+  padding-left: 100px;
+}
+
+.nav-links li {
+  font-family: 'Computer Modern Serif';
   display: inline-block;
   padding-inline: 2vw;
 }
 
-main {
-  display: flex;
-  justify-content: center;
+.nav-header2 {
+  padding: 20px 0px 0px 100px;
+  font-family: 'Computer Modern Serif italic';
 }
 
-main .container {
-  padding-top: 4vh;
-  height: 600px;
+.software-i-use {
+  font-family: 'Computer Modern Serif';
+}
+
+.software-i-use .container {
+  padding-left: 100px;
+  /* height: 600px; */
   width: 500px;
 }
 
-main .container .fetch {
+.software-i-use .container .fetch {
   border: solid 2px var(--black);
   border-radius: 25px;
   height: 250px;
   width: 100%;
 }
 
-main .container .distro {
+.software-i-use .container .distro {
   float: left;
   padding-left: 10px;
   height: 100%;
   width: 250px;
 }
 
-main .container .info ul {
+.software-i-use .container .info ul {
   padding: 20px 0 0 60%;
   list-style: none;
 }
 
-main .container .social {
-  padding-top: 1vh;
+.social {
+  padding-left: 120px;
 }
 
-main .container .social ul {
+.social ul {
   list-style: none;
 }
 
-main .container .social ul li {
+.social ul li {
   padding-right: 5px;
   display: inline-block;
-}
-
-main .container .reach-me {
-  padding-top: 10px;
-  list-style: none;
-}
-
-main .container .reach-me li p span {
-  float: right;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-}
-
-@media only screen and (max-width: 400px) {
-  main .container .distro {
-    width: 50vw;
-    margin-top: 10px;
-    position: absolute;
-  }
-
-  main .container .fetch {
-    height: 60vw;
-  }
-
-  main .container .info ul li {
-    font-size: 4.7vw;
-  }
 }
 
 .emojis {
