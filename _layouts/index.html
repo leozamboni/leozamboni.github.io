@@ -12,7 +12,7 @@
 
 <body>
   <header>
-    <h1 class="nav-header"><a href="/">leonardo.moe:$ ls</a></h1>
+    <h1 class="nav-header"><a href="/" id="title">leonardo.moe:$ ls</a></h1>
     <ul class="nav-links">
       <li title="About me">
         <a href="/about">About</a>
@@ -27,7 +27,7 @@
         <i class="fa fa-github fab"></i> <a href="https://github.com/leozamboni/leozamboni.github.io">Source</a>
       </li>
     </ul>
- 
+
   </header>
   <main>
     {{ content }}
@@ -35,6 +35,17 @@
   <script>
     twemoji.parse(document.body, {
       className: "emojis",
+    });
+
+    path = window.location.pathname.split('/')[1]
+    title = document.getElementById('title')
+    title.innerText = `leonardo.moe:$ ls`
+
+    title.addEventListener('mouseover', (event) => {
+      path && (title.innerText = `leonardo.moe/${path}:$ ..`)
+    });
+    title.addEventListener('mouseout', (event) => {
+      title.innerText = `leonardo.moe:$ ls`
     });
   </script>
 </body>
