@@ -31,7 +31,7 @@ $endif$
 $for(header-includes)$
   $header-includes$
 $endfor$
-<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml"/>
 </head>
 <body>
 <div class="page">
@@ -53,7 +53,7 @@ $if(date)$
 <p class="date">$date$</p>
 $endif$
 <ul>
-<li><a href="/">Home</a></li>
+<li><a href="https://leonardo.moe/www/leonardo/site/index.html">Home</a></li>
 <li><a href="faq.html">FAQ</a></li>
 <li><a href="https://github.com/leozamboni/leozamboni.github.io">Source</a></li>
 <li><strong><a href="donate.html">Donate</a></strong></li>

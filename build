@@ -81,7 +81,7 @@ meta() {
 	htmlfile=$(printf '%s\n' "${file%.md}.html")
 
 	printf '%s\n' \
-	"[$(title "${SITEDIR}/site/${BLOGDIR}${file}")](/${BLOGDIR}${file}){.title}"
+	"[$(title "${SITEDIR}/site/${BLOGDIR}${file}")](${BLOGDIR}${file}){.title}"
 
 	printf '%s\n' \
 	"[$(sed -n 3p "${SITEDIR}/site/${BLOGDIR}${file}" | sed -e s-^..--)]{.date}"
@@ -616,10 +616,10 @@ mknews() {
 			continue
 		fi
 		if [ "${MANIFESTDIR%/}" = "${BLOGDIR%/}" ]; then
-			printf "\nSubscribe to RSS: [/feed.xml](/feed.xml)\n\n" \
+			printf "\nSubscribe to RSS: [feed.xml](feed.xml)\n\n" \
 				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
 		else
-			printf "\nSubscribe to RSS: [/%sfeed.xml](/%sfeed.xml)\n\n" \
+			printf "\nSubscribe to RSS: [%sfeed.xml](%sfeed.xml)\n\n" \
 				"${MANIFESTDIR}" "${MANIFESTDIR}" \
 				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
 		fi
