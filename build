@@ -1,0 +1,947 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2017,2021 Leah Rowe <info@minifree.org>
+# Copyright (C) 2017 Alyssa Rosenzweig <alyssa@rosenzweig.io>
+# Copyright (C) 2017 Michael Reed <michael@michaelreed.io>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+[ "x${DEBUG+set}" = 'xset' ] && set -v
+set -u -e
+
+# TODO: speed optimization: use ***GIT*** to detect site changes.
+#		init .git in www/ but already have a .gitignore (part of
+#		untitled) in there, which only allows .md files. that way,
+#		git add -A . will always, always only add .md files. then
+#		git-whatchanged can be used, always, to just detect changes
+#	one thing:
+#		it is not possible, using this method, to detect all changes.
+#		for example, .include files (and their per-page equivalents)
+#		so on some files, modification dates will still be used
+
+# TODO: support MANIFEST.xx for translated news indexes. Individual news pages
+#		are still supported, without this change
+
+# TODO: make site change detection more robust. certain things are missed
+#		AUDIT NEEDED
+
+# TODO: make untitled work on subdirectories. e.g. https://website.com/~user/
+
+# TODO: gemtext support
+
+# TODO: write an optimized C replacement for pandoc markdown->html conversion
+#		pandoc is written is haskell, and C will probably be faster
+
+# TODO: ensure that /tmp is a tmpfs, and recommend this in the documentation
+
+# TODO: in mkhtml, allow auto-nav if no .nav file specified
+#		but disable this by default, to maintain old behaviour
+#		make it configurable in site.cfg
+
+# TODO: next/previous links on news pages
+
+# TODO: allow per-directory .include overrides, including for translations
+#		right now, only global ones and per-page ones are supported
+
+SITECHANGED="n"
+
+# usage: title file
+title() {
+	firstchar=$(head -c 1 ${1})
+	firstthreechars=$(head -c 3 ${1})
+	outputstring=""
+	if [ "${firstchar}" = "%" ] || [ "${firstchar}" = "#" ]; then
+		outputstring="$(sed -n 1p "${1}" | sed -e s-^..--)"
+	elif [ "${firstthreechars}" = "---" ]; then
+		outputstring="$(sed -n 2p "${1}" | sed -e s-^..--)"
+		outputstring="${outputstring#* }"
+	else
+		outputstring="$(head -n1 "${1}")"
+	fi
+	printf "%s\n" "${outputstring}"
+	return 0
+}
+
+# usage: meta file
+meta() {
+	file="${1}"
+	SITEDIR="${2}"
+	BLOGDIR="${3}"
+	htmlfile=$(printf '%s\n' "${file%.md}.html")
+
+	printf '%s\n' \
+	"[$(title "${SITEDIR}/site/${BLOGDIR}${file}")](/${BLOGDIR}${file}){.title}"
+
+	printf '%s\n' \
+	"[$(sed -n 3p "${SITEDIR}/site/${BLOGDIR}${file}" | sed -e s-^..--)]{.date}"
+	# printf '\n'
+	# tail -n +5 "${SITEDIR}/news/${file}" | perl -p0e 's/(\.|\?|\!)( |\n)(.|\n)*/.../g'
+	# todo: make this configurable via enable/disable, and make it less cursed
+
+	printf '\n'
+	printf '\n'
+}
+
+# usage: rss_header
+rss_header() {
+	BLOGTITLE="${1}"
+	DOMAIN="${2}" # without a / at the end, but with http:// or https://
+	BLOGDESCRIPTION="${3}"
+	BLOGDIR="${4}"
+
+	printf '%s\n' '<rss version="2.0">'
+	printf '%s\n' '<channel>'
+
+	printf '%s\n' "<title>${BLOGTITLE}</title>"
+	printf '%s\n' "<link>${DOMAIN}${BLOGDIR}</link>"
+	printf '%s\n' "<description>$BLOGDESCRIPTION</description>"
+}
+
+# usage: rss_main file
+rss_main() {
+	file="${1}"
+	SITEDIR="${2}"
+	DOMAIN="${3}"
+	BLOGDIR="${4}"
+
+	# render content and escape
+	htmlfile="${file%.md}.html"
+
+	PAGETITLE=$(title "${SITEDIR}/site/${BLOGDIR}${file}")
+	PAGEURL="${DOMAIN}${BLOGDIR}${htmlfile}"
+
+	printf '%s\n' '<item>'
+	printf '%s\n' "<title>${PAGETITLE}</title>"
+	printf '%s\n' "<link>${PAGEURL}</link>"
+	printf '%s\n' \
+	"<description><p>Article: ${PAGETITLE}</p><p>Web link: ${PAGEURL}</p></description>"
+	printf '%s\n' '</item>'
+}
+
+# usage: rss_footer
+rss_footer() {
+	printf '%s\n' '</channel>'
+	printf '%s\n' '</rss>'
+}
+
+# uses the last modified date
+# returns 1 if the file has changed
+filehasnotchanged() {
+	# return 1 means yes, needs to be changed
+	# 0 means no, doesn't need to be changed
+	f="${1}"
+
+	if [ ! -f "${f}" ]; then
+		return 0
+	fi
+
+	if [ -d "${f}.date" ]; then
+		return 1
+	fi
+
+	if [ ! -f "${f}.date" ]; then
+		date -r "${f}" +%s > "${f}.date"
+		return 1
+	fi
+
+	moddate=$(date -r "${f}" +%s)
+	if [ "$(cat "${f}.date")" = "${moddate}" ]; then
+		return 0
+	fi
+
+	printf "%s\n" "${moddate}" > "${f}.date"
+	return 1
+}
+
+getlangname() {
+	FILE="${1%.md}" # path to markdown file
+	DEFAULTLANG="${2}"
+
+	REALPAGE="${FILE##*/}"
+	PAGELANG="${REALPAGE##*.}"
+
+	if [ "${PAGELANG}" = "${REALPAGE}" ]; then
+		PAGELANG="${DEFAULTLANG}"
+	fi
+
+	STRINGSCFGPATH="lang/${PAGELANG}/strings.cfg"
+
+	if [ ! -f "${STRINGSCFGPATH}" ]; then
+		printf "%s\n" "${PAGELANG}"
+		return 0
+	fi
+
+	LANGNAME="$(getConfigValue "${STRINGSCFGPATH}" "LANGNAME")"
+
+	if [ "${LANGNAME}" != "" ]; then
+		printf "%s\n" "${LANGNAME}"
+		return 0
+	fi
+
+	printf "%s\n" "${PAGELANG}"
+	return 0
+}
+
+# convert pandoc-markdown file into html, using a template file
+mkhtml() {
+	FILE=${1%.md}
+	SITEDIR="www/${2}"
+	TITLE="${3}"
+	CSS="${4}"
+	DEFAULTLANG="${5}"
+
+	# will be set to y if page changes are detected
+	NEEDCHANGE="n"
+
+	if [ -d "${FILE}.html" ]; then
+		printf "%s: %s.html is a DIRECTORY. skipping %s.md\n" \
+			"${SITEDIR}" "${FILE}" "${FILE}"
+		return 0
+	fi
+
+	# e.g. file.md is default(english) and file.ru.md is russian
+	REALPAGE="${FILE##*/}"
+	PAGELANGUAGE="${REALPAGE##*.}"
+	if [ "${PAGELANGUAGE}" = "${REALPAGE}" ]; then
+		PAGELANGUAGE="${DEFAULTLANG}"
+	else
+		FILE="${FILE%.${PAGELANGUAGE}}"
+	fi
+
+	STRINGSCFGPATH="lang/${PAGELANGUAGE}/strings.cfg"
+	if [ ! -f "${STRINGSCFGPATH}" ]; then
+		STRINGSCFGPATH="lang/${DEFAULTLANG}/strings.cfg"
+	fi
+	if [ ! -f "${STRINGSCFGPATH}" ]; then
+		STRINGSCFGPATH="lang/en/strings.cfg"
+	fi
+
+	# This is the URI but without any extension, *and without language
+	# extension*. This will be used extensively, especially for backlinks
+	URI="${FILE##${SITEDIR}/site}" # without file extension e.g. .html
+
+	# Allow a given page to override the default footer
+	FOOTERFILE=""
+	if [ -f "${FILE}.footer" ]; then
+		FOOTERFILE="${FILE}.footer"
+	fi
+	if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+		if [ -f "${FILE}.${PAGELANGUAGE}.footer" ]; then
+			FOOTERFILE="${FILE}.${PAGELANGUAGE}.footer"
+		fi
+	fi
+
+	# Backlink text for each page. This helps with site navigation
+	BACKLINK=""
+	if [ "${URI}" != "/index" ]; then # the home page doesn't need a backlink
+		if [ "${URI##*/}" = "index" ]; then
+			BACKLINK="$(getConfigValue "${STRINGSCFGPATH}" "BACKLINK_PREVDIR")"
+		else
+			BACKLINK="$(getConfigValue "${STRINGSCFGPATH}" "BACKLINK_CURRENTDIR")"
+		fi
+	fi
+
+	# Allow a given page to override the default navigation menu
+	NAVFILE=""
+	if [ -f "${FILE}.nav" ]; then
+		NAVFILE="${FILE}.nav"
+	fi
+	if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+		if [ -f "${FILE}.${PAGELANGUAGE}.nav" ]; then
+			NAVFILE="${FILE}.${PAGELANGUAGE}.nav"
+		fi
+	fi
+
+	# Allow a given page to override the default template
+	TEMPLATE=""
+	if [ -f "${FILE}.template" ]; then
+		TEMPLATE="${FILE}.template"
+	fi
+	if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+		if [ -f "${FILE}.${PAGELANGUAGE}.template" ]; then
+			TEMPLATE="${FILE}.${PAGELANGUAGE}.template"
+		fi
+	fi
+
+	# Allow a given page to override the default CSS
+	CSSOVERRIDE=""
+	if [ -f "${FILE}.css" ]; then
+		CSSOVERRIDE="--css ${URI}.css"
+	fi
+	# DO NOT override the main override! add it instead
+	if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+		if [ -f "${FILE}.${PAGELANGUAGE}.css" ]; then
+			if [ "${CSSOVERRIDE}" != "" ]; then
+				CSSOVERRIDE="${CSSOVERRIDE} --css ${URI}.${PAGELANGUAGE}.css"
+			else
+				CSSOVERRIDE="--css ${URI}.${PAGELANGUAGE}.css"
+			fi
+		fi
+	fi
+
+	if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+		FILE="${FILE}.${PAGELANGUAGE}"
+		URI="${URI}.${PAGELANGUAGE}"
+	fi
+
+	for f in "${FILE}.md" "${FOOTERFILE}" "${NAVFILE}" "${TEMPLATE}"; do
+		if [ "${f}" = "" ]; then continue; fi
+		filehasnotchanged "${f}" || NEEDCHANGE="y"
+	done 
+
+	if [ "${NEEDCHANGE}" = "n" ] && [ -f "${FILE}.html" ]; then
+		return 0
+	fi
+
+	if [ "${FOOTERFILE}" = "" ]; then
+		if [ -f "${SITEDIR}/site/footer.include" ]; then
+			FOOTERFILE="${SITEDIR}/site/footer.include"
+		fi
+		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+			if [ -f "${SITEDIR}/site/footer.${PAGELANGUAGE}.include" ]; then
+				FOOTERFILE="${SITEDIR}/site/footer.${PAGELANGUAGE}.include"
+			fi
+		fi
+	fi
+
+	if [ "${NAVFILE}" = "" ]; then
+		if [ -f "${SITEDIR}/site/nav.include" ]; then
+			NAVFILE="${SITEDIR}/site/nav.include"
+		fi
+		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+			if [ -f "${SITEDIR}/site/nav.${PAGELANGUAGE}.include" ]; then
+				NAVFILE="${SITEDIR}/site/nav.${PAGELANGUAGE}.include"
+			fi
+		fi
+	fi
+
+	if [ "${TEMPLATE}" = "" ]; then
+		if [ -f "${SITEDIR}/site/template.include" ]; then
+			TEMPLATE="${SITEDIR}/site/template.include"
+		fi
+		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
+			if [ -f "${SITEDIR}/site/template.${PAGELANGUAGE}.include" ]; then
+				TEMPLATE="${SITEDIR}/site/template.${PAGELANGUAGE}.include"
+			fi
+		fi
+	fi
+
+	# The news and sitemap function need to know this
+	# because they will only be called if this variable is set to y
+	SITECHANGED="y"
+
+	TMPFILE=$(mktemp -t untitled_www.XXXXXXXXXX)
+
+	date=""
+	author=""
+#	title="Webpage" # dirty hack
+
+	firstchar=$(head -c 1 ${1})
+	firstthreechars=$(head -c 3 ${1})
+	if [ "${firstchar}" = "#" ]; then
+		filetitle="$(title "${1}")"
+		TMPFILE2=$(mktemp -t untitled_www.XXXXXXXXXX)
+		head -n1 title.example > "${TMPFILE2}"
+		printf "title: %s\n" "${filetitle}" >> "${TMPFILE2}"
+		tail -n-2 title.example	>> "${TMPFILE2}"
+		title="$(cat "${TMPFILE2}")"
+		rm -f "${TMPFILE2}"
+		pagetext="$(tail -n+2 "${1}")"
+	elif [ "${firstchar}" = "%" ]; then
+		TMPFILE2=$(mktemp -t untitled_www.XXXXXXXXXX)
+
+		title="$(head -n3 ${1})"
+		printf "%s\n" "${title}" > $TMPFILE2
+		chunk="$(head -n1 $TMPFILE2)"
+
+		chunk="$(tail -n+2 $TMPFILE2)"
+		printf "%s\n" "${chunk}" > $TMPFILE2
+		author="$(head -n1 $TMPFILE2)"
+
+		chunk="$(tail -n+2 $TMPFILE2)"
+		printf "%s\n" "${chunk}" > $TMPFILE2
+		date="$(head -n1 $TMPFILE2)"
+
+		rm -f "$TMPFILE2"
+
+		pagetext="$(tail -n+4 ${1})"
+	elif [ "${firstthreechars}" = "---" ]; then
+		title="$(head -n4 ${1})"
+		author=""
+		date=""
+		pagetext="$(tail -n+5 ${1})"
+	else
+		printf "WARNING: no title detected. defaulting to first line as title\n"
+		filetitle="$(title "${1}")"
+		TMPFILE2=$(mktemp -t untitled_www.XXXXXXXXXX)
+		head -n1 title.example > "${TMPFILE2}"
+		printf "title: %s\n" "${filetitle}" >> "${TMPFILE2}"
+		tail -n-2 title.example	>> "${TMPFILE2}"
+		title="$(cat "${TMPFILE2}")"
+		rm -f "${TMPFILE2}"
+
+		pagetext="$(tail -n+2 "${1}")"
+	fi
+
+	printf "%s\n" "${title}" > "$TMPFILE"
+
+	if [ "${NAVFILE}" != "" ]; then
+		NAVFILECONTENTS="$(cat "${NAVFILE}")"
+		printf "\n<div class='nav'>\n%s\n</div>\n" \
+			"${NAVFILECONTENTS}" >> "${TMPFILE}"
+	fi
+
+	# insert the language select menu
+	LANGMENU=""
+	DEFAULTPAGE="${FILE##*/}"
+	DEFAULTPAGE="${DEFAULTPAGE%.*}"
+	if [ "${DEFAULTPAGE}" != "" ]; then
+		for page in "${FILE%/*}/${DEFAULTPAGE}".*.md; do
+			if [ ! -f "${page}" ]; then continue; fi
+			LANGNAME=$(getlangname "${page}" "${DEFAULTLANG}")
+			LANGMENU="${LANGMENU} | [${LANGNAME}](${page##*/})"
+		done
+	fi
+	if [ "${LANGMENU}" != "" ]; then
+		LANGMENU="${LANGMENU# | }"
+		if [ -f "${FILE%/*}/${DEFAULTPAGE}.md" ]; then
+			LANGNAME=$(getlangname "${FILE%/*}/${DEFAULTPAGE}.md" "${DEFAULTLANG}")
+			if [ "${DEFAULTPAGE}" = "index" ]; then
+				LANGMENU="[${LANGNAME}](./) | ${LANGMENU}"
+			else
+				LANGMENU="[${LANGNAME}](${DEFAULTPAGE}.md) | ${LANGMENU}"
+			fi
+		fi
+	fi
+	if [ "${LANGMENU}" != "" ]; then
+		# TODO: display "select language" text
+		printf "\n%s\n" "${LANGMENU}" >> "${TMPFILE}"
+	fi
+
+	if [ "${BACKLINK}" != "" ]; then
+		printf "\n%s\n" "${BACKLINK}" >> "${TMPFILE}"
+	fi
+
+	# the directory was already checked. no need to
+	# check the validity of it, because it's part
+	# of untitled, not part of a given site, and
+	# what goes in untitled is reviewed thoroughly
+
+	if [ "${author}" != "" ] && [ "${date}" != "" ]; then
+		PUBLISHED_BY="$(getConfigValue "${STRINGSCFGPATH}" "PUBLISHED_BY")"
+		printf "\n%s %s\n" "${PUBLISHED_BY}" "${author#% }" >> "${TMPFILE}"
+
+		PUBLICATION_DATE="$(getConfigValue "${STRINGSCFGPATH}" "PUBLICATION_DATE")"
+		printf "\n%s %s\n" "${PUBLICATION_DATE}" "${date#% }" >> "${TMPFILE}"
+	fi
+
+	printf "\n%s\n" "${pagetext}" >> "$TMPFILE"
+
+	if [ "${FOOTERFILE}" != "" ]; then
+		FOOTERFILECONTENTS="$(cat "${FOOTERFILE}")"
+		printf "\n<div id='footer'>\n%s\n</div>\n" \
+			"${FOOTERFILECONTENTS}" >> "${TMPFILE}"
+	fi
+
+	MARKDOWN_LINK="$(getConfigValue "${STRINGSCFGPATH}" "MARKDOWN_LINK")"
+	printf "\n%s <%s%s.md>\n" "${MARKDOWN_LINK}" "${DOMAIN}" \
+		"${URI##/}" >> "${TMPFILE}"
+
+	RSS_LINK="$(getConfigValue "${STRINGSCFGPATH}" "RSS_LINK")"
+	if [ -f "${SITEDIR}/site/feed.xml" ]; then
+		printf "\n%s\n" "${RSS_LINK}" >> "${TMPFILE}"
+	fi
+
+	SITEMAP_LINK="$(getConfigValue "${STRINGSCFGPATH}" "SITEMAP_LINK")"
+	if [ -f "${SITEDIR}/site/sitemap.md" ]; then
+		printf "\n%s\n" "${SITEMAP_LINK}" >> "${TMPFILE}"
+	fi
+
+	# TODO: make this configurable to enable/disable in site.cfg
+	SHAMELESS_PLUG="$(getConfigValue "${STRINGSCFGPATH}" "SHAMELESS_PLUG")"
+	printf "\n%s\n" "${SHAMELESS_PLUG}" >> "${TMPFILE}"
+
+	# change out .md -> .html
+	# but not for external links
+	sed -i -e \
+		'/\/\//!{s/\.md\(#[a-zA-Z0-9_-]*\)\?\([])]*\)/.html\1\2/g}' \
+		"$TMPFILE"
+
+	# TOC is always enabled on news pages
+	TOC=$(grep -q "^x-toc-enable: true$" "$TMPFILE" && \
+		printf '%s\n' "--toc --toc-depth=4") || TOC=""
+
+	# TODO: make toc depth configurable in site.cfg
+	if [ -f "${FILE%/*}/MANIFEST" ]; then
+		TOC="--toc --toc-depth=4"
+	fi
+
+	# work around heterogenous pandoc versions
+	SMART=$(pandoc -v | grep -q '2\.0' || \
+		printf '%s\n' "-f markdown+smart -t html") || SMART=""
+
+	PDIR="$(getConfigValue "${STRINGSCFGPATH}" "PDIR")"
+
+	printf "Generating '%s.html'\n" "${FILE}"
+
+	HTMLLINK="${MARKDOWN_LINK%.md}"
+
+	HTMLLINK="${DOMAIN}${URI##/}"
+
+	if [ "${HTMLLINK##*/}" = "index" ]; then
+		HTMLLINK="${HTMLLINK%/*}/"
+	else
+		HTMLLINK="${HTMLLINK}.html"
+	fi
+
+	# chuck through pandoc
+	#
+	# $CSS must not be quoted, otherwise pandoc interprets '--css /headercenter.css'
+	# as one argument, when it is actually two.
+	# Same for $TITLE
+	pandoc -V lang=${PAGELANGUAGE} -V dir=${PDIR} $TOC $SMART "$TMPFILE" \
+		-V antisocialurl="${HTMLLINK}" -s ${CSS} ${CSSOVERRIDE} ${TITLE} \
+		--template ${TEMPLATE} --metadata return="" > "$FILE.html"
+
+	# generate section title anchors as [link]
+	sed -i \
+		-e 's_^<h\([123]\) id="\(.*\)">\(.*\)</h\1>_<div class="h"><h\1 id="\2">\3</h\1><a aria-hidden="true" href="#\2">[link]</a></div>_' \
+		"$FILE.html"
+
+	# clean up temporary file
+	rm -f "$TMPFILE"
+}
+
+getConfigValue() {
+	CONFIGFILE="${1}" # e.g. www/foo/site.cfg
+	ITEM="${2}" # e.g. TITLE
+	TMPCFG=$(mktemp -t untitled_www.XXXXXXXXXX)
+	grep "${ITEM}" "${CONFIGFILE}" > "${TMPCFG}"
+	VALUE="$(head -n1 $TMPCFG)"
+	VALUE="${VALUE##*$ITEM=\"}"
+	VALUE="${VALUE%\"*}"
+	printf "%s\n" "${VALUE}"
+	rm -f "${TMPCFG}"
+}
+
+# ensure that it's just a file name, no directories specified
+# if the path includes directories, it just means that this will be mangled.
+# code that uses this function is: mostly the mknews function
+# should be safe
+sanitizefilename() {
+	page="${1##*/}"
+	page="${page%/}" # avoid refering to directory
+	page="$(printf "%s\n" "${1}" | sed -e 's/\ //g')"
+	page="$(printf "%s\n" "${1}" | sed -e 's/\.\.//g')"
+	printf "${page}\n"
+}
+
+mknews() {
+	SITEDIR="${1}"
+	SITENAME="${2}"
+	BLOGDIR="${3}"
+	DOMAIN="${4}"
+	TITLE="${5}"
+	CSS="${6}"
+	DEFAULTLANG="${7}"
+
+	#if [ -f "${SITEDIR}/site/${BLOGDIR}MANIFEST" ]; then
+
+	for MANIFEST in $(find -L "${SITEDIR}/site/" -type f -name "MANIFEST"); do
+
+		if [ ! -f "${MANIFEST}" ]; then continue; fi
+
+		BLOGTITLE="News"
+		BLOGDESCRIPTION="News"
+		MANIFESTDIR="${MANIFEST##${SITEDIR}/site/}"
+		MANIFESTDIR="${MANIFESTDIR%MANIFEST}"
+		if [ -f "${SITEDIR}/site/${MANIFESTDIR}news.cfg" ]; then
+			BLOGTITLE="$(getConfigValue "${SITEDIR}/site/${MANIFESTDIR}news.cfg" "BLOGTITLE")"
+			BLOGDESCRIPTION="$(getConfigValue "${SITEDIR}/site/${MANIFESTDIR}news.cfg" "BLOGDESCRIPTION")"
+
+			if [ "${BLOGTITLE}" = "" ]; then BLOGTITLE="News"; fi
+			if [ "${BLOGDESCRIPTION}" = "" ]; then BLOGDESCRIPTION="News"; fi
+		fi
+
+		# Dermine the order of news articles in news/index.md and news/feed.xml
+		FILES="$(cat "${MANIFEST}")"
+		TMPFILE=$(mktemp -t untitled_www.XXXXXXXXXX)
+		printf "\n" > "${TMPFILE}"
+		for f in ${FILES}; do
+			page="$(sanitizefilename "${f}")"
+			if [ ! -f "${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+				printf "build-html: news file '%s' does not exist in site '%s' for news section '%s'. Skipping this news section\n" \
+					"${page}" "${SITENAME}" "${MANIFESTDIR}" \
+					>> "${TMPFILE}"
+			fi
+			if [ -L "${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+				printf "build-html: news file '%s' is a symlink in news section '%s' for site '%s'. Skipping this news section.\n" \
+					"${page}" "${MANIFESTDIR}" "${SITENAME}" \
+					>> "${TMPFILE}"
+			fi
+			if [ "$(readlink -f "$(pwd)/${SITEDIR}/site/${MANIFESTDIR}${page}" 2>&1)" \
+					!= "$(pwd)/${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+
+				printf "build-html: news file '%s' different when running readlink -f. skipping this news section\n" \
+					"${page}" \
+					>> "${TMPFILE}"
+
+			fi
+		done
+		if [ "$(cat "${TMPFILE}")" != "" ]; then
+			cat "${TMPFILE}"
+			rm -f "${TMPFILE}"
+			continue
+		fi
+		rm -f "${TMPFILE}"
+
+		# generate the index file
+		if [ -f "${SITEDIR}/site/${MANIFESTDIR}news-list.md.include" ]; then
+			cat "${SITEDIR}/site/${MANIFESTDIR}news-list.md.include" \
+				> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+		else
+			printf "MANIFEST present for %s in %s but no news-list.md.include present with that MANIFEST. Skipping this news section.\n" \
+				"${SITEDIR}" "${MANIFESTDIR}"
+			continue
+		fi
+		if [ "${MANIFESTDIR%/}" = "${BLOGDIR%/}" ]; then
+			printf "\nSubscribe to RSS: [/feed.xml](/feed.xml)\n\n" \
+				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+		else
+			printf "\nSubscribe to RSS: [/%sfeed.xml](/%sfeed.xml)\n\n" \
+				"${MANIFESTDIR}" "${MANIFESTDIR}" \
+				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+		fi
+		for f in $FILES
+		do
+			page="$(sanitizefilename "${f}")"
+			meta "${page}" "${SITEDIR}" "${MANIFESTDIR}" \
+				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+		done
+
+		# generate the RSS index
+		rss_header "$BLOGTITLE" "$DOMAIN" "$BLOGDESCRIPTION" \
+			"${MANIFESTDIR}" > "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+		for f in $FILES
+		do	
+			page="$(sanitizefilename "${f}")"
+			rss_main "$page" "${SITEDIR}" "${DOMAIN}" "${MANIFESTDIR}" \
+				>> "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+		done
+		rss_footer >> "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+
+		if [ "${SITEDIR}/site/${MANIFESTDIR}feed.xml" \
+				!= "${SITEDIR}/site/feed.xml" ] \
+				&& [ "${MANIFESTDIR}" = "${BLOGDIR}" ]; then
+
+			rm -f "${SITEDIR}/site/feed.xml"
+
+			cp "${SITEDIR}/site/${MANIFESTDIR}feed.xml" \
+				"${SITEDIR}/site/feed.xml"
+		fi
+
+		if [ -f "${SITEDIR}/site/${MANIFESTDIR}index.md" ]; then
+			mkhtml "${SITEDIR}/site/${MANIFESTDIR}index.md" \
+				"${SITEDIR##*/}" "${TITLE}" "${CSS}" \
+				"${DEFAULTLANG}"
+		fi
+
+	done
+	#fi
+}
+
+mksitemap() {
+	SITEDIR="${1}"
+	TITLE="${2}"
+	CSS="${3}"
+	DEFAULTLANG="${4}"
+	if [ ! -f "${SITEDIR}/site/sitemap.include" ]; then return 0; fi
+	# only generate a sitemap if one is specified
+
+	TMPFILE=$(mktemp -t untitled_www.XXXXXXXXXX)
+
+	cat "${SITEDIR}/site/sitemap.include" > "${TMPFILE}"
+	printf "\n\n" >> "${TMPFILE}"
+
+	printf "<div class='sitemap'>\n" >> "${TMPFILE}"
+	for MDFILE in $(find -L "${SITEDIR}/site/" -type f -name "*.md"); do
+		if [ ! -f "${MDFILE}" ]; then continue; fi
+		if [ "${MDFILE}" = "${SITEDIR}/site/sitemap.md" ]; then continue; fi
+		URI="${MDFILE##${SITEDIR}/site}"
+		URI="${URI%index*}"
+		printf "* %s: [%s](%s)\n" "${URI}" "$(title "${MDFILE}")" \
+			"${URI}" \
+			>> "${TMPFILE}"
+	done
+	printf "</div>\n\n" >> "${TMPFILE}"
+
+	cp "${TMPFILE}" "${SITEDIR}/site/sitemap.md"
+	rm -f "${TMPFILE}"
+
+	if [ -f "${SITEDIR}/site/sitemap.md" ]; then
+		mkhtml "${SITEDIR}/site/sitemap.md" \
+			"${SITEDIR##*/}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
+	fi
+}
+
+buildsite() {
+	SITECHANGED="n"
+	SITEDIR="${1}"
+
+	printf "\nProcessing files in site: %s\n" "${SITEDIR##*/}"
+
+	if [ ! -d "${SITEDIR}" ]; then return 0; fi
+	if [ -f "${SITEDIR}" ]; then return 0; fi
+
+	SITENAME="${SITEDIR}"
+
+	# check if there are symlinks in the site directory
+	if [ -L "${SITEDIR}" ]; then
+		printf "%s site dir is a symlink. skipping this site\n" \
+			"${SITEDIR}"
+		return 0
+	fi
+
+	TMPFILE=$(mktemp -t untitled.XXXXXXXXXX)
+	printf "\n" > "${TMPFILE}"
+	for i in $(find -L "${SITEDIR}" ! -path "${SITEDIR}/.git"); do
+		if [ -L "${i}" ]; then
+			printf "%s\n" "${i}" 2>&1 >> "${TMPFILE}"
+		fi
+	done
+	if [ "$(cat "${TMPFILE}")" != "" ]; then
+		printf "ERROR: symbolic links present in the %s directory. skipping this site. List:\n" \
+			"${SITEDIR}"
+		cat "${TMPFILE}" | sort > "${TMPFILE}"
+		rm -f "${TMPFILE}"
+		return 0
+	fi
+	rm -f "${TMPFILE}"
+
+	TEMPLATE="${SITEDIR}/site/template.include"
+
+	# Check whether the required files are present.
+	# ALSO: Clean the site if site-wide changes are detected
+	# For example: if a template changed, purge the whole site and re-build
+	FILELIST=$(mktemp -t untitled_www.XXXXXXXXXX)
+	printf "%s\n" "${TEMPLATE}" > "${FILELIST}"
+	printf "%s/site.cfg\n" "${SITEDIR}" >> "${FILELIST}"
+	for f in $(cat "${FILELIST}"); do
+		if [ ! -f "${f}" ]; then
+			printf "%s missing for site '%s'. Skipping this site\n" \
+				"${f}" "${SITEDIR}"
+			rm -f "${FILELIST}"
+			return 0
+		fi
+	done
+	for f in "${SITEDIR}"/site/footer*.include "${SITEDIR}"/site/nav*.include; do
+		if [ -f "${f}" ]; then
+			printf "%s\n" "${f}" >> "${FILELIST}"
+		fi
+	done
+	for f in $(cat "${FILELIST}"); do
+		filehasnotchanged "${f}" || SITECHANGED="y"
+	done
+	rm -f "${FILELIST}"
+
+	if [ "${SITECHANGED}" = "y" ]; then
+		printf "Site-wide changes detected in '%s'. Cleaning now.\n" \
+			"${SITEDIR}"
+		./clean "${SITENAME}"
+	fi
+	SITECHANGED="n"
+
+	# TODO: allow per-page override of site.cfg
+
+	TITLE="$(getConfigValue "${SITEDIR}/site.cfg" "TITLE")"
+	if [ "${TITLE}" = "" ]; then TITLE="-T untitled_output"; fi
+
+	CSS="$(getConfigValue "${SITEDIR}/site.cfg" "CSS")"
+	# optional. if empty, there just won't be any css
+
+	DOMAIN="$(getConfigValue "${SITEDIR}/site.cfg" "DOMAIN")"
+	if [ "${DOMAIN}" = "" ]; then
+		printf "%s/site.cfg does not specify DOMAIN. Exiting\n" "${SITEDIR}"
+		return 1
+	fi
+
+	BLOGTITLE="$(getConfigValue "${SITEDIR}/site.cfg" "BLOGTITLE")"
+	if [ "${BLOGTITLE}" = "" ]; then BLOGTITLE="News"; fi
+
+	BLOGDESCRIPTION="$(getConfigValue "${SITEDIR}/site.cfg" "BLOGDESCRIPTION")"
+	if [ "${BLOGDESCRIPTION}" = "" ]; then BLOGDESCRIPTION="News"; fi
+
+	DEFAULTLANG="$(getConfigValue "${SITEDIR}/site.cfg" "DEFAULTLANG")"
+	DEFAULTLANG="${DEFAULTLANG##*/}"
+	if [ "${DEFAULTLANG}" = "" ]; then DEFAULTLANG="en"; fi
+	if [ ! -d "lang/${DEFAULTLANG}" ]; then DEFAULTLANG="en"; fi
+
+	BLOGDIR="$(getConfigValue "${SITEDIR}/site.cfg" "BLOGDIR")"
+	# optional. if not set, this will be empty, and blog will be homepage
+	TESTDIR="$(pwd)/${SITEDIR}/site/${BLOGDIR%/}"
+	if [ "$(readlink -f "${TESTDIR}" 2>&1)" != "${TESTDIR%/}" ]; then
+		printf "Invalid BLOGDIR in site.cfg for %s. skipping this site\n" "${SITEDIR}"
+		return 0	
+	fi
+	if [ -L "${TESTDIR}" ]; then
+		printf "BLOGDIR in site.cfg for %s is a symlink. skipping the site\n" "${SITEDIR}"
+		return 0
+	fi
+	if [ -f "${TESTDIR}" ]; then
+		printf "BLOGDIR in site.cfg for %s is a file. skipping this site\n" "${SITEDIR}"
+		return 0
+	fi
+	TESTDIR="${TESTDIR##$(pwd)/${SITEDIR}/site/}"
+
+	for mdfile in $(find -L ${SITEDIR}/site/ -name '*.md'); do
+		mkhtml "${mdfile}" "${SITEDIR##*/}" "${TITLE}" "${CSS}" \
+			"${DEFAULTLANG}"
+	done
+
+	if [ "${SITECHANGED}" = "y" ]; then
+		mksitemap "${SITEDIR}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
+		if [ ! -d "${SITEDIR}/site/${TESTDIR}" ]; then
+			printf "BLOGDIR does not exist in %s. not building news sections for this site\n" "${SITEDIR}"
+		else
+			mknews "${SITEDIR}" "${SITENAME}" "${BLOGDIR}" "${DOMAIN}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
+		fi
+	else
+		printf "this website has not been changed. skipping.\n"
+	fi
+}
+
+buildpage() {
+	[[ $# -lt 1 ]] && return 0
+
+	MDFILE="${1}"
+	MDFILE="${MDFILE#/}"
+	MDFILE="${MDFILE#./}"
+	MDFILELOCAL="${MDFILE##*/}"
+
+	[[ "${MDFILE%.md}" = "${MDFILE}" ]] && return 0
+
+	# path translation
+	# e.g. libreboot/index.md becomes www/libreboot/site/index.md
+	# e.g. libreboot/site/index.md becomes www/libreboot/site/index.md
+	# e.g. www/libreboot/index.md becomes www/libreboot/site/index.md
+	# in all cases, the correct path is: www/libreboot/site/index.md
+	MDFILE="${MDFILE#www/}"
+	SITESITE="${MDFILE#*/}"
+	[[ "${SITESITE#site/}" = "${SITESITE}" ]] && SITESITE="site/${SITESITE}"
+	MDFILE="www/${MDFILE%%/*}/${SITESITE}"
+
+	[[ ! -f "${MDFILE}" ]] && return 0
+	[[ -L "${MDFILE}" ]] && return 0
+
+	# Do not allow if the file is contained within a symlinked directory
+	absolutepath="$(pwd)/${MDFILE}"
+	absolutepath_readlink="$(readlink -f "${absolutepath}" 2>&1)"
+	if [ "${absolutepath_readlink}" != "${absolutepath}" ]; then
+		return 0
+	fi
+
+	SITEDIR="${MDFILE#www/}"
+	[[ "${SITEDIR}" = "${MDFILE}" ]] && return 0
+	SITENAME="${SITEDIR%%/*}"
+	[[ "${SITENAME}" = "${SITEDIR}" ]] && return 0
+	SITEDIR="www/${SITENAME}"
+	[[ ! -d "${SITEDIR}" ]] && return 0
+
+	printf "\nPage: %s\n" "${MDFILE}"
+	printf "Processing page in site directory: %s/site/\n" "${SITEDIR}"
+
+	if [ ! -f "${SITEDIR}/site.cfg" ]; then
+		printf "%s missing for site '%s'. Skipping this page\n" \
+			"${f}" "${SITEDIR}"
+		return 0
+	fi
+
+	DOMAIN="$(getConfigValue "${SITEDIR}/site.cfg" "DOMAIN")"
+	# it doesn't matter if this is empty
+
+	TITLE="$(getConfigValue "${SITEDIR}/site.cfg" "TITLE")"
+	if [ "${TITLE}" = "" ]; then TITLE="-T untitled_output"; fi
+
+	CSS="$(getConfigValue "${SITEDIR}/site.cfg" "CSS")"
+	# optional. if empty, there just won't be any css
+
+	DEFAULTLANG="$(getConfigValue "${SITEDIR}/site.cfg" "DEFAULTLANG")"
+	DEFAULTLANG="${DEFAULTLANG##*/}"
+	if [ "${DEFAULTLANG}" = "" ]; then DEFAULTLANG="en"; fi
+	if [ ! -d "lang/${DEFAULTLANG}" ]; then DEFAULTLANG="en"; fi
+
+	mkhtml "${MDFILE}" "${SITEDIR##*/}" "${TITLE}" "${CSS}" \
+		"${DEFAULTLANG}"
+}
+
+if [ -f "www" ]; then
+	printf "untitled error: www is a file. should be a directory. exiting.\n"
+	exit 1
+fi
+if [ ! -d "www" ]; then
+	printf "untitled error: no www/ directory. Exiting\n"
+	exit 1
+fi
+if [ -L "www" ]; then
+	printf "untitled error: www/ directory is a symlink. Exiting\n"
+	exit 1
+fi
+
+mode=""
+
+if [ $# -lt 1 ]; then
+	mode="sites"
+else
+	mode="${1}"
+	shift 1
+fi
+
+if [ "${mode}" = "pages" ] && [ $# -lt 1 ]; then
+	mode="sites"
+fi
+
+if [ "${mode}" = "sites" ]; then
+	if [ $# -gt 0 ]; then
+		for sitename in "${@}"; do
+			startdate=$(date +%s%N | cut -b1-13)
+			buildsite "www/${sitename##*/}"
+			enddate=$(date +%s%N | cut -b1-13)
+			endtime=$(( enddate - startdate ))
+			printf "time: %d milliseconds\n" "${endtime}"
+		done
+	else
+		for sitedir in www/*; do
+			startdate=$(date +%s%N | cut -b1-13)
+			buildsite "${sitedir}"
+			enddate=$(date +%s%N | cut -b1-13)
+			endtime=$(( enddate - startdate ))
+			printf "time: %d milliseconds\n" "${endtime}"
+		done
+	fi
+elif [ "${mode}" = "pages" ]; then
+	for pagepath in "$@"; do
+		startdate=$(date +%s%N | cut -b1-13)
+
+		buildpage "${pagepath}"
+
+		enddate=$(date +%s%N | cut -b1-13)
+		endtime=$(( enddate - startdate ))
+		printf "time: %d milliseconds\n" "${endtime}"
+	done
+else
+	printf "error: unrecognized command: %s\n\n" "${mode}"
+	printf "available commands:\n\tsites\n\tpages\n\n"
+	printf "Consult the documentation to understand these commands.\n"
+	exit 1
+fi
