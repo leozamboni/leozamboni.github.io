@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Leonardo Z. N.">
+  <title>Leonardo – Baixar, instalar e customizar o suckless terminal</title>
+  <link rel="stylesheet" href="global.css">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml"/>
+</head>
+<body>
+<div class="page">
+<header>
+<div class="title">
+<h1 class="title">Baixar, instalar e customizar o suckless terminal</h1>
+</div>
+<p class="author">Leonardo Z. N.</p>
+<p class="date">14/02/2022</p>
+<ul>
+<li><a href="https://leonardo.moe/www/leonardo/site/index.html">Home</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="https://github.com/leozamboni/leozamboni.github.io">Source</a></li>
+<li><strong><a href="donate.html">Donate</a></strong></li>
+</ul>
+<hr/>
+</header>
+<nav id="TOC">
+<h1>Navigate this page:</h1>
+<ul>
+<li><a href="#baixar-e-instalar">Baixar e Instalar</a></li>
+<li><a href="#configuracões-e-customizacões">Configuracões e
+Customizacões</a></li>
+</ul>
+</nav>
+<div class="pagetext">
+<p><a href="./">Return to index</a></p>
+<p>Article published by: Leonardo Z. N.</p>
+<p>Date of publication: 14/02/2022</p>
+<p>antes de tudo se você nunca ouviu falar no <a
+href="https://st.suckless.org/">suckless terminal</a>, também conhecido
+como simple terminal ou simplesmente st, ele é um emulador de terminal
+para <a href="https://en.wikipedia.org/wiki/X_Window_System">X Window
+System</a> escrito em C que tem como motivacão criar um terminal simples
+para substituir o <a
+href="https://en.wikipedia.org/wiki/Xterm">xterm</a> e o <a
+href="https://en.wikipedia.org/wiki/Rxvt">rxvt</a>.</p>
+<div class="h"><h1 id="baixar-e-instalar">Baixar e Instalar</h1><a aria-hidden="true" href="#baixar-e-instalar">[link]</a></div>
+<p>para baixar e instalar você vai precisar dos pacotes build-essential
+(base-devel no arch) e git</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Debian</th>
+<th>Arch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sudo apt install build-essential git</code></td>
+<td><code>sudo pacman -S base-devel git</code></td>
+</tr>
+</tbody>
+</table>
+<p>para baixar, clone o repositório oficial em algum lugar que você
+desejar no seu computador</p>
+<pre><code>git clone https://git.suckless.org/st</code></pre>
+<p>para instalar compile</p>
+<pre><code>sudo make clean install</code></pre>
+<p>pronto, agora é só digitar <code>st</code> para abrir</p>
+<h1 id="configuracões-e-customizacões">Configuracões e
+Customizacões</h1>
+<p>o arquivo de configuracão <code>config.h</code> é localizado dentro
+do repositório. <em>lembrando que assim como xterm ele é um terminal
+compatível com X então você também pode usar .Xresources</em></p>
+<p>dentro dele você encontra uma váriavel para cada um dos vários
+aspectos do terminal como: font, shell, tabspaces, …</p>
+<p>aqui vamos trocar a fonte do terminal mas o processo é o mesmo para
+fazer qualquer outra customizacão, inclusive o próprio site oferece
+vários <a href="https://st.suckless.org/patches/">conjuntos de
+alteracões</a> (patch) que você pode instalar, basta baixar o arquivo
+.diff (utilizando wget ou salvando com o botão direito no link) dentro
+do repo e aplicar as alteracões com o comando</p>
+<pre><code>patch -i nome-do-patch.diff</code></pre>
+<p>e seguir o mesmo passo para alteracões no arquivo:</p>
+<p>Para trocar a fonte vamos alterar a variável
+<code>static char *font</code> na mesma string podemos alterar algumas
+outras configuracões da fonte como pixel size, antialias e font hinting.
+Vou usar minha fonte favorita <a
+href="https://dtinth.github.io/comic-mono-font/">Comic Mono</a></p>
+<p>{% highlight c %} static char *font = “Comic
+Mono:pixelsize=12:antialias=false:autohint=false”; {% endhighlight
+%}</p>
+<p>após isso basta salvar o arquivo e recompilar o terminal</p>
+<pre><code>sudo make clean install</code></pre>
+<p>no caso dos patches, antes de recompilar você deve <a
+href="https://git-scm.com/book/pt-br/v2/Branches-no-Git-O-b%C3%A1sico-de-Ramifica%C3%A7%C3%A3o-Branch-e-Mesclagem-Merge#r_basic_merge_conflicts">resolver
+os arquivos conflitantes</a></p>
+<div id="footer">
+<hr />
+<p>🇧🇷</p>
+<hr />
+<p>Unless otherwise stated, documents/pages/images on this
+website/repository are released under the terms of the GNU Free
+Documentation License, either version 1.3 or any later version as
+published by the Free Software Foundation, with no Invariant Sections,
+no Back Cover Texts and no Front Cover Texts. View the license here: <a
+href="/license.html">/license.html</a></p>
+<hr />
+</div>
+<p>Markdown file for this page: <a
+href="https://leonardo.moe/2022-02-14-tutorial-st.md"
+class="uri">https://leonardo.moe/2022-02-14-tutorial-st.md</a></p>
+<p>This HTML page was generated by the <a
+href="https://untitled.vimuser.org/">untitled static site
+generator</a>.</p>
+</div>
+</div>
+</body>
+</html>
