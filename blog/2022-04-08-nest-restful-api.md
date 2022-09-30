@@ -222,6 +222,7 @@ nest_api/
 ```
 // orm.config.ts:
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import * as Models from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({
@@ -235,7 +236,7 @@ export const ormConfig: TypeOrmModuleOptions = {
   username: process.env.POSTGRES_USERNAME,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
-  entities: [],
+  entities: [...Object.keys(Models).map((key) => Models[key])],
   synchronize: true,
 };
 ```
