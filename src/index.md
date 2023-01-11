@@ -1,11 +1,11 @@
 ---
-title: Leonardo Blog
+title: There is no spoon
 x-toc-enable: true
 ...
 # Welcome to my blog
 
 <p> 
-I post tech stuff, tutorials, projects, things that I am learning and everything I want to share in the internet.
+I post tech stuff, tutorials, projects, things I am learning and everything I want to share in the internet.
 </p>
 -------------------------------------------------------------------------------
 Subscribe to RSS: [feed.xml](feed.xml)
