@@ -115,12 +115,13 @@ rss_main() {
 	SITEDIR="src"
 	DOMAIN="${3}"
 	BLOGDIR="${4}"
+	OUTPUTDIR="$(getConfigValue "${SITEDIR}/site.cfg" "OUTPUTDIR")"
 
 	# render content and escape
 	htmlfile="${file%.md}.html"
 
 	PAGETITLE=$(title "${SITEDIR}/${BLOGDIR}${file}")
-	PAGEURL="${DOMAIN}${BLOGDIR}${htmlfile}"
+	PAGEURL="${DOMAIN}${OUTPUTDIR}/${htmlfile}"
 
 	printf '%s\n' '<item>'
 	printf '%s\n' "<title>${PAGETITLE}</title>"
