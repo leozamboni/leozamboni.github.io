@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #
+# Copyright (C) 2023 Leonardo Zamboni 
 # Copyright (C) 2017,2021 Leah Rowe <info@minifree.org>
 # Copyright (C) 2017 Alyssa Rosenzweig <alyssa@rosenzweig.io>
 # Copyright (C) 2017 Michael Reed <michael@michaelreed.io>
@@ -76,15 +77,15 @@ title() {
 # usage: meta file
 meta() {
 	file="${1}"
-	SITEDIR="${2}"
+	SITEDIR="src"
 	BLOGDIR="${3}"
 	htmlfile=$(printf '%s\n' "${file%.md}.html")
 
 	printf '%s\n' \
-	"[$(title "${SITEDIR}/site/${BLOGDIR}${file}")](${BLOGDIR}${file}){.title}"
+	"[$(title "${SITEDIR}/${BLOGDIR}${file}")](${BLOGDIR}${file}){.title}"
 
 	printf '%s\n' \
-	"[$(sed -n 3p "${SITEDIR}/site/${BLOGDIR}${file}" | sed -e s-^..--)]{.date}"
+	"[$(sed -n 3p "${SITEDIR}/${BLOGDIR}${file}" | sed -e s-^..--)]{.date}"
 	# printf '\n'
 	# tail -n +5 "${SITEDIR}/news/${file}" | perl -p0e 's/(\.|\?|\!)( |\n)(.|\n)*/.../g'
 	# todo: make this configurable via enable/disable, and make it less cursed
@@ -111,14 +112,14 @@ rss_header() {
 # usage: rss_main file
 rss_main() {
 	file="${1}"
-	SITEDIR="${2}"
+	SITEDIR="src"
 	DOMAIN="${3}"
 	BLOGDIR="${4}"
 
 	# render content and escape
 	htmlfile="${file%.md}.html"
 
-	PAGETITLE=$(title "${SITEDIR}/site/${BLOGDIR}${file}")
+	PAGETITLE=$(title "${SITEDIR}/${BLOGDIR}${file}")
 	PAGEURL="${DOMAIN}${BLOGDIR}${htmlfile}"
 
 	printf '%s\n' '<item>'
@@ -196,7 +197,7 @@ getlangname() {
 # convert pandoc-markdown file into html, using a template file
 mkhtml() {
 	FILE=${1%.md}
-	SITEDIR="www/${2}"
+	SITEDIR="src"
 	TITLE="${3}"
 	CSS="${4}"
 	DEFAULTLANG="${5}"
@@ -305,34 +306,34 @@ mkhtml() {
 	fi
 
 	if [ "${FOOTERFILE}" = "" ]; then
-		if [ -f "${SITEDIR}/site/footer.include" ]; then
-			FOOTERFILE="${SITEDIR}/site/footer.include"
+		if [ -f "${SITEDIR}/footer.include" ]; then
+			FOOTERFILE="${SITEDIR}/footer.include"
 		fi
 		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
-			if [ -f "${SITEDIR}/site/footer.${PAGELANGUAGE}.include" ]; then
-				FOOTERFILE="${SITEDIR}/site/footer.${PAGELANGUAGE}.include"
+			if [ -f "${SITEDIR}/footer.${PAGELANGUAGE}.include" ]; then
+				FOOTERFILE="${SITEDIR}/footer.${PAGELANGUAGE}.include"
 			fi
 		fi
 	fi
 
 	if [ "${NAVFILE}" = "" ]; then
-		if [ -f "${SITEDIR}/site/nav.include" ]; then
-			NAVFILE="${SITEDIR}/site/nav.include"
+		if [ -f "${SITEDIR}/nav.include" ]; then
+			NAVFILE="${SITEDIR}/nav.include"
 		fi
 		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
-			if [ -f "${SITEDIR}/site/nav.${PAGELANGUAGE}.include" ]; then
-				NAVFILE="${SITEDIR}/site/nav.${PAGELANGUAGE}.include"
+			if [ -f "${SITEDIR}/nav.${PAGELANGUAGE}.include" ]; then
+				NAVFILE="${SITEDIR}/nav.${PAGELANGUAGE}.include"
 			fi
 		fi
 	fi
 
 	if [ "${TEMPLATE}" = "" ]; then
-		if [ -f "${SITEDIR}/site/template.include" ]; then
-			TEMPLATE="${SITEDIR}/site/template.include"
+		if [ -f "${SITEDIR}/template.include" ]; then
+			TEMPLATE="${SITEDIR}/template.include"
 		fi
 		if [ "${PAGELANGUAGE}" != "${DEFAULTLANG}" ]; then
-			if [ -f "${SITEDIR}/site/template.${PAGELANGUAGE}.include" ]; then
-				TEMPLATE="${SITEDIR}/site/template.${PAGELANGUAGE}.include"
+			if [ -f "${SITEDIR}/template.${PAGELANGUAGE}.include" ]; then
+				TEMPLATE="${SITEDIR}/template.${PAGELANGUAGE}.include"
 			fi
 		fi
 	fi
@@ -459,12 +460,12 @@ mkhtml() {
 		"${URI##/}" >> "${TMPFILE}"
 
 	RSS_LINK="$(getConfigValue "${STRINGSCFGPATH}" "RSS_LINK")"
-	if [ -f "${SITEDIR}/site/feed.xml" ]; then
+	if [ -f "${SITEDIR}/feed.xml" ]; then
 		printf "\n%s\n" "${RSS_LINK}" >> "${TMPFILE}"
 	fi
 
 	SITEMAP_LINK="$(getConfigValue "${STRINGSCFGPATH}" "SITEMAP_LINK")"
-	if [ -f "${SITEDIR}/site/sitemap.md" ]; then
+	if [ -f "${SITEDIR}/sitemap.md" ]; then
 		printf "\n%s\n" "${SITEMAP_LINK}" >> "${TMPFILE}"
 	fi
 
@@ -511,6 +512,7 @@ mkhtml() {
 	# as one argument, when it is actually two.
 	# Same for $TITLE
 	pandoc -V lang=${PAGELANGUAGE} -V dir=${PDIR} $TOC $SMART "$TMPFILE" \
+		--preserve-tabs --tab-stop 8 \
 		-V antisocialurl="${HTMLLINK}" -s ${CSS} ${CSSOVERRIDE} ${TITLE} \
 		--template ${TEMPLATE} --metadata return="" > "$FILE.html"
 
@@ -548,7 +550,7 @@ sanitizefilename() {
 }
 
 mknews() {
-	SITEDIR="${1}"
+	SITEDIR="src"
 	SITENAME="${2}"
 	BLOGDIR="${3}"
 	DOMAIN="${4}"
@@ -556,19 +558,19 @@ mknews() {
 	CSS="${6}"
 	DEFAULTLANG="${7}"
 
-	#if [ -f "${SITEDIR}/site/${BLOGDIR}MANIFEST" ]; then
+	#if [ -f "${SITEDIR}/${BLOGDIR}MANIFEST" ]; then
 
-	for MANIFEST in $(find -L "${SITEDIR}/site/" -type f -name "MANIFEST"); do
+	for MANIFEST in $(find -L "${SITEDIR}/" -type f -name "MANIFEST"); do
 
 		if [ ! -f "${MANIFEST}" ]; then continue; fi
 
 		BLOGTITLE="News"
 		BLOGDESCRIPTION="News"
-		MANIFESTDIR="${MANIFEST##${SITEDIR}/site/}"
+		MANIFESTDIR="${MANIFEST##${SITEDIR}/}"
 		MANIFESTDIR="${MANIFESTDIR%MANIFEST}"
-		if [ -f "${SITEDIR}/site/${MANIFESTDIR}news.cfg" ]; then
-			BLOGTITLE="$(getConfigValue "${SITEDIR}/site/${MANIFESTDIR}news.cfg" "BLOGTITLE")"
-			BLOGDESCRIPTION="$(getConfigValue "${SITEDIR}/site/${MANIFESTDIR}news.cfg" "BLOGDESCRIPTION")"
+		if [ -f "${SITEDIR}/${MANIFESTDIR}news.cfg" ]; then
+			BLOGTITLE="$(getConfigValue "${SITEDIR}/${MANIFESTDIR}news.cfg" "BLOGTITLE")"
+			BLOGDESCRIPTION="$(getConfigValue "${SITEDIR}/${MANIFESTDIR}news.cfg" "BLOGDESCRIPTION")"
 
 			if [ "${BLOGTITLE}" = "" ]; then BLOGTITLE="News"; fi
 			if [ "${BLOGDESCRIPTION}" = "" ]; then BLOGDESCRIPTION="News"; fi
@@ -580,18 +582,18 @@ mknews() {
 		printf "\n" > "${TMPFILE}"
 		for f in ${FILES}; do
 			page="$(sanitizefilename "${f}")"
-			if [ ! -f "${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+			if [ ! -f "${SITEDIR}/${MANIFESTDIR}${page}" ]; then
 				printf "build-html: news file '%s' does not exist in site '%s' for news section '%s'. Skipping this news section\n" \
 					"${page}" "${SITENAME}" "${MANIFESTDIR}" \
 					>> "${TMPFILE}"
 			fi
-			if [ -L "${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+			if [ -L "${SITEDIR}/${MANIFESTDIR}${page}" ]; then
 				printf "build-html: news file '%s' is a symlink in news section '%s' for site '%s'. Skipping this news section.\n" \
 					"${page}" "${MANIFESTDIR}" "${SITENAME}" \
 					>> "${TMPFILE}"
 			fi
-			if [ "$(readlink -f "$(pwd)/${SITEDIR}/site/${MANIFESTDIR}${page}" 2>&1)" \
-					!= "$(pwd)/${SITEDIR}/site/${MANIFESTDIR}${page}" ]; then
+			if [ "$(readlink -f "$(pwd)/${SITEDIR}/${MANIFESTDIR}${page}" 2>&1)" \
+					!= "$(pwd)/${SITEDIR}/${MANIFESTDIR}${page}" ]; then
 
 				printf "build-html: news file '%s' different when running readlink -f. skipping this news section\n" \
 					"${page}" \
@@ -607,9 +609,9 @@ mknews() {
 		rm -f "${TMPFILE}"
 
 		# generate the index file
-		if [ -f "${SITEDIR}/site/${MANIFESTDIR}news-list.md.include" ]; then
-			cat "${SITEDIR}/site/${MANIFESTDIR}news-list.md.include" \
-				> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+		if [ -f "${SITEDIR}/${MANIFESTDIR}news-list.md.include" ]; then
+			cat "${SITEDIR}/${MANIFESTDIR}news-list.md.include" \
+				> "${SITEDIR}/${MANIFESTDIR}index.md"
 		else
 			printf "MANIFEST present for %s in %s but no news-list.md.include present with that MANIFEST. Skipping this news section.\n" \
 				"${SITEDIR}" "${MANIFESTDIR}"
@@ -617,42 +619,42 @@ mknews() {
 		fi
 		if [ "${MANIFESTDIR%/}" = "${BLOGDIR%/}" ]; then
 			printf "\nSubscribe to RSS: [feed.xml](feed.xml)\n\n" \
-				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+				>> "${SITEDIR}/${MANIFESTDIR}index.md"
 		else
 			printf "\nSubscribe to RSS: [%sfeed.xml](%sfeed.xml)\n\n" \
 				"${MANIFESTDIR}" "${MANIFESTDIR}" \
-				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+				>> "${SITEDIR}/${MANIFESTDIR}index.md"
 		fi
 		for f in $FILES
 		do
 			page="$(sanitizefilename "${f}")"
 			meta "${page}" "${SITEDIR}" "${MANIFESTDIR}" \
-				>> "${SITEDIR}/site/${MANIFESTDIR}index.md"
+				>> "${SITEDIR}/${MANIFESTDIR}index.md"
 		done
 
 		# generate the RSS index
 		rss_header "$BLOGTITLE" "$DOMAIN" "$BLOGDESCRIPTION" \
-			"${MANIFESTDIR}" > "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+			"${MANIFESTDIR}" > "${SITEDIR}/${MANIFESTDIR}feed.xml"
 		for f in $FILES
 		do	
 			page="$(sanitizefilename "${f}")"
 			rss_main "$page" "${SITEDIR}" "${DOMAIN}" "${MANIFESTDIR}" \
-				>> "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+				>> "${SITEDIR}/${MANIFESTDIR}feed.xml"
 		done
-		rss_footer >> "${SITEDIR}/site/${MANIFESTDIR}feed.xml"
+		rss_footer >> "${SITEDIR}/${MANIFESTDIR}feed.xml"
 
-		if [ "${SITEDIR}/site/${MANIFESTDIR}feed.xml" \
-				!= "${SITEDIR}/site/feed.xml" ] \
+		if [ "${SITEDIR}/${MANIFESTDIR}feed.xml" \
+				!= "${SITEDIR}/feed.xml" ] \
 				&& [ "${MANIFESTDIR}" = "${BLOGDIR}" ]; then
 
-			rm -f "${SITEDIR}/site/feed.xml"
+			rm -f "${SITEDIR}/feed.xml"
 
-			cp "${SITEDIR}/site/${MANIFESTDIR}feed.xml" \
-				"${SITEDIR}/site/feed.xml"
+			cp "${SITEDIR}/${MANIFESTDIR}feed.xml" \
+				"${SITEDIR}/feed.xml"
 		fi
 
-		if [ -f "${SITEDIR}/site/${MANIFESTDIR}index.md" ]; then
-			mkhtml "${SITEDIR}/site/${MANIFESTDIR}index.md" \
+		if [ -f "${SITEDIR}/${MANIFESTDIR}index.md" ]; then
+			mkhtml "${SITEDIR}/${MANIFESTDIR}index.md" \
 				"${SITEDIR##*/}" "${TITLE}" "${CSS}" \
 				"${DEFAULTLANG}"
 		fi
@@ -662,22 +664,22 @@ mknews() {
 }
 
 mksitemap() {
-	SITEDIR="${1}"
+	SITEDIR="src"
 	TITLE="${2}"
 	CSS="${3}"
 	DEFAULTLANG="${4}"
-	if [ ! -f "${SITEDIR}/site/sitemap.include" ]; then return 0; fi
+	if [ ! -f "${SITEDIR}/sitemap.include" ]; then return 0; fi
 	# only generate a sitemap if one is specified
 
 	TMPFILE=$(mktemp -t untitled_www.XXXXXXXXXX)
 
-	cat "${SITEDIR}/site/sitemap.include" > "${TMPFILE}"
+	cat "${SITEDIR}/sitemap.include" > "${TMPFILE}"
 	printf "\n\n" >> "${TMPFILE}"
 
 	printf "<div class='sitemap'>\n" >> "${TMPFILE}"
-	for MDFILE in $(find -L "${SITEDIR}/site/" -type f -name "*.md"); do
+	for MDFILE in $(find -L "${SITEDIR}/" -type f -name "*.md"); do
 		if [ ! -f "${MDFILE}" ]; then continue; fi
-		if [ "${MDFILE}" = "${SITEDIR}/site/sitemap.md" ]; then continue; fi
+		if [ "${MDFILE}" = "${SITEDIR}/sitemap.md" ]; then continue; fi
 		URI="${MDFILE##${SITEDIR}/site}"
 		URI="${URI%index*}"
 		printf "* %s: [%s](%s)\n" "${URI}" "$(title "${MDFILE}")" \
@@ -686,18 +688,18 @@ mksitemap() {
 	done
 	printf "</div>\n\n" >> "${TMPFILE}"
 
-	cp "${TMPFILE}" "${SITEDIR}/site/sitemap.md"
+	cp "${TMPFILE}" "${SITEDIR}/sitemap.md"
 	rm -f "${TMPFILE}"
 
-	if [ -f "${SITEDIR}/site/sitemap.md" ]; then
-		mkhtml "${SITEDIR}/site/sitemap.md" \
+	if [ -f "${SITEDIR}/sitemap.md" ]; then
+		mkhtml "${SITEDIR}/sitemap.md" \
 			"${SITEDIR##*/}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
 	fi
 }
 
 buildsite() {
 	SITECHANGED="n"
-	SITEDIR="${1}"
+	SITEDIR="src"
 
 	printf "\nProcessing files in site: %s\n" "${SITEDIR##*/}"
 
@@ -729,7 +731,7 @@ buildsite() {
 	fi
 	rm -f "${TMPFILE}"
 
-	TEMPLATE="${SITEDIR}/site/template.include"
+	TEMPLATE="${SITEDIR}/template.include"
 
 	# Check whether the required files are present.
 	# ALSO: Clean the site if site-wide changes are detected
@@ -745,7 +747,7 @@ buildsite() {
 			return 0
 		fi
 	done
-	for f in "${SITEDIR}"/site/footer*.include "${SITEDIR}"/site/nav*.include; do
+	for f in "${SITEDIR}"/footer*.include "${SITEDIR}"/nav*.include; do
 		if [ -f "${f}" ]; then
 			printf "%s\n" "${f}" >> "${FILELIST}"
 		fi
@@ -789,11 +791,13 @@ buildsite() {
 
 	BLOGDIR="$(getConfigValue "${SITEDIR}/site.cfg" "BLOGDIR")"
 	# optional. if not set, this will be empty, and blog will be homepage
-	TESTDIR="$(pwd)/${SITEDIR}/site/${BLOGDIR%/}"
-	if [ "$(readlink -f "${TESTDIR}" 2>&1)" != "${TESTDIR%/}" ]; then
-		printf "Invalid BLOGDIR in site.cfg for %s. skipping this site\n" "${SITEDIR}"
-		return 0	
-	fi
+	# TESTDIR="$(pwd)/${SITEDIR}/${BLOGDIR%/}"
+	TESTDIR="${BLOGDIR%/}"
+
+	# if [ "$(readlink -f "${TESTDIR}" 2>&1)" != "${TESTDIR%/}" ]; then
+	# 	printf "Invalid BLOGDIR in site.cfg for %s. skipping this site\n" "${SITEDIR}"
+	# 	return 0	
+	# fi
 	if [ -L "${TESTDIR}" ]; then
 		printf "BLOGDIR in site.cfg for %s is a symlink. skipping the site\n" "${SITEDIR}"
 		return 0
@@ -802,16 +806,16 @@ buildsite() {
 		printf "BLOGDIR in site.cfg for %s is a file. skipping this site\n" "${SITEDIR}"
 		return 0
 	fi
-	TESTDIR="${TESTDIR##$(pwd)/${SITEDIR}/site/}"
+	TESTDIR="${TESTDIR##$(pwd)/}"
 
-	for mdfile in $(find -L ${SITEDIR}/site/ -name '*.md'); do
+	for mdfile in $(find -L ${SITEDIR}/ -name '*.md'); do
 		mkhtml "${mdfile}" "${SITEDIR##*/}" "${TITLE}" "${CSS}" \
 			"${DEFAULTLANG}"
 	done
-
+	
 	if [ "${SITECHANGED}" = "y" ]; then
 		mksitemap "${SITEDIR}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
-		if [ ! -d "${SITEDIR}/site/${TESTDIR}" ]; then
+		if [ ! -d "${SITEDIR}/${TESTDIR}" ]; then
 			printf "BLOGDIR does not exist in %s. not building news sections for this site\n" "${SITEDIR}"
 		else
 			mknews "${SITEDIR}" "${SITENAME}" "${BLOGDIR}" "${DOMAIN}" "${TITLE}" "${CSS}" "${DEFAULTLANG}"
@@ -819,6 +823,22 @@ buildsite() {
 	else
 		printf "this website has not been changed. skipping.\n"
 	fi
+
+	OUTPUTDIR="$(getConfigValue "${SITEDIR}/site.cfg" "OUTPUTDIR")"
+
+	if [ -z ${OUTPUTDIR+x} ]; then
+		printf "untitled error: OUTPUTDIR not defined in site.cfg.\n"
+		exit 1
+	fi
+
+	mkdir -p $OUTPUTDIR
+	cp $SITEDIR/*.html $SITEDIR/*.xml $SITEDIR/*.css $SITEDIR/license.md $OUTPUTDIR/
+
+	if [[ $BLOGDIR != "" ]]; then
+		mkdir -p $OUTPUTDIR/$BLOGDIR
+		cp $SITEDIR/*.css $SITEDIR/$BLOGDIR*.html $SITEDIR/$BLOGDIR*.xml $OUTPUTDIR/$BLOGDIR
+	fi
+	./clean
 }
 
 buildpage() {
@@ -832,13 +852,13 @@ buildpage() {
 	[[ "${MDFILE%.md}" = "${MDFILE}" ]] && return 0
 
 	# path translation
-	# e.g. libreboot/index.md becomes www/libreboot/site/index.md
-	# e.g. libreboot/site/index.md becomes www/libreboot/site/index.md
-	# e.g. www/libreboot/index.md becomes www/libreboot/site/index.md
-	# in all cases, the correct path is: www/libreboot/site/index.md
+	# e.g. libreboot/index.md becomes www/libreboot/index.md
+	# e.g. libreboot/index.md becomes www/libreboot/index.md
+	# e.g. www/libreboot/index.md becomes www/libreboot/index.md
+	# in all cases, the correct path is: www/libreboot/index.md
 	MDFILE="${MDFILE#www/}"
 	SITESITE="${MDFILE#*/}"
-	[[ "${SITESITE#site/}" = "${SITESITE}" ]] && SITESITE="site/${SITESITE}"
+	[[ "${SITESITE#}" = "${SITESITE}" ]] && SITESITE="${SITESITE}"
 	MDFILE="www/${MDFILE%%/*}/${SITESITE}"
 
 	[[ ! -f "${MDFILE}" ]] && return 0
@@ -851,15 +871,17 @@ buildpage() {
 		return 0
 	fi
 
-	SITEDIR="${MDFILE#www/}"
+	# SITEDIR="${MDFILE#www/}"
+	SITEDIR="src"
 	[[ "${SITEDIR}" = "${MDFILE}" ]] && return 0
 	SITENAME="${SITEDIR%%/*}"
 	[[ "${SITENAME}" = "${SITEDIR}" ]] && return 0
-	SITEDIR="www/${SITENAME}"
+	# SITEDIR="www/${SITENAME}"
+	SITEDIR="src"
 	[[ ! -d "${SITEDIR}" ]] && return 0
 
 	printf "\nPage: %s\n" "${MDFILE}"
-	printf "Processing page in site directory: %s/site/\n" "${SITEDIR}"
+	printf "Processing page in site directory: %s/\n" "${SITEDIR}"
 
 	if [ ! -f "${SITEDIR}/site.cfg" ]; then
 		printf "%s missing for site '%s'. Skipping this page\n" \
@@ -885,16 +907,16 @@ buildpage() {
 		"${DEFAULTLANG}"
 }
 
-if [ -f "www" ]; then
-	printf "untitled error: www is a file. should be a directory. exiting.\n"
+if [ -f "src" ]; then
+	printf "untitled error: src is a file. should be a directory. exiting.\n"
 	exit 1
 fi
-if [ ! -d "www" ]; then
-	printf "untitled error: no www/ directory. Exiting\n"
+if [ ! -d "src" ]; then
+	printf "untitled error: no src/ directory. Exiting\n"
 	exit 1
 fi
-if [ -L "www" ]; then
-	printf "untitled error: www/ directory is a symlink. Exiting\n"
+if [ -L "src" ]; then
+	printf "untitled error: src/ directory is a symlink. Exiting\n"
 	exit 1
 fi
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2021 Leah Rowe <info@minifree.org>
+# Copyright (C) 2023 Leonardo Zamboni 
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,71 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-[ "x${DEBUG+set}" = 'xset' ] && set -v
-set -e
+rm -f src/*.html src/*.date
 
-if [ ! -d "www" ]; then
-	printf "untitled error: no www/ directory. Exiting\n"
-	exit 1
-fi
-
-# NOTE: the cleansite script does check for symlinks, but unlike in the build
-# script, an entire site won't simply be skipped for having symlinks.
-
-cleansite() {
-	SITENAME="${1}"
-
-	if [ ! -d "www/${SITENAME}/site" ]; then
-		printf "Site '%s' has no site directory; skipping clean\n" "${SITENAME}"
-		return 0
-	fi
-	if [ -L "www/${SITENAME}" ] || [ -L "www/${SITENAME}/site" ]; then
-		printf "Site '%s' is a symlink directory. skipping clean\n" "${SITENAME}"
-		return 0
-	fi
-
-	printf "Cleaning generated files from site: '%s'\n" "${SITENAME}"
-
-	for f in $(find -L www/"${SITENAME}"/site/ -type f -name '*.html'); do
-		if [ ! -f "${f}" ]; then continue; fi
-		if [ -L "${f}" ]; then continue; fi
-		if [ -f "${f%.html}.md" ] && [ ! -L "${f%.html}.md" ]; then
-			rm -f "${f}"
-		fi
-	done
-
-	for f in $(find -L "www/${SITENAME}/site" -type f -name "*.date"); do
-		if [ ! -f "${f}" ]; then continue; fi
-		if [ -L "${f}" ]; then continue; fi
-		if [ "${f##*/}" = "footer.include.date" ] \
-			|| [ "${f##*/}" = "nav.include.date" ] \
-			|| [ "${f##*/}" = "template.include.date" ]; then
-
-			continue
-		fi
-		rm -f "${f}"
-	done
-
-	rm -f www/"${SITENAME}"/site/feed.xml
-	for f in $(find -L www/"${SITENAME}"/site/ -type f -name 'MANIFEST'); do
-		if [ ! -f "${f}" ]; then continue; fi
-		if [ -L "${f}" ]; then continue; fi
-		for ff in "${f%MANIFEST}"{index.md,index.html,feed.xml}; do
-			if [ ! -f "${ff}" ]; then continue; fi
-			if [ -L "${ff}" ]; then continue; fi
-
-			rm -f "${ff}"
-		done
-	done
-}
-
-if [ $# -gt 0 ]; then
-	for site in "${@}"; do
-		sitename="${site##*/}"
-		cleansite "${sitename}"
-	done
-else
-	for sitedir in www/*; do
-		cleansite "${sitedir##*/}"
-	done
-fi
+for dir in src/*/; 
+do 
+	rm -f "$dir*.html" "$dir*.date"; 
+done
