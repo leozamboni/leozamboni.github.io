@@ -860,6 +860,7 @@
       <a href="https://twitter.com/intent/user?user_id=4700433616" title="Twitter"><span class="emoji">&#128038;</span></a>
       <a href="http://irc.leonardo.moe" title="IRC"><span class="emoji">&#128172;</span></a>
       `
+      emoji_parse()
     }
 
     function software_i_use() {
@@ -941,10 +942,12 @@
         sun.style.opacity = 0
       }
     }
-    twemoji.parse(
-      document.body,
-      { base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/' }
-    )
+    function emoji_parse() {
+      twemoji.parse(
+        document.body,
+        { base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/' }
+      )
+    } emoji_parse()
   </script>
 </body>
 
