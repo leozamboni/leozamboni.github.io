@@ -1,181 +1,130 @@
-@import url(../puppertino/puppertino.css);
+/*
+ * This CSS is released under Creative Commons Zero 1.0 Universal license:
+ * https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt
+ */
+.specs {
+  float: right;
+}
+
+:not(p) {
+  max-width: 85em;
+  margin: 0 auto;
+}
+
+@media (max-width: 89em) {
+  html {
+    font-size: 0.95em;
+  }
+}
+@media (min-width: 90em) {
+  html {
+    font-size: 1.05em;
+  }
+}
 
 html {
-  background-color: var(--p-silver-300);
-  padding-bottom: 7em;
-  text-align: left;
-}
-
-div.title {
-  background: url("nowhere");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-attachment: absolute;
-  background-position: right;
-}
-
-h1.title {
-  text-align: center;
-  background: url("nowhere");
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  min-height: 2em;
-  margin: 0;
-  display: block;
-}
-
-body {
-  line-height: 1.6;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1em;
-  color: #222;
-}
-
-div.page {
-  border-radius: 15px;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
-  background-color: var(--p-silver-100);
-  max-width: 70em;
-  margin: 0 auto;
-  padding: 0.2em 1em;
-}
-
-div.warning {
-  background: #fcc;
-  font-size: 1.1em;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-pre {
-  padding: 0.3em;
-}
-
-pre,
-table {
-  overflow-x: auto;
-  display: block;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-th {
-  background: #cdcdcd;
-}
-th,
-td {
-  /* border: solid 1px #888; */
-}
-tr:nth-child(even) {
-  background-color: #eee;
+  background: #0b1028;
+  color: #eeeeee;
+  font-family: sans-serif;
+  line-height: 1.4;
+  text-shadow: 1px 1px #000;
 }
 
 code,
 pre,
-nav#TOC {
-  background-color: #ececec;
-}
-
-img {
-  max-width: 100%;
+#TOC,
+a:hover {
+  background: #32374e;
 }
 
 a {
-  text-decoration: none;
-  color: var(--p-blueberry-900);
+  color: #cccdff;
 }
 
-a.uri {
-  word-wrap: break-word;
+img,
+video,
+iframe,
+pre {
+  max-width: 100%;
+  overflow: auto;
 }
 
-a:hover {
-  color: var(--p-blueberry-700);
+.title > *,
+header ul > li,
+.nav ul > li,
+#footer ul > li,
+.h:hover > * {
+  display: inline;
+  margin: 0.7%;
+  text-align: center;
 }
 
-.date {
+.title > *,
+span.date {
   display: block;
 }
 
-h1,
-h2,
-h3,
-.h:hover a {
-  display: inline;
+html,
+ul,
+#TOC {
+  padding: 1em;
 }
 
+.date,
+.author,
 .h a {
   display: none;
 }
 
-p.author,
-p.date {
-  display: none;
-}
-div.nav {
-  text-align: center;
-}
-header ul:first-of-type,
-div.nav ul:first-of-type,
-div#footer ul:last-of-type {
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-header ul:first-of-type > li,
-div.nav ul:first-of-type > li,
-div#footer ul:last-of-type li {
-  padding: 0;
-  margin: 0;
-  display: inline;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  border-right: solid 1px #000;
-}
-header ul:first-of-type > li:first-child,
-div.nav ul:first-of-type > li:first-child,
-div#footer ul:last-of-type > li:first-child {
-  padding-left: 0;
-}
-header ul:first-of-type > li:last-child,
-div.nav ul:first-of-type > li:last-child,
-div#footer ul:last-of-type > li:last-child {
-  padding-right: 0;
-  border: none;
+@media (min-width: 60em) {
+  .title-logo {
+    display: none;
+  }
+  div.title,
+  h1.title {
+    background: url("/favicon.ico") no-repeat;
+    background-size: auto 99%;
+    min-height: 2em;
+  }
+  div.title {
+    background-position: right;
+  }
+  h1.title {
+    padding: 0 4em;
+  }
+  #TOC {
+    float: left;
+    margin: 1em;
+    min-width: 25%;
+  }
 }
 
-nav#TOC {
-  min-width: 25%;
+.f,
+.f * {
+  position: fixed;
   max-width: 100%;
-  float: left;
-  margin: 1em;
-  padding: 0.2em 1em;
-}
-nav#TOC h1 {
-  font-size: 1em;
-}
-nav#TOC li > ul {
-  margin-left: 0;
-  padding-left: 0.5em;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
 }
 
-img.imgleft,
-img.imgright {
-  max-width: 25%;
-  height: auto;
-  padding: 2em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+.f * {
+  transform: translate(-50%, -50%);
 }
 
-img.imgright {
-  float: right;
-  padding-right: 0;
+.f {
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
 }
 
-img.imgleft {
-  float: left;
-  padding-left: 0;
+*:focus + .f {
+  display: block;
+}
+
+img {
+  cursor: pointer;
 }
