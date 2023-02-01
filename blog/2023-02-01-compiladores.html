@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Leonardo Z. N.">
+  <meta name="dcterms.date" content="2023-01-02">
+  <title>Leonardo – Notas sobre o livro Compiladores Princípios, técnicas e ferramentas 2ª Edição</title>
+  <link rel="stylesheet" href="global.css">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml"/>
+</head>
+<body>
+<div class="page">
+<header>
+<div class="title">
+<h1 class="title">Notas sobre o livro <em>Compiladores Princípios,
+técnicas e ferramentas 2ª Edição</em></h1>
+</div>
+<p class="author">Leonardo Z. N.</p>
+<p class="date">01/02/2023</p>
+<ul>
+<li><a href="https://leonardo.moe/blog/index.html">Home</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="https://github.com/leozamboni/leozamboni.github.io">Source</a></li>
+<li><strong><a href="donate.html">Donate</a></strong></li>
+</ul>
+<hr/>
+</header>
+<nav id="TOC">
+<h1>Navigate this page:</h1>
+<ul>
+<li><a
+href="#notas-sobre-o-livro-compiladores-princípios-técnicas-e-ferramentas-2ª-edição">Notas
+sobre o livro <em>Compiladores Princípios, técnicas e ferramentas 2ª
+Edição</em></a>
+<ul>
+<li><a href="#introdução">Introdução</a></li>
+<li><a href="#processadores-de-linguagem">1.1 Processadores de
+Linguagem</a>
+<ul>
+<li><a href="#exemplo-1.1">Exemplo 1.1</a></li>
+<li><a href="#programa-objeto---programa-objeto-executável">Programa
+Objeto -&gt; Programa Objeto Executável</a></li>
+<li><a href="#exercícios">Exercícios</a></li>
+</ul></li>
+<li><a href="#estrutura-de-um-compilador">1.2 Estrutura de um
+Compilador</a></li>
+</ul></li>
+</ul>
+</nav>
+<div class="pagetext">
+<p><a href="./">Return to index</a></p>
+<p>Article published by: Leonardo Z. N.</p>
+<p>Date of publication: 01/02/2023</p>
+<h1
+id="notas-sobre-o-livro-compiladores-princípios-técnicas-e-ferramentas-2ª-edição">Notas
+sobre o livro <em>Compiladores Princípios, técnicas e ferramentas 2ª
+Edição</em></h1>
+<p>O objetivo desse artigo é fazer anotações sobre o livro, tentar
+clarificar alguns termos e adicionar alguns links úteis em palavras
+chaves.</p>
+<ul>
+<li>Isso não tem como objetivo ser uma cópia do livro original, APENAS
+NOTAS;</li>
+<li>Notações feitas a partir de um exemplar físico original, traduzido
+em Português brasileiro e editado por Pearson Addison Wesley, que eu
+mesmo comprei;</li>
+<li>Exercícios resolvidos sem nenhuma garantia e com base na minha atual
+experiência.</li>
+<li>Pode e vai conter erros de digitação.</li>
+</ul>
+<div class="h"><h2 id="introdução">Introdução</h2><a aria-hidden="true" href="#introdução">[link]</a></div>
+<p>Linguagens de programação são <strong>notações</strong> para
+descrever computação para <strong>pessoas</strong> e para
+<strong>máquinas</strong>.</p>
+<p><strong>Todo software executando em todos os computadores foi escrito
+em alguma linguagem de programação</strong>, mas para um programa rodar,
+precisa ser <strong>traduzido</strong> para um formato que o computador
+consiga <strong>executar</strong>.</p>
+<p>Os softwares que fazem essa tradução são chamados de <strong><a
+href="https://pt.wikipedia.org/wiki/Compilador">compiladores</a></strong>.</p>
+<div class="h"><h2 id="processadores-de-linguagem">1.1 Processadores de Linguagem</h2><a aria-hidden="true" href="#processadores-de-linguagem">[link]</a></div>
+<ul>
+<li>Um compilador recebe como <strong>entrada</strong> um programa
+escrito em uma linguagem de programação (<strong>linguagem
+fonte</strong>);</li>
+<li>E <strong>retorna</strong> o mesmo programa
+<strong>traduzido</strong> em outra linguagem (<strong>linguagem
+objeto</strong>).</li>
+</ul>
+<pre><code>                    .------------.
+  Programa fonte -&gt; | Compilador | -&gt; Programa Objeto
+                    --------------</code></pre>
+<p>Se o programa objeto (<strong>saida</strong>) estiver em uma
+<strong>linguagem executável</strong> (linguagens interpretadas ou <a
+href="https://pt.wikipedia.org/wiki/C%C3%B3digo_de_m%C3%A1quina">linguagem
+de máquina</a>, por exemplo), poderá ser <strong>chamado</strong> pelo
+usuário (<strong>executado pelo máquina</strong>).</p>
+<p>Interpretadores também é um <strong>processador de
+linguagem</strong>. Mas em vez de produzir um <strong>programa
+objeto</strong>, um interpretador <strong>executa diretamente</strong>
+as operações do <strong>programa fonte</strong>.</p>
+<pre><code>                       .---------------.
+     Programa fonte -&gt; | Interpretador | -&gt; Saída
+Entradas do Usuário -&gt; |               |
+                       -----------------</code></pre>
+<ul>
+<li>O <strong>programa objeto</strong> em <strong>linguagem de
+máquina</strong> produzido por um <strong>compilador</strong>,
+normalmente é muito <strong>mais rápido</strong> (na execução do
+programa objeto) que um interpretador;</li>
+<li>Um <strong>interpretador</strong>, normalmente tem um <strong>melhor
+diagnóstico de erro</strong>, poís <strong>executa</strong> o programa
+fonte <strong>instrução por instrução</strong>.</li>
+</ul>
+<div class="h"><h3 id="exemplo-1.1">Exemplo 1.1</h3><a aria-hidden="true" href="#exemplo-1.1">[link]</a></div>
+<p><a
+href="https://pt.wikipedia.org/wiki/Java_(linguagem_de_programa%C3%A7%C3%A3o)">Java</a>
+combina os dois modelos, compilação e interpretação.</p>
+<pre><code>                  .------------.                           .------------------.
+Programa fonte -&gt; | Compilador | -&gt; Prog. Intermediário -&gt; |   Interpretador  | -&gt; Saída
+                  --------------    Entradas do Usuário -&gt; | (Máquina Virtual)|
+                                                           --------------------</code></pre>
+<ul>
+<li>Programa objeto: <strong><em>quase</em> executável</strong>;</li>
+<li>Programa Intermediável: <strong>mesmo programa em outra
+linguagem</strong>.</li>
+</ul>
+<p>Alguns compiladores Java são <strong>just-in-time</strong>, traduzem
+os <a href="https://pt.wikipedia.org/wiki/Bytecode">bytecodes</a> um
+atrás do outro, <strong>antes</strong> de executar o programa
+intermediário.</p>
+<h3 id="programa-objeto---programa-objeto-executável">Programa Objeto
+-&gt; Programa Objeto Executável</h3>
+<p>Após gerar um <strong>programa objeto</strong> através de um
+<strong>compilador</strong>, alguns <strong>outros programas</strong>
+podem ser <strong>necessários</strong> para gerar o <strong>programa
+objeto executável</strong>.</p>
+<p>As vezes um programa pode estar <strong>divido em diversos
+arquivos</strong>, a tarefa de <strong>juntar o programa fonte</strong>
+às vezes é feita por um <strong>programa separado</strong>, chamado
+<strong>pré-processador</strong>.</p>
+<pre><code>               .-----------------.                              .------------.
+Prog. Fonte -&gt; | Pré-processador | -&gt; Prog. Fonte Modificado -&gt; | Compilador | -&gt; Prog. Obj. (Assembly)
+               -------------------                              --------------
+   .----------.                       .--------------------.
+-&gt; | Montador | -&gt; Cód. de Máquina -&gt; | Carregador de libs | -&gt; Prog. Obj. executável
+   ------------                       ----------------------</code></pre>
+<div class="h"><h3 id="exercícios">Exercícios</h3><a aria-hidden="true" href="#exercícios">[link]</a></div>
+<pre><code>1.1.1: Qual é a diferenças entre compilador e interpretador?
+    - Compilador gera um arquivo objeto (que geralmente roda mais rápido) a partir do arquivo fonte, que pode ou não ser em uma linguagem executável.
+    - Intepretador executa o arquivo fonte (trata melhor os erros).
+
+1.1.2: Vantagens em relação ao outro?
+    - Compiladores geralmente resultam em um programa objeto executável que roda mais rápido.
+    - Interpretadores geralmente possuem um tratamento de erro melhor.
+
+1.1.3: Vantagens de um sistema de processamente de linguagem que resulta em linguagem simbólica em vez de linguagem de máquina?
+    Maior portabilidade, já que cada processador possue uma linguagem de máquina com instruções diferente.
+
+1.1.4: Sobre compiladores **fonte para fonte** (que compilam para uma linguagem do mesmo nível). Qual a vantagem de usar C como linguagem objeto de um compilador?
+    C é uma linguagem de fácil entendimento com uma syntax relativamente simples, que possue diversos compiladores extremamente validados e mantidos por suas comunidades. Usar C como código intermediário facilita a criação do executável usando um compilador mais amplamente usado (Clang ou GCC, por exemplo). Além de facilitar a construção de geradores de códigos dentro de um compilador, já que a syntax é simples e oferece maior capacidade para a linguagem fonte em relação ao gerenciamento de memória do computador.
+
+1.1.5: Sobre programas montadores:
+    Um programa montador precisa ser capaz de realizar a tarefa de transformar o código fonte em um código de máquina de acordo com a arquitetura do computador que está sendo executado.
+</code></pre>
+<div class="h"><h2 id="estrutura-de-um-compilador">1.2 Estrutura de um Compilador</h2><a aria-hidden="true" href="#estrutura-de-um-compilador">[link]</a></div>
+<p>em breve…</p>
+<div id="footer">
+<hr />
+<p>Unless otherwise stated, documents/pages/images on this
+website/repository are released under the terms of the GNU Free
+Documentation License, either version 1.3 or any later version as
+published by the Free Software Foundation, with no Invariant Sections,
+no Back Cover Texts and no Front Cover Texts. View the license here: <a
+href="license.html">license.html</a></p>
+<p>🇧🇷</p>
+</div>
+<p>Markdown file for this page: <a
+href="http://leonardo.moe/src/2023-02-01-compiladores.md"
+class="uri">http://leonardo.moe/src/2023-02-01-compiladores.md</a></p>
+<p><a href="feed.xml">Subscribe to RSS for this site</a></p>
+<p>This HTML page was generated by the <a
+href="https://untitled.vimuser.org/">untitled static site
+generator</a>.</p>
+</div>
+</div>
+</body>
+</html>

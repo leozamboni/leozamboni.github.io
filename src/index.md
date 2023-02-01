@@ -26,3 +26,7 @@ Subscribe to RSS: [feed.xml](feed.xml)
 [14/02/2022]{.date}
 
 
+[Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_](2023-02-01-compiladores.md){.title}
+[01/02/2023]{.date}
+
+
