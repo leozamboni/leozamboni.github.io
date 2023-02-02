@@ -6,9 +6,8 @@
 
 O objetivo desse artigo é fazer anotações sobre o livro, tentar clarificar alguns termos e adicionar alguns links úteis em palavras chaves.
 
-- Isso não tem como objetivo ser uma cópia do livro original, APENAS NOTAS;
 - Notações feitas a partir de um exemplar físico original, traduzido em Português brasileiro e editado por Pearson Addison Wesley, que eu mesmo comprei;
-- Exercícios resolvidos sem nenhuma garantia e com base na minha atual experiência.
+- Exercícios resolvidos sem nenhuma garantia e com base na minha atual experiência;
 - Pode e vai conter erros de digitação.
 
 ## Introdução
@@ -100,4 +99,67 @@ Prog. Fonte -> | Pré-processador | -> Prog. Fonte Modificado -> | Compilador | 
 
 ## 1.2 Estrutura de um Compilador
 
-em breve...
+Um Compilador possui duas partes, **análise** e **síntese**.
+
+- **Análise**: Geralmente chamada de **front-end**, **subdivide** o programa fonte, **impõe uma [estrutura gramatical](https://pt.wikipedia.org/wiki/Gram%C3%A1tica)**, trata exceções caso o programa fonte não siga a gramática e armazena informações sobre o programa fonte em uma estrutura chamada **tabela de símbolos**;
+- **Síntese**: **Back-end**, cria o programa objeto com base em uma representação intermediária e com a tabela de símbolos.
+
+### Análise Léxica
+
+- Primeira fase do compilador (chamado também de análise léxica, lexing ou scanning);
+- O analisador léxico (lexer, lex ou scanner) **lê o fluxo de caracteres do programa fonte e os agrupa de forma significativa**, formando lexemas. Para cada lexema o lexer cria um **token** e retorna para a próxima fase do compilador, a **análise sintática**.
+
+```
+(nome, valorAtribuido)
+```
+
+Onde o nome é o símbolo do token no programa fonte e o valorAtribuido, aponta uma entrada na tabela de símbolos.
+
+### Análise Sintática
+
+- Segunda fase do compilador;
+- A análise sintática usa o nome dos tokens para gerar uma representação intermediária tipo árvore;
+- Pode acontecer no mesmo momento que a análise semântica??
+
+### Análise Semântica
+
+- Analisa se a ordem das palavras estão em seus devidos lugares;
+- Também faz a validação de tipos;
+- Dependendo a linguagem pode haver coerções.
+
+### Geração de Código Intermediário
+
+- Um compilador pode produzir uma ou mais representaçõess intermediárias, as quias podem ter diversas formas;
+- Árvores de sintax denotam uma forma de representação intermediária, normalmante usado na análise sintática e semântica;
+- Após as análises sintática e semântica, muitos compiladores produzem uma representação explicita de baixo nível ou linguagem de máquina.
+
+### Otimização de Código
+
+- Otimização independente de arquitetura faz transformações no código intermediário com o objetivo de produzir um código objeto melhor.
+
+### Geração de Código
+
+- Recebe como entrada uma representação intermediária do programa fonte e mapeia em uma linguagem objeto;
+- Se a linguagem objeto for assembly de alguma arquitetura, deve ser selecionado registradores para cada variável.
+
+### Gerenciamento da Tabela de Símbolos
+
+- Registrar os nomes de variáveis usados no programa fonte e coletar informações sobre diversos atributos de cada nome,
+  como a linha que se encontra, espaço alocado na memória, seu tipo...
+- É uma estrutura de dados contendo um registro para cada nome de variável, com campos para cada atributo.
+
+### O Agrupamento de Fases em Passos
+
+- Em uma implementação as vezes podem ser agrupadas em passos;
+- O front-end pode ser agrupado em um único passo;
+- Otimização de código pode ser um passo opcional;
+- O back-end pode ser agrupado em um único passo;
+
+### Ferramentas Para Construção de Compiladores
+
+- Geradores de analisadores sintáticos;
+- Geradores de analisadores léxico;
+- Mecanismos de tradução dirigida por sintaxe;
+- Geradores de gerador de código;
+- Mecanismos de análise de fluxo de dados;
+- Conjunto de ferramentas para construção de compiladoress.
