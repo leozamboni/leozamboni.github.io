@@ -45,7 +45,22 @@ Objeto -&gt; Programa Objeto Executável</a></li>
 <li><a href="#exercícios">Exercícios</a></li>
 </ul></li>
 <li><a href="#estrutura-de-um-compilador">1.2 Estrutura de um
-Compilador</a></li>
+Compilador</a>
+<ul>
+<li><a href="#análise-léxica">Análise Léxica</a></li>
+<li><a href="#análise-sintática">Análise Sintática</a></li>
+<li><a href="#análise-semântica">Análise Semântica</a></li>
+<li><a href="#geração-de-código-intermediário">Geração de Código
+Intermediário</a></li>
+<li><a href="#otimização-de-código">Otimização de Código</a></li>
+<li><a href="#geração-de-código">Geração de Código</a></li>
+<li><a href="#gerenciamento-da-tabela-de-símbolos">Gerenciamento da
+Tabela de Símbolos</a></li>
+<li><a href="#o-agrupamento-de-fases-em-passos">O Agrupamento de Fases
+em Passos</a></li>
+<li><a href="#ferramentas-para-construção-de-compiladores">Ferramentas
+Para Construção de Compiladores</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -61,13 +76,11 @@ Edição</em></h1>
 clarificar alguns termos e adicionar alguns links úteis em palavras
 chaves.</p>
 <ul>
-<li>Isso não tem como objetivo ser uma cópia do livro original, APENAS
-NOTAS;</li>
 <li>Notações feitas a partir de um exemplar físico original, traduzido
 em Português brasileiro e editado por Pearson Addison Wesley, que eu
 mesmo comprei;</li>
 <li>Exercícios resolvidos sem nenhuma garantia e com base na minha atual
-experiência.</li>
+experiência;</li>
 <li>Pode e vai conter erros de digitação.</li>
 </ul>
 <div class="h"><h2 id="introdução">Introdução</h2><a aria-hidden="true" href="#introdução">[link]</a></div>
@@ -166,7 +179,95 @@ Prog. Fonte -&gt; | Pré-processador | -&gt; Prog. Fonte Modificado -&gt; | Comp
     Um programa montador precisa ser capaz de realizar a tarefa de transformar o código fonte em um código de máquina de acordo com a arquitetura do computador que está sendo executado.
 </code></pre>
 <div class="h"><h2 id="estrutura-de-um-compilador">1.2 Estrutura de um Compilador</h2><a aria-hidden="true" href="#estrutura-de-um-compilador">[link]</a></div>
-<p>em breve…</p>
+<p>Um Compilador possui duas partes, <strong>análise</strong> e
+<strong>síntese</strong>.</p>
+<ul>
+<li><strong>Análise</strong>: Geralmente chamada de
+<strong>front-end</strong>, <strong>subdivide</strong> o programa fonte,
+<strong>impõe uma <a
+href="https://pt.wikipedia.org/wiki/Gram%C3%A1tica">estrutura
+gramatical</a></strong>, trata exceções caso o programa fonte não siga a
+gramática e armazena informações sobre o programa fonte em uma estrutura
+chamada <strong>tabela de símbolos</strong>;</li>
+<li><strong>Síntese</strong>: <strong>Back-end</strong>, cria o programa
+objeto com base em uma representação intermediária e com a tabela de
+símbolos.</li>
+</ul>
+<div class="h"><h3 id="análise-léxica">Análise Léxica</h3><a aria-hidden="true" href="#análise-léxica">[link]</a></div>
+<ul>
+<li>Primeira fase do compilador (chamado também de análise léxica,
+lexing ou scanning);</li>
+<li>O analisador léxico (lexer, lex ou scanner) <strong>lê o fluxo de
+caracteres do programa fonte e os agrupa de forma
+significativa</strong>, formando lexemas. Para cada lexema o lexer cria
+um <strong>token</strong> e retorna para a próxima fase do compilador, a
+<strong>análise sintática</strong>.</li>
+</ul>
+<pre><code>(nome, valorAtribuido)</code></pre>
+<p>Onde o nome é o símbolo do token no programa fonte e o
+valorAtribuido, aponta uma entrada na tabela de símbolos.</p>
+<div class="h"><h3 id="análise-sintática">Análise Sintática</h3><a aria-hidden="true" href="#análise-sintática">[link]</a></div>
+<ul>
+<li>Segunda fase do compilador;</li>
+<li>A análise sintática usa o nome dos tokens para gerar uma
+representação intermediária tipo árvore;</li>
+<li>Pode acontecer no mesmo momento que a análise semântica??</li>
+</ul>
+<div class="h"><h3 id="análise-semântica">Análise Semântica</h3><a aria-hidden="true" href="#análise-semântica">[link]</a></div>
+<ul>
+<li>Analisa se a ordem das palavras estão em seus devidos lugares;</li>
+<li>Também faz a validação de tipos;</li>
+<li>Dependendo a linguagem pode haver coerções.</li>
+</ul>
+<h3 id="geração-de-código-intermediário">Geração de Código
+Intermediário</h3>
+<ul>
+<li>Um compilador pode produzir uma ou mais representaçõess
+intermediárias, as quias podem ter diversas formas;</li>
+<li>Árvores de sintax denotam uma forma de representação intermediária,
+normalmante usado na análise sintática e semântica;</li>
+<li>Após as análises sintática e semântica, muitos compiladores produzem
+uma representação explicita de baixo nível ou linguagem de máquina.</li>
+</ul>
+<div class="h"><h3 id="otimização-de-código">Otimização de Código</h3><a aria-hidden="true" href="#otimização-de-código">[link]</a></div>
+<ul>
+<li>Otimização independente de arquitetura faz transformações no código
+intermediário com o objetivo de produzir um código objeto melhor.</li>
+</ul>
+<div class="h"><h3 id="geração-de-código">Geração de Código</h3><a aria-hidden="true" href="#geração-de-código">[link]</a></div>
+<ul>
+<li>Recebe como entrada uma representação intermediária do programa
+fonte e mapeia em uma linguagem objeto;</li>
+<li>Se a linguagem objeto for assembly de alguma arquitetura, deve ser
+selecionado registradores para cada variável.</li>
+</ul>
+<h3 id="gerenciamento-da-tabela-de-símbolos">Gerenciamento da Tabela de
+Símbolos</h3>
+<ul>
+<li>Registrar os nomes de variáveis usados no programa fonte e coletar
+informações sobre diversos atributos de cada nome, como a linha que se
+encontra, espaço alocado na memória, seu tipo…</li>
+<li>É uma estrutura de dados contendo um registro para cada nome de
+variável, com campos para cada atributo.</li>
+</ul>
+<h3 id="o-agrupamento-de-fases-em-passos">O Agrupamento de Fases em
+Passos</h3>
+<ul>
+<li>Em uma implementação as vezes podem ser agrupadas em passos;</li>
+<li>O front-end pode ser agrupado em um único passo;</li>
+<li>Otimização de código pode ser um passo opcional;</li>
+<li>O back-end pode ser agrupado em um único passo;</li>
+</ul>
+<h3 id="ferramentas-para-construção-de-compiladores">Ferramentas Para
+Construção de Compiladores</h3>
+<ul>
+<li>Geradores de analisadores sintáticos;</li>
+<li>Geradores de analisadores léxico;</li>
+<li>Mecanismos de tradução dirigida por sintaxe;</li>
+<li>Geradores de gerador de código;</li>
+<li>Mecanismos de análise de fluxo de dados;</li>
+<li>Conjunto de ferramentas para construção de compiladoress.</li>
+</ul>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
