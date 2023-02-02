@@ -10,6 +10,10 @@ I post tech stuff, tutorials, projects, things I am learning and everything I wa
 -------------------------------------------------------------------------------
 Subscribe to RSS: [feed.xml](feed.xml)
 
+[Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_](2023-02-01-compiladores.md){.title}
+[01/02/2023]{.date}
+
+
 [Stranger Tags: HTML tags you maybe missed](2022-07-09-stranger-tags.md){.title}
 [09/07/2022]{.date}
 
@@ -24,9 +28,5 @@ Subscribe to RSS: [feed.xml](feed.xml)
 
 [Baixar, instalar e customizar o suckless terminal](2022-02-14-tutorial-st.md){.title}
 [14/02/2022]{.date}
-
-
-[Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_](2023-02-01-compiladores.md){.title}
-[01/02/2023]{.date}
 
 

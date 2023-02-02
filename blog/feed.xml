@@ -4,6 +4,11 @@
 <link>http://leonardo.moe/</link>
 <description>News</description>
 <item>
+<title>Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</title>
+<link>http://leonardo.moe/blog/2023-02-01-compiladores.html</link>
+<description><p>Article: Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</p><p>Web link: http://leonardo.moe/blog/2023-02-01-compiladores.html</p></description>
+</item>
+<item>
 <title>Stranger Tags: HTML tags you maybe missed</title>
 <link>http://leonardo.moe/blog/2022-07-09-stranger-tags.html</link>
 <description><p>Article: Stranger Tags: HTML tags you maybe missed</p><p>Web link: http://leonardo.moe/blog/2022-07-09-stranger-tags.html</p></description>
@@ -22,11 +27,6 @@
 <title>Baixar, instalar e customizar o suckless terminal</title>
 <link>http://leonardo.moe/blog/2022-02-14-tutorial-st.html</link>
 <description><p>Article: Baixar, instalar e customizar o suckless terminal</p><p>Web link: http://leonardo.moe/blog/2022-02-14-tutorial-st.html</p></description>
-</item>
-<item>
-<title>Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</title>
-<link>http://leonardo.moe/blog/2023-02-01-compiladores.html</link>
-<description><p>Article: Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</p><p>Web link: http://leonardo.moe/blog/2023-02-01-compiladores.html</p></description>
 </item>
 </channel>
 </rss>
