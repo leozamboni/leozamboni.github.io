@@ -199,3 +199,96 @@ g) Quarta Geração
 h) Scripting
     Perl, Python
 ```
+
+## 1.4 A Ciência da Criação de um Compilador
+
+Resolver problemas em um compilador: dado um problema, formule uma abstração matemática que capture suas principais características e resolva-o usando técnicas matemáticas.
+
+Um compilador precisa aceitar todos os programas que estejam de acordo com a linguagem. O conjunto de programas fonte são infinitos.
+
+O compilador precisa manter a semântica do programa fonte durante qualquer transformação.
+
+### 1.4.1 Modelagem no projeto e Implementação do Compilador
+
+O estudo de compiladores pode se resumir em projetar os modelos matemáticos certos e escolher corretamente os algoritmos, mantendo o equilíbrio entre abrangência X eficiência.
+
+### 1.4.2 A Ciência da Otimização do Código
+
+As otimizações de um compilador precisam atender os seguintes objetivos de projeto:
+
+- A otimização precisa presenvar a semântica do programa compilado;
+- A otimização precisa melhorar o desempenho de muitos programas;
+- O tempo de compilação precisa continuar razoável;
+- O esforço de engenharia empregado precisa ser administrável.
+
+## 1.5 Aplicações da Tecnologia de Compiladores
+
+O projeto de um compilador tem impacto em vários outras àreas da ciência da computação.
+
+### 1.5.1 Implementação de Linguagens de Programação de Alto nível
+
+Uma linguagem de programação de alto nível define uma abstração de programação.
+
+### 1.5.2 Otimizações para Arquiteturas de Computador
+
+Paralelismo e Hierarquias.
+
+#### Paralelismo
+
+Os programas são escritos como se todas as instruções fossem executadas sequencialmente; O hardware verifica dinamicamente se há dependências no fluxo sequêncial das instruções e, quando possível, as emite em paralelo.
+
+Códigos muiltithread é possível.
+
+#### Hierarquias de Memória
+
+O Uso eficaz dos registradores provavelmente é o problema mais importante no otimização de um programa.
+
+### 1.5.3 Projeto de Novas Arquiteturas de Computador
+
+Atualmente os compiladores são desenvolvidos durante o projeto de um processador.
+
+Exemplo de influência de processadores para criação de arquiteturas:
+
+- [RISC](https://pt.wikipedia.org/wiki/RISC)
+- [VLIW](https://pt.wikipedia.org/wiki/VLIW)
+- [SIMD](https://pt.wikipedia.org/wiki/SIMD)
+
+### 1.5.4 Traduções de Programa
+
+Compiladores podem traduzir para outra linguagem além de código de máquina.
+
+#### Tradução Binária
+
+Compiladores podem ser criados para traduzir um binário de uma máquina para outra.
+
+x86 -> Alpha e Sparc
+
+#### Síntese de hardware
+
+Hardware também é escrito em linguagens como Verilog e VHDL.
+
+#### Interpretadores de Consulta de Banco de Dados
+
+SQL
+
+#### Simulação Compilada
+
+Simulação compilada muitas vezes é mais rápida que interpretada, por exemplo para simular projetos de Verilog e VHDL.
+
+### 1.5.5 Ferramentas de Produtividade de Software
+
+Análise de fluxo de dados para localizar erros estaticamente, antes do programa ser executado.
+
+#### Verificação de Tipos
+
+Pode ser usada para identificar erros e brechas de segurança.
+
+#### Verificação de Limites
+
+Usuario pode facilmente manipular entradas e causar problemas no programa caso não tenha uma verificação de limites.
+
+A mesma análise de fluxo de dados pode ser usada para verificar estouros de buffer.
+
+#### Ferramentas de Estouro de Memória
+
+Coleta de lixo suprime erros de vazamento de memória.
