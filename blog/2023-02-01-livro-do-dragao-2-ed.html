@@ -68,6 +68,46 @@ Linguagens de Alto Nível</a></li>
 Compiladores</a></li>
 <li><a href="#exercícios-1">Exercícios</a></li>
 </ul></li>
+<li><a href="#a-ciência-da-criação-de-um-compilador">1.4 A Ciência da
+Criação de um Compilador</a>
+<ul>
+<li><a href="#modelagem-no-projeto-e-implementação-do-compilador">1.4.1
+Modelagem no projeto e Implementação do Compilador</a></li>
+<li><a href="#a-ciência-da-otimização-do-código">1.4.2 A Ciência da
+Otimização do Código</a></li>
+</ul></li>
+<li><a href="#aplicações-da-tecnologia-de-compiladores">1.5 Aplicações
+da Tecnologia de Compiladores</a>
+<ul>
+<li><a
+href="#implementação-de-linguagens-de-programação-de-alto-nível">1.5.1
+Implementação de Linguagens de Programação de Alto nível</a></li>
+<li><a href="#otimizações-para-arquiteturas-de-computador">1.5.2
+Otimizações para Arquiteturas de Computador</a>
+<ul>
+<li><a href="#paralelismo">Paralelismo</a></li>
+<li><a href="#hierarquias-de-memória">Hierarquias de Memória</a></li>
+</ul></li>
+<li><a href="#projeto-de-novas-arquiteturas-de-computador">1.5.3 Projeto
+de Novas Arquiteturas de Computador</a></li>
+<li><a href="#traduções-de-programa">1.5.4 Traduções de Programa</a>
+<ul>
+<li><a href="#tradução-binária">Tradução Binária</a></li>
+<li><a href="#síntese-de-hardware">Síntese de hardware</a></li>
+<li><a
+href="#interpretadores-de-consulta-de-banco-de-dados">Interpretadores de
+Consulta de Banco de Dados</a></li>
+<li><a href="#simulação-compilada">Simulação Compilada</a></li>
+</ul></li>
+<li><a href="#ferramentas-de-produtividade-de-software">1.5.5
+Ferramentas de Produtividade de Software</a>
+<ul>
+<li><a href="#verificação-de-tipos">Verificação de Tipos</a></li>
+<li><a href="#verificação-de-limites">Verificação de Limites</a></li>
+<li><a href="#ferramentas-de-estouro-de-memória">Ferramentas de Estouro
+de Memória</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -328,6 +368,91 @@ f) Terceira Geração
 g) Quarta Geração
 h) Scripting
     Perl, Python</code></pre>
+<h2 id="a-ciência-da-criação-de-um-compilador">1.4 A Ciência da Criação
+de um Compilador</h2>
+<p>Resolver problemas em um compilador: dado um problema, formule uma
+abstração matemática que capture suas principais características e
+resolva-o usando técnicas matemáticas.</p>
+<p>Um compilador precisa aceitar todos os programas que estejam de
+acordo com a linguagem. O conjunto de programas fonte são infinitos.</p>
+<p>O compilador precisa manter a semântica do programa fonte durante
+qualquer transformação.</p>
+<h3 id="modelagem-no-projeto-e-implementação-do-compilador">1.4.1
+Modelagem no projeto e Implementação do Compilador</h3>
+<p>O estudo de compiladores pode se resumir em projetar os modelos
+matemáticos certos e escolher corretamente os algoritmos, mantendo o
+equilíbrio entre abrangência X eficiência.</p>
+<h3 id="a-ciência-da-otimização-do-código">1.4.2 A Ciência da Otimização
+do Código</h3>
+<p>As otimizações de um compilador precisam atender os seguintes
+objetivos de projeto:</p>
+<ul>
+<li>A otimização precisa presenvar a semântica do programa
+compilado;</li>
+<li>A otimização precisa melhorar o desempenho de muitos programas;</li>
+<li>O tempo de compilação precisa continuar razoável;</li>
+<li>O esforço de engenharia empregado precisa ser administrável.</li>
+</ul>
+<h2 id="aplicações-da-tecnologia-de-compiladores">1.5 Aplicações da
+Tecnologia de Compiladores</h2>
+<p>O projeto de um compilador tem impacto em vários outras àreas da
+ciência da computação.</p>
+<h3 id="implementação-de-linguagens-de-programação-de-alto-nível">1.5.1
+Implementação de Linguagens de Programação de Alto nível</h3>
+<p>Uma linguagem de programação de alto nível define uma abstração de
+programação.</p>
+<h3 id="otimizações-para-arquiteturas-de-computador">1.5.2 Otimizações
+para Arquiteturas de Computador</h3>
+<p>Paralelismo e Hierarquias.</p>
+<h4 id="paralelismo">Paralelismo</h4>
+<p>Os programas são escritos como se todas as instruções fossem
+executadas sequencialmente; O hardware verifica dinamicamente se há
+dependências no fluxo sequêncial das instruções e, quando possível, as
+emite em paralelo.</p>
+<p>Códigos muiltithread é possível.</p>
+<h4 id="hierarquias-de-memória">Hierarquias de Memória</h4>
+<p>O Uso eficaz dos registradores provavelmente é o problema mais
+importante no otimização de um programa.</p>
+<h3 id="projeto-de-novas-arquiteturas-de-computador">1.5.3 Projeto de
+Novas Arquiteturas de Computador</h3>
+<p>Atualmente os compiladores são desenvolvidos durante o projeto de um
+processador.</p>
+<p>Exemplo de influência de processadores para criação de
+arquiteturas:</p>
+<ul>
+<li><a href="https://pt.wikipedia.org/wiki/RISC">RISC</a></li>
+<li><a href="https://pt.wikipedia.org/wiki/VLIW">VLIW</a></li>
+<li><a href="https://pt.wikipedia.org/wiki/SIMD">SIMD</a></li>
+</ul>
+<div class="h"><h3 id="traduções-de-programa">1.5.4 Traduções de Programa</h3><a aria-hidden="true" href="#traduções-de-programa">[link]</a></div>
+<p>Compiladores podem traduzir para outra linguagem além de código de
+máquina.</p>
+<h4 id="tradução-binária">Tradução Binária</h4>
+<p>Compiladores podem ser criados para traduzir um binário de uma
+máquina para outra.</p>
+<p>x86 -&gt; Alpha e Sparc</p>
+<h4 id="síntese-de-hardware">Síntese de hardware</h4>
+<p>Hardware também é escrito em linguagens como Verilog e VHDL.</p>
+<h4 id="interpretadores-de-consulta-de-banco-de-dados">Interpretadores
+de Consulta de Banco de Dados</h4>
+<p>SQL</p>
+<h4 id="simulação-compilada">Simulação Compilada</h4>
+<p>Simulação compilada muitas vezes é mais rápida que interpretada, por
+exemplo para simular projetos de Verilog e VHDL.</p>
+<h3 id="ferramentas-de-produtividade-de-software">1.5.5 Ferramentas de
+Produtividade de Software</h3>
+<p>Análise de fluxo de dados para localizar erros estaticamente, antes
+do programa ser executado.</p>
+<h4 id="verificação-de-tipos">Verificação de Tipos</h4>
+<p>Pode ser usada para identificar erros e brechas de segurança.</p>
+<h4 id="verificação-de-limites">Verificação de Limites</h4>
+<p>Usuario pode facilmente manipular entradas e causar problemas no
+programa caso não tenha uma verificação de limites.</p>
+<p>A mesma análise de fluxo de dados pode ser usada para verificar
+estouros de buffer.</p>
+<h4 id="ferramentas-de-estouro-de-memória">Ferramentas de Estouro de
+Memória</h4>
+<p>Coleta de lixo suprime erros de vazamento de memória.</p>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
