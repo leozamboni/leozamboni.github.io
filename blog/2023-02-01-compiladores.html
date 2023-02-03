@@ -61,6 +61,15 @@ em Passos</a></li>
 <li><a href="#ferramentas-para-construção-de-compiladores">Ferramentas
 Para Construção de Compiladores</a></li>
 </ul></li>
+<li><a href="#evolução-das-linguagens-de-programação">1.3 Evolução das
+Linguagens de Programação</a>
+<ul>
+<li><a href="#mudança-para-linguagens-de-alto-nível">1.3.1 Mudança para
+Linguagens de Alto Nível</a></li>
+<li><a href="#impactos-nos-compiladores">1.3.2 Impactos nos
+Compiladores</a></li>
+<li><a href="#exercícios-1">Exercícios</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -136,7 +145,7 @@ Programa fonte -&gt; | Compilador | -&gt; Prog. Intermediário -&gt; |   Interpr
                   --------------    Entradas do Usuário -&gt; | (Máquina Virtual)|
                                                            --------------------</code></pre>
 <ul>
-<li>Programa objeto: <strong><em>quase</em> executável</strong>;</li>
+<li>Programa objeto: <strong>executável</strong>;</li>
 <li>Programa Intermediável: <strong>mesmo programa em outra
 linguagem</strong>.</li>
 </ul>
@@ -194,80 +203,129 @@ objeto com base em uma representação intermediária e com a tabela de
 símbolos.</li>
 </ul>
 <div class="h"><h3 id="análise-léxica">Análise Léxica</h3><a aria-hidden="true" href="#análise-léxica">[link]</a></div>
-<ul>
-<li>Primeira fase do compilador (chamado também de análise léxica,
-lexing ou scanning);</li>
-<li>O analisador léxico (lexer, lex ou scanner) <strong>lê o fluxo de
-caracteres do programa fonte e os agrupa de forma
+<p>Primeira fase do compilador (chamado também de análise léxica, lexing
+ou scanning). O analisador léxico (lexer, lex ou scanner) <strong>lê o
+fluxo de caracteres do programa fonte e os agrupa de forma
 significativa</strong>, formando lexemas. Para cada lexema o lexer cria
 um <strong>token</strong> e retorna para a próxima fase do compilador, a
-<strong>análise sintática</strong>.</li>
-</ul>
+<strong>análise sintática</strong>.</p>
 <pre><code>(nome, valorAtribuido)</code></pre>
 <p>Onde o nome é o símbolo do token no programa fonte e o
 valorAtribuido, aponta uma entrada na tabela de símbolos.</p>
 <div class="h"><h3 id="análise-sintática">Análise Sintática</h3><a aria-hidden="true" href="#análise-sintática">[link]</a></div>
-<ul>
-<li>Segunda fase do compilador;</li>
-<li>A análise sintática usa o nome dos tokens para gerar uma
-representação intermediária tipo árvore;</li>
-<li>Pode acontecer no mesmo momento que a análise semântica??</li>
-</ul>
+<p>Segunda fase do compilador. A análise sintática usa o nome dos tokens
+para gerar uma representação intermediária tipo árvore. Pode acontecer
+no mesmo momento que a análise semântica.</p>
 <div class="h"><h3 id="análise-semântica">Análise Semântica</h3><a aria-hidden="true" href="#análise-semântica">[link]</a></div>
-<ul>
-<li>Analisa se a ordem das palavras estão em seus devidos lugares;</li>
-<li>Também faz a validação de tipos;</li>
-<li>Dependendo a linguagem pode haver coerções.</li>
-</ul>
+<p>Analisa se a ordem das palavras estão em seus devidos lugares. Também
+faz a validação de tipos. Dependendo a linguagem pode haver
+coerções.</p>
 <h3 id="geração-de-código-intermediário">Geração de Código
 Intermediário</h3>
-<ul>
-<li>Um compilador pode produzir uma ou mais representaçõess
-intermediárias, as quias podem ter diversas formas;</li>
-<li>Árvores de sintax denotam uma forma de representação intermediária,
-normalmante usado na análise sintática e semântica;</li>
-<li>Após as análises sintática e semântica, muitos compiladores produzem
-uma representação explicita de baixo nível ou linguagem de máquina.</li>
-</ul>
+<p>Um compilador pode produzir uma ou mais representaçõess
+intermediárias, as quias podem ter diversas formas. Árvores de sintax
+denotam uma forma de representação intermediária, normalmante usado na
+análise sintática e semântica. Após as análises sintática e semântica,
+muitos compiladores produzem uma representação explicita de baixo nível
+ou linguagem de máquina.</p>
 <div class="h"><h3 id="otimização-de-código">Otimização de Código</h3><a aria-hidden="true" href="#otimização-de-código">[link]</a></div>
-<ul>
-<li>Otimização independente de arquitetura faz transformações no código
-intermediário com o objetivo de produzir um código objeto melhor.</li>
-</ul>
+<p>Otimização independente de arquitetura faz transformações no código
+intermediário com o objetivo de produzir um código objeto melhor.</p>
 <div class="h"><h3 id="geração-de-código">Geração de Código</h3><a aria-hidden="true" href="#geração-de-código">[link]</a></div>
-<ul>
-<li>Recebe como entrada uma representação intermediária do programa
-fonte e mapeia em uma linguagem objeto;</li>
-<li>Se a linguagem objeto for assembly de alguma arquitetura, deve ser
-selecionado registradores para cada variável.</li>
-</ul>
+<p>Recebe como entrada uma representação intermediária do programa fonte
+e mapeia em uma linguagem objeto. Se a linguagem objeto for assembly de
+alguma arquitetura, deve ser selecionado registradores para cada
+variável.</p>
 <h3 id="gerenciamento-da-tabela-de-símbolos">Gerenciamento da Tabela de
 Símbolos</h3>
-<ul>
-<li>Registrar os nomes de variáveis usados no programa fonte e coletar
+<p>Registrar os nomes de variáveis usados no programa fonte e coletar
 informações sobre diversos atributos de cada nome, como a linha que se
-encontra, espaço alocado na memória, seu tipo…</li>
-<li>É uma estrutura de dados contendo um registro para cada nome de
-variável, com campos para cada atributo.</li>
-</ul>
+encontra, espaço alocado na memória, seu tipo… É uma estrutura de dados
+contendo um registro para cada nome de variável, com campos para cada
+atributo.</p>
 <h3 id="o-agrupamento-de-fases-em-passos">O Agrupamento de Fases em
 Passos</h3>
-<ul>
-<li>Em uma implementação as vezes podem ser agrupadas em passos;</li>
-<li>O front-end pode ser agrupado em um único passo;</li>
-<li>Otimização de código pode ser um passo opcional;</li>
-<li>O back-end pode ser agrupado em um único passo;</li>
-</ul>
+<p>Em uma implementação as vezes podem ser agrupadas em passos. O
+front-end pode ser agrupado em um único passo. Otimização de código pode
+ser um passo opcional. O back-end pode ser agrupado em um único
+passo.</p>
 <h3 id="ferramentas-para-construção-de-compiladores">Ferramentas Para
 Construção de Compiladores</h3>
 <ul>
-<li>Geradores de analisadores sintáticos;</li>
-<li>Geradores de analisadores léxico;</li>
-<li>Mecanismos de tradução dirigida por sintaxe;</li>
-<li>Geradores de gerador de código;</li>
-<li>Mecanismos de análise de fluxo de dados;</li>
-<li>Conjunto de ferramentas para construção de compiladoress.</li>
+<li>Geradores de analisadores sintáticos (syntax generators);</li>
+<li>Geradores de analisadores léxico (lexer generators);</li>
+<li>Mecanismos de tradução dirigida por sintaxe (syntax-directed
+translation);</li>
+<li>Geradores de gerador de código (code gen generators);</li>
+<li>Mecanismos de análise de fluxo de dados (data flow analysis);</li>
+<li>Conjunto de ferramentas para construção de compiladoress
+(frameworks).</li>
 </ul>
+<h2 id="evolução-das-linguagens-de-programação">1.3 Evolução das
+Linguagens de Programação</h2>
+<p>Os primeiros computadores eletrônicos aparecerem na década de 1940 e
+eram programados em linguagem de máquina por sequências de 0s e 1s que
+diziam explicitamente ao computador quais operações deveriam ser
+executadas e em que ordem. Isso era lento, cansativo e passível de
+erros. Um vez escritos, os programas eram difíceis de entender e
+modificar.</p>
+<h3 id="mudança-para-linguagens-de-alto-nível">1.3.1 Mudança para
+Linguagens de Alto Nível</h3>
+<p>O primeiro passo foi a criação de linguagens assembly (início década
+1950). No começo contiam apenas mnemômicos das intruções de máquina.
+Mais tarde foram acrescentadas instruções de macro.</p>
+<p>Um passo importante (metade década 1950) foi a criação do <a
+href="https://pt.wikipedia.org/wiki/Fortran">Fortran</a> para computação
+científica, <a href="https://pt.wikipedia.org/wiki/COBOL">Cobol</a> para
+processamento de dados e do <a
+href="https://pt.wikipedia.org/wiki/Lisp">Lisp</a> para computação
+simbólica.</p>
+<p>Gerações:</p>
+<ul>
+<li>Primeira geração: linguagens de máquina;</li>
+<li>Segunda geração: linguagens simbólicas ou montagem (assembly);</li>
+<li>Terceira geração: linguagens de alto nível, procedimentais (Fortran,
+Cobol, Lisp, …);</li>
+<li>Quarta geração: linguagens para aplicações específicas (NOMAD, SQL,
+HTML, …);</li>
+<li>Quinta geração: linguagens baseadas em lógica com restrição (Prolog,
+…).</li>
+</ul>
+<p>Classificações de paradigmas:</p>
+<ul>
+<li>Imperativas (procedurais): descrevem como suas instruções funcionam,
+estado e mudança de estado (C, C++, C#);</li>
+<li>Declarativas (funcional, lógicas, restritiva): descrevem o que fazem
+e não exatamente como suas instruções funcionam (ML, Haskell,
+Prolog).</li>
+<li>von Neumann: linguagens cujo modelo computacional se baseia na
+arquitetura de computadores de von Neumann (Fortran, C, …);</li>
+<li>Orientada por Objeto: estilo de programação baseada em coleções de
+objetos;</li>
+<li>Scripting: Linguagens interpretadas com operadores de alto nível
+criados para juntar computações (Awk, JavaScript, …).</li>
+</ul>
+<div class="h"><h3 id="impactos-nos-compiladores">1.3.2 Impactos nos Compiladores</h3><a aria-hidden="true" href="#impactos-nos-compiladores">[link]</a></div>
+<p>Os avanços nas linguagens de programação e nas arquiteturas de
+computadores, impõem novas demandas sobre os projetistas de
+compiladores.</p>
+<div class="h"><h3 id="exercícios-1">Exercícios</h3><a aria-hidden="true" href="#exercícios-1">[link]</a></div>
+<pre><code>1.3.1
+a) Imperativa
+C, C++, Cobol, Fortran, Java, Python, VB
+b) Declarativa
+Lisp, ML, Perl
+c) von Neumann
+C, C++, Cobol, Java, Python, VB
+d) Orientada por Objeto
+C++, Cobol, Java, Python, VB
+e) Funcional
+Lisp, ML, Perl
+f) Terceira Geração
+C, C++, Cobol, Fortran, Java, Lisp, ML, Perl, Python, VB
+g) Quarta Geração
+h) Scripting
+Perl, Python</code></pre>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
