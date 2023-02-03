@@ -60,8 +60,6 @@ Programa fonte -> | Compilador | -> Prog. Intermediário -> |   Interpretador  |
 
 Alguns compiladores Java são **just-in-time**, traduzem os [bytecodes](https://pt.wikipedia.org/wiki/Bytecode) um atrás do outro, **antes** de executar o programa intermediário.
 
-### Programa Objeto -> Programa Objeto Executável
-
 Após gerar um **programa objeto** através de um **compilador**, alguns **outros programas** podem ser **necessários** para gerar o **programa objeto executável**.
 
 As vezes um programa pode estar **divido em diversos arquivos**, a tarefa de **juntar o programa fonte** às vezes é feita por um **programa separado**, chamado **pré-processador**.
@@ -136,46 +134,46 @@ Recebe como entrada uma representação intermediária do programa fonte e mapei
 
 ### Gerenciamento da Tabela de Símbolos
 
-Registrar os nomes de variáveis usados no programa fonte e coletar informações sobre diversos atributos de cada nome, como a linha que se encontra, espaço alocado na memória, seu tipo... É uma estrutura de dados contendo um registro para cada nome de variável, com campos para cada atributo.
+É uma estrutura de dados contendo um registro para cada nome de variável, com campos para cada atributo. Deve-se registrar os nomes de variáveis usados no programa fonte e coletar informações sobre diversos atributos de cada nome, como a linha que se encontra, espaço alocado na memória, seu tipo...
 
 ### O Agrupamento de Fases em Passos
 
-Em uma implementação as vezes podem ser agrupadas em passos. O front-end pode ser agrupado em um único passo. Otimização de código pode ser um passo opcional. O back-end pode ser agrupado em um único passo.
+Em uma implementação as fases vezes podem ser agrupadas em passos. O front-end pode ser agrupado em um único passo. Otimização de código pode ser um passo opcional. O back-end pode ser agrupado em um único passo.
 
 ### Ferramentas Para Construção de Compiladores
 
-- Geradores de analisadores sintáticos (syntax generators);
-- Geradores de analisadores léxico (lexer generators);
-- Mecanismos de tradução dirigida por sintaxe (syntax-directed translation);
-- Geradores de gerador de código (code gen generators);
-- Mecanismos de análise de fluxo de dados (data flow analysis);
-- Conjunto de ferramentas para construção de compiladoress (frameworks).
+- Geradores de analisadores sintáticos (**syntax generators(**);
+- Geradores de analisadores léxico (**lexer generators**);
+- Mecanismos de tradução dirigida por sintaxe (**syntax-directed translation** e **parser generators**);
+- Geradores de gerador de código (**codegen generators**);
+- Mecanismos de análise de fluxo de dados (**data flow analysis**);
+- Conjunto de ferramentas para construção de compiladoress (**frameworks**).
 
 ## 1.3 Evolução das Linguagens de Programação
 
-Os primeiros computadores eletrônicos aparecerem na década de 1940 e eram programados em linguagem de máquina por sequências de 0s e 1s que diziam explicitamente ao computador quais operações deveriam ser executadas e em que ordem. Isso era lento, cansativo e passível de erros. Um vez escritos, os programas eram difíceis de entender e modificar.
+Os primeiros computadores eletrônicos apareceram na década de 1940 e eram programados em linguagem de máquina por sequências de 0s e 1s que diziam explicitamente ao computador quais operações deveriam ser executadas e em que ordem. Isso era lento, cansativo e passível de erros. Um vez escrito, os programas eram difíceis de entender e modificar.
 
 ### 1.3.1 Mudança para Linguagens de Alto Nível
 
-O primeiro passo foi a criação de linguagens assembly (início década 1950). No começo contiam apenas mnemômicos das intruções de máquina. Mais tarde foram acrescentadas instruções de macro.
+O primeiro passo foi a criação de linguagens assembly (início da década 1950). No começo contiam apenas mnemômicos das intruções de máquina. Mais tarde foram acrescentadas instruções de macro.
 
-Um passo importante (metade década 1950) foi a criação do [Fortran](https://pt.wikipedia.org/wiki/Fortran) para computação científica, [Cobol](https://pt.wikipedia.org/wiki/COBOL) para processamento de dados e do [Lisp](https://pt.wikipedia.org/wiki/Lisp) para computação simbólica.
+Um passo importante (metade da década 1950) foi a criação do [Fortran](https://pt.wikipedia.org/wiki/Fortran) para computação científica, [Cobol](https://pt.wikipedia.org/wiki/COBOL) para processamento de dados e do [Lisp](https://pt.wikipedia.org/wiki/Lisp) para computação simbólica.
 
 Gerações:
 
-- Primeira geração: linguagens de máquina;
-- Segunda geração: linguagens simbólicas ou montagem (assembly);
-- Terceira geração: linguagens de alto nível, procedimentais (Fortran, Cobol, Lisp, ...);
-- Quarta geração: linguagens para aplicações específicas (NOMAD, SQL, HTML, ...);
-- Quinta geração: linguagens baseadas em lógica com restrição (Prolog, ...).
+- **Primeira geração**: linguagens de máquina;
+- **Segunda geração**: linguagens simbólicas ou montagem (assembly);
+- **Terceira geração**: linguagens de alto nível, procedimentais (Fortran, Cobol, Lisp, ...);
+- **Quarta geração**: linguagens para aplicações específicas (NOMAD, SQL, HTML, ...);
+- **Quinta geração**: linguagens baseadas em lógica com restrição (Prolog, ...).
 
 Classificações de paradigmas:
 
-- Imperativas (procedurais): descrevem como suas instruções funcionam, estado e mudança de estado (C, C++, C#);
-- Declarativas (funcional, lógicas, restritiva): descrevem o que fazem e não exatamente como suas instruções funcionam (ML, Haskell, Prolog).
-- von Neumann: linguagens cujo modelo computacional se baseia na arquitetura de computadores de von Neumann (Fortran, C, ...);
-- Orientada por Objeto: estilo de programação baseada em coleções de objetos;
-- Scripting: Linguagens interpretadas com operadores de alto nível criados para juntar computações (Awk, JavaScript, ...).
+- **Imperativas** (procedurais): descrevem como suas instruções funcionam, estado e mudança de estado (C, C++, C#);
+- **Declarativas** (funcional, lógicas, restritiva): descrevem o que fazem e não exatamente como suas instruções funcionam (ML, Haskell, Prolog).
+- **von Neumann**: linguagens cujo modelo computacional se baseia na arquitetura de computadores de von Neumann (Fortran, C, ...);
+- **Orientada por Objeto**: estilo de programação baseada em coleções de objetos;
+- **Scripting**: Linguagens interpretadas com operadores de alto nível criados para juntar computações (Awk, JavaScript, ...).
 
 ### 1.3.2 Impactos nos Compiladores
 
@@ -186,18 +184,18 @@ Os avanços nas linguagens de programação e nas arquiteturas de computadores, 
 ```
 1.3.1
 a) Imperativa
-C, C++, Cobol, Fortran, Java, Python, VB
+    C, C++, Cobol, Fortran, Java, Python, VB
 b) Declarativa
-Lisp, ML, Perl
+    Lisp, ML, Perl
 c) von Neumann
-C, C++, Cobol, Java, Python, VB
+    C, C++, Cobol, Java, Python, VB
 d) Orientada por Objeto
-C++, Cobol, Java, Python, VB
+    C++, Cobol, Java, Python, VB
 e) Funcional
-Lisp, ML, Perl
+    Lisp, ML, Perl
 f) Terceira Geração
-C, C++, Cobol, Fortran, Java, Lisp, ML, Perl, Python, VB
+    C, C++, Cobol, Fortran, Java, Lisp, ML, Perl, Python, VB
 g) Quarta Geração
 h) Scripting
-Perl, Python
+    Perl, Python
 ```
