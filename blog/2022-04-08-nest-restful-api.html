@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="author" content="Leonardo Z. N.">
   <meta name="dcterms.date" content="2022-08-04">
-  <title>Leonardo – RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</title>
+  <title>Leonardo – [pt-br] RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</title>
   <link rel="stylesheet" href="global.css">
 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml"/>
 </head>
@@ -14,8 +14,8 @@
 <div class="page">
 <header>
 <div class="title">
-<h1 class="title">RESTful API com NestJS, Docker Compose, Postgres,
-TypeORM e Swagger</h1>
+<h1 class="title">[pt-br] RESTful API com NestJS, Docker Compose,
+Postgres, TypeORM e Swagger</h1>
 </div>
 <p class="author">Leonardo Z. N.</p>
 <p class="date">08/04/2022</p>
@@ -277,8 +277,11 @@ successfully started</em> no log do container da API.</p>
 <div class="h"><h1 id="pgadmin">pgAdmin</h1><a aria-hidden="true" href="#pgadmin">[link]</a></div>
 <p>Com os containers rodando podemos acessar o banco pelo pgAdmin. Vamos
 entrar no endereço <em>http://localhost:16543/</em> e conectar com as
-informações que passamos no arquivo do docker compose: &gt; email:
-admin@admin.com.br &gt; &gt; senha: root</p>
+informações que passamos no arquivo do docker compose:</p>
+<blockquote>
+<p>email: admin@admin.com.br</p>
+<p>senha: root</p>
+</blockquote>
 <p>Vamos criar um server com nome “Tutorial” e na aba
 <em>connection</em> vamos colocar as variáveis que conectamos nossa
 API:</p>
@@ -332,23 +335,23 @@ campos:</p>
 </ul>
 <pre><code>// example.model.ts:
 import { Column, Entity, PrimaryGeneratedColumn } from &#39;typeorm&#39;;
- 
+
 @Entity()
 export class Example {
  @PrimaryGeneratedColumn()
  id!: number;
- 
+
  @Column()
  name: string;
- 
+
  @Column()
  age: number;
- 
+
  constructor(example: Partial&lt;Example&gt;) {
    Object.assign(this, example);
  }
 }
- </code></pre>
+</code></pre>
 <pre><code>// index.ts:
 export * from &#39;./example.model&#39;;</code></pre>
 <p>Agora para criar o CRUD em si vamos usar o comando:</p>
@@ -358,18 +361,18 @@ no diretório criado:</p>
 <pre><code>// create-example.dto:
 import { ApiProperty } from &#39;@nestjs/swagger&#39;;
 import { IsNotEmpty, IsNumber, IsString, MaxLength } from &#39;class-validator&#39;;
- 
+
 export class CreateExampleDto {
  @ApiProperty()
  @IsNumber()
  id?: number;
- 
+
  @ApiProperty()
  @IsString()
  @IsNotEmpty()
  @MaxLength(200)
  name: string;
- 
+
  @ApiProperty()
  @IsNumber()
  @IsNotEmpty()
@@ -383,30 +386,30 @@ import { Example } from &#39;src/models&#39;;
 import { Repository } from &#39;typeorm&#39;;
 import { CreateExampleDto } from &#39;./dto/create-example.dto&#39;;
 import { UpdateExampleDto } from &#39;./dto/update-example.dto&#39;;
- 
+
 @Injectable()
 export class ExampleService {
  constructor(
    @InjectRepository(Example)
    private readonly exampleRepository: Repository&lt;Example&gt;,
  ) {}
- 
+
  create(createExampleDto: CreateExampleDto) {
    return this.exampleRepository.save(createExampleDto);
  }
- 
+
  findAll() {
    return this.exampleRepository.find();
  }
- 
+
  findOne(id: number) {
    return this.exampleRepository.findOneBy({ id: id });
  }
- 
+
  update(id: number, updateExampleDto: UpdateExampleDto) {
    return this.exampleRepository.update(id, updateExampleDto);
  }
- 
+
  remove(id: number) {
    return this.exampleRepository.delete(id);
  }
@@ -419,20 +422,20 @@ export class ExampleService {
 import { NestFactory } from &#39;@nestjs/core&#39;;
 import { DocumentBuilder, SwaggerModule } from &#39;@nestjs/swagger&#39;;
 import { AppModule } from &#39;./app.module&#39;;
- 
+
 async function bootstrap() {
  const app = await NestFactory.create(AppModule);
- 
+
  const config = new DocumentBuilder()
    .setTitle(&#39;Example&#39;)
    .setDescription(&#39;The Example API description&#39;)
    .setVersion(&#39;1.0&#39;)
    .addTag(&#39;Example Api&#39;)
    .build();
- 
+
  const document = SwaggerModule.createDocument(app, config);
  SwaggerModule.setup(&#39;api&#39;, app, document);
- 
+
  await app.listen(3000);
 }
 bootstrap();</code></pre>

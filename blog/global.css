@@ -1,3 +1,13 @@
+@font-face {
+  font-family: cmunbx;
+  src: url("../font/cmunrm.ttf");
+}
+
+@font-face {
+  font-family: cmunbi;
+  src: url("../font/cmunbi.ttf");
+}
+
 html {
   padding-bottom: 7em;
   text-align: left;
@@ -20,7 +30,7 @@ span.date {
 
 body {
   line-height: 1.6;
-  font-family: sans-serif;
+  font-family: cmunbx;
   font-size: 1em;
   color: #222;
 }

@@ -4,29 +4,29 @@
 <link>http://leonardo.moe/</link>
 <description>News</description>
 <item>
-<title>Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</title>
-<link>http://leonardo.moe/blog/2023-02-01-compiladores.html</link>
-<description><p>Article: Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</p><p>Web link: http://leonardo.moe/blog/2023-02-01-compiladores.html</p></description>
+<title>[pt-br] Notas e Estudos _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</title>
+<link>http://leonardo.moe/blog/2023-02-01-livro-do-dragao-2-ed.html</link>
+<description><p>Article: [pt-br] Notas e Estudos _Compiladores Princípios, técnicas e ferramentas 2ª Edição_</p><p>Web link: http://leonardo.moe/blog/2023-02-01-livro-do-dragao-2-ed.html</p></description>
 </item>
 <item>
-<title>Stranger Tags: HTML tags you maybe missed</title>
+<title>[en] Stranger Tags: HTML tags you maybe missed</title>
 <link>http://leonardo.moe/blog/2022-07-09-stranger-tags.html</link>
-<description><p>Article: Stranger Tags: HTML tags you maybe missed</p><p>Web link: http://leonardo.moe/blog/2022-07-09-stranger-tags.html</p></description>
+<description><p>Article: [en] Stranger Tags: HTML tags you maybe missed</p><p>Web link: http://leonardo.moe/blog/2022-07-09-stranger-tags.html</p></description>
 </item>
 <item>
-<title>RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</title>
+<title>[pt-br] RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</title>
 <link>http://leonardo.moe/blog/2022-04-08-nest-restful-api.html</link>
-<description><p>Article: RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</p><p>Web link: http://leonardo.moe/blog/2022-04-08-nest-restful-api.html</p></description>
+<description><p>Article: [pt-br] RESTful API com NestJS, Docker Compose, Postgres, TypeORM e Swagger</p><p>Web link: http://leonardo.moe/blog/2022-04-08-nest-restful-api.html</p></description>
 </item>
 <item>
-<title>HolyC Interpreter</title>
+<title>[en] HolyC Interpreter</title>
 <link>http://leonardo.moe/blog/2022-03-01-holyc-interpreter.html</link>
-<description><p>Article: HolyC Interpreter</p><p>Web link: http://leonardo.moe/blog/2022-03-01-holyc-interpreter.html</p></description>
+<description><p>Article: [en] HolyC Interpreter</p><p>Web link: http://leonardo.moe/blog/2022-03-01-holyc-interpreter.html</p></description>
 </item>
 <item>
-<title>Baixar, instalar e customizar o suckless terminal</title>
+<title>[pt-br] Baixar, instalar e customizar o suckless terminal</title>
 <link>http://leonardo.moe/blog/2022-02-14-tutorial-st.html</link>
-<description><p>Article: Baixar, instalar e customizar o suckless terminal</p><p>Web link: http://leonardo.moe/blog/2022-02-14-tutorial-st.html</p></description>
+<description><p>Article: [pt-br] Baixar, instalar e customizar o suckless terminal</p><p>Web link: http://leonardo.moe/blog/2022-02-14-tutorial-st.html</p></description>
 </item>
 </channel>
 </rss>

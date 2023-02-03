@@ -1,4 +1,4 @@
-% HolyC Interpreter
+% [en] HolyC Interpreter
 % Leonardo Z. N.
 % 01/03/2022
 
@@ -10,5 +10,4 @@ I chose JavaScript because I wanted to have the experience of writing a compiler
 
 I've been writing in my spare time, so it might take a while to have full language compatibility but anyone can contribute in GitHub repository, I'll be happy with that.
 
-[Live demo](http://leozamboni.github.io/holyc-interpreter). 
-
+[Live demo](http://leozamboni.github.io/holyc-interpreter).

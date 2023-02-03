@@ -1,8 +1,8 @@
-% Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_
+% [pt-br] Notas e Estudos _Compiladores Princípios, técnicas e ferramentas 2ª Edição_
 % Leonardo Z. N.
 % 01/02/2023
 
-# Notas sobre o livro _Compiladores Princípios, técnicas e ferramentas 2ª Edição_
+# Notas e Estudos _Compiladores Princípios, técnicas e ferramentas 2ª Edição_
 
 O objetivo desse artigo é fazer anotações sobre o livro, tentar clarificar alguns termos e adicionar alguns links úteis em palavras chaves.
 
@@ -142,7 +142,7 @@ Em uma implementação as fases vezes podem ser agrupadas em passos. O front-end
 
 ### Ferramentas Para Construção de Compiladores
 
-- Geradores de analisadores sintáticos (**syntax generators(**);
+- Geradores de analisadores sintáticos (**syntax generators**);
 - Geradores de analisadores léxico (**lexer generators**);
 - Mecanismos de tradução dirigida por sintaxe (**syntax-directed translation** e **parser generators**);
 - Geradores de gerador de código (**codegen generators**);

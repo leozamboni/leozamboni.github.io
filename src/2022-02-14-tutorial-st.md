@@ -1,4 +1,4 @@
-% Baixar, instalar e customizar o suckless terminal
+% [pt-br] Baixar, instalar e customizar o suckless terminal
 % Leonardo Z. N.
 % 14/02/2022
 
@@ -8,9 +8,9 @@ antes de tudo se você nunca ouviu falar no [suckless terminal](https://st.suckl
 
 para baixar e instalar você vai precisar dos pacotes build-essential (base-devel no arch) e git
 
-| Debian | Arch | 
-|---|---|
-| `sudo apt install build-essential git` | `sudo pacman -S base-devel git`   |
+| Debian                                 | Arch                            |
+| -------------------------------------- | ------------------------------- |
+| `sudo apt install build-essential git` | `sudo pacman -S base-devel git` |
 
 para baixar, clone o repositório oficial em algum lugar que você desejar no seu computador
 
@@ -29,11 +29,11 @@ pronto, agora é só digitar `st` para abrir
 # Configuracões e Customizacões
 
 o arquivo de configuracão `config.h` é localizado dentro do repositório.
-*lembrando que assim como xterm ele é um terminal compatível com X então você também pode usar .Xresources*
+_lembrando que assim como xterm ele é um terminal compatível com X então você também pode usar .Xresources_
 
 dentro dele você encontra uma váriavel para cada um dos vários aspectos do terminal como: font, shell, tabspaces, ...
 
-aqui vamos trocar a fonte do terminal mas o processo é o mesmo para fazer qualquer outra customizacão, inclusive 
+aqui vamos trocar a fonte do terminal mas o processo é o mesmo para fazer qualquer outra customizacão, inclusive
 o próprio site oferece vários [conjuntos de alteracões](https://st.suckless.org/patches/) (patch) que você pode instalar, basta baixar o arquivo .diff (utilizando wget ou salvando com o botão direito no link) dentro do repo e aplicar as alteracões com o comando
 
 ```
@@ -46,7 +46,7 @@ Para trocar a fonte vamos alterar a variável `static char *font`
 na mesma string podemos alterar algumas outras configuracões da fonte como pixel size, antialias e font hinting. Vou usar minha fonte favorita [Comic Mono](https://dtinth.github.io/comic-mono-font/)
 
 {% highlight c %}
-static char *font = "Comic Mono:pixelsize=12:antialias=false:autohint=false"; 
+static char \*font = "Comic Mono:pixelsize=12:antialias=false:autohint=false";
 {% endhighlight %}
 
 após isso basta salvar o arquivo e recompilar o terminal
