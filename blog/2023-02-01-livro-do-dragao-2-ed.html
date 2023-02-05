@@ -108,6 +108,28 @@ Ferramentas de Produtividade de Software</a>
 de Memória</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#fundamentos-da-linguagem-de-programação">1.6 Fundamentos
+da Linguagem de Programação</a>
+<ul>
+<li><a href="#a-diferença-entre-estático-e-dinâmico">1.6.1 A Diferença
+entre Estático e Dinâmico</a></li>
+<li><a href="#ambientes-e-estados">1.6.2 Ambientes e Estados</a>
+<ul>
+<li><a href="#exemplo">Exemplo</a></li>
+</ul></li>
+<li><a href="#escopo-estático-e-estrutura-de-blocos">1.6.3 Escopo
+estático e Estrutura de Blocos</a>
+<ul>
+<li><a href="#exemplo-1">Exemplo</a></li>
+</ul></li>
+<li><a href="#controle-de-acesso-explícito">1.6.4 Controle de Acesso
+Explícito</a></li>
+<li><a href="#escopo-dinâmico">1.6.5 Escopo Dinâmico</a></li>
+<li><a href="#mecanismos-de-passagem-de-parâmetros">1.6.6 Mecanismos de
+Passagem de Parâmetros</a></li>
+<li><a href="#sinônimos">1.6.7 Sinônimos</a></li>
+<li><a href="#exercícios-2">Exercícios</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -152,7 +174,7 @@ objeto</strong>).</li>
 <pre><code>                    .------------.
   Programa fonte -&gt; | Compilador | -&gt; Programa Objeto
                     --------------</code></pre>
-<p>Se o programa objeto (<strong>saida</strong>) estiver em uma
+<p>Se o programa objeto (<strong>saída</strong>) estiver em uma
 <strong>linguagem executável</strong> (linguagens interpretadas ou <a
 href="https://pt.wikipedia.org/wiki/C%C3%B3digo_de_m%C3%A1quina">linguagem
 de máquina</a>, por exemplo), poderá ser <strong>chamado</strong> pelo
@@ -171,7 +193,7 @@ máquina</strong> produzido por um <strong>compilador</strong>,
 normalmente é muito <strong>mais rápido</strong> (na execução do
 programa objeto) que um interpretador;</li>
 <li>Um <strong>interpretador</strong>, normalmente tem um <strong>melhor
-diagnóstico de erro</strong>, poís <strong>executa</strong> o programa
+diagnóstico de erro</strong>, pois <strong>executa</strong> o programa
 fonte <strong>instrução por instrução</strong>.</li>
 </ul>
 <div class="h"><h3 id="exemplo-1.1">Exemplo 1.1</h3><a aria-hidden="true" href="#exemplo-1.1">[link]</a></div>
@@ -184,7 +206,7 @@ Programa fonte -&gt; | Compilador | -&gt; Prog. Intermediário -&gt; |   Interpr
                                                            --------------------</code></pre>
 <ul>
 <li>Programa objeto: <strong>executável</strong>;</li>
-<li>Programa Intermediável: <strong>mesmo programa em outra
+<li>Programa Intermediário: <strong>mesmo programa em outra
 linguagem</strong>.</li>
 </ul>
 <p>Alguns compiladores Java são <strong>just-in-time</strong>, traduzem
@@ -195,7 +217,7 @@ intermediário.</p>
 <strong>compilador</strong>, alguns <strong>outros programas</strong>
 podem ser <strong>necessários</strong> para gerar o <strong>programa
 objeto executável</strong>.</p>
-<p>As vezes um programa pode estar <strong>divido em diversos
+<p>Às vezes um programa pode estar <strong>dividido em diversos
 arquivos</strong>, a tarefa de <strong>juntar o programa fonte</strong>
 às vezes é feita por um <strong>programa separado</strong>, chamado
 <strong>pré-processador</strong>.</p>
@@ -206,19 +228,19 @@ Prog. Fonte -&gt; | Pré-processador | -&gt; Prog. Fonte Modificado -&gt; | Comp
 -&gt; | Montador | -&gt; Cód. de Máquina -&gt; | Carregador de libs | -&gt; Prog. Obj. executável
    ------------                       ----------------------</code></pre>
 <div class="h"><h3 id="exercícios">Exercícios</h3><a aria-hidden="true" href="#exercícios">[link]</a></div>
-<pre><code>1.1.1: Qual é a diferenças entre compilador e interpretador?
+<pre><code>1.1.1: Qual é a diferença entre compilador e interpretador?
     - Compilador gera um arquivo objeto (que geralmente roda mais rápido) a partir do arquivo fonte, que pode ou não ser em uma linguagem executável.
-    - Intepretador executa o arquivo fonte (trata melhor os erros).
+    - Interpretador executa o arquivo fonte (trata melhor os erros).
 
 1.1.2: Vantagens em relação ao outro?
     - Compiladores geralmente resultam em um programa objeto executável que roda mais rápido.
     - Interpretadores geralmente possuem um tratamento de erro melhor.
 
-1.1.3: Vantagens de um sistema de processamente de linguagem que resulta em linguagem simbólica em vez de linguagem de máquina?
-    Maior portabilidade, já que cada processador possue uma linguagem de máquina com instruções diferente.
+1.1.3: Vantagens de um sistema de processamento de linguagem que resulta em linguagem simbólica em vez de linguagem de máquina?
+    Maior portabilidade, já que cada processador possui uma linguagem de máquina com instruções diferentes.
 
 1.1.4: Sobre compiladores **fonte para fonte** (que compilam para uma linguagem do mesmo nível). Qual a vantagem de usar C como linguagem objeto de um compilador?
-    C é uma linguagem de fácil entendimento com uma syntax relativamente simples, que possue diversos compiladores extremamente validados e mantidos por suas comunidades. Usar C como código intermediário facilita a criação do executável usando um compilador mais amplamente usado (Clang ou GCC, por exemplo). Além de facilitar a construção de geradores de códigos dentro de um compilador, já que a syntax é simples e oferece maior capacidade para a linguagem fonte em relação ao gerenciamento de memória do computador.
+    C é uma linguagem de fácil entendimento com uma syntax relativamente simples, que possui diversos compiladores extremamente validados e mantidos por suas comunidades. Usar C como código intermediário facilita a criação do executável usando um compilador mais amplamente usado (Clang ou GCC, por exemplo). Além de facilitar a construção de geradores de códigos dentro de um compilador, já que a sintaxe é simples e oferece maior capacidade para a linguagem fonte em relação ao gerenciamento de memória do computador.
 
 1.1.5: Sobre programas montadores:
     Um programa montador precisa ser capaz de realizar a tarefa de transformar o código fonte em um código de máquina de acordo com a arquitetura do computador que está sendo executado.
@@ -258,11 +280,11 @@ faz a validação de tipos. Dependendo a linguagem pode haver
 coerções.</p>
 <h3 id="geração-de-código-intermediário">Geração de Código
 Intermediário</h3>
-<p>Um compilador pode produzir uma ou mais representaçõess
-intermediárias, as quias podem ter diversas formas. Árvores de sintax
-denotam uma forma de representação intermediária, normalmante usado na
+<p>Um compilador pode produzir uma ou mais representações
+intermediárias, as quais podem ter diversas formas. Árvores de sintaxe
+denotam uma forma de representação intermediária, normalmente usado na
 análise sintática e semântica. Após as análises sintática e semântica,
-muitos compiladores produzem uma representação explicita de baixo nível
+muitos compiladores produzem uma representação explícita de baixo nível
 ou linguagem de máquina.</p>
 <div class="h"><h3 id="otimização-de-código">Otimização de Código</h3><a aria-hidden="true" href="#otimização-de-código">[link]</a></div>
 <p>Otimização independente de arquitetura faz transformações no código
@@ -298,7 +320,7 @@ translation</strong> e <strong>parser generators</strong>);</li>
 generators</strong>);</li>
 <li>Mecanismos de análise de fluxo de dados (<strong>data flow
 analysis</strong>);</li>
-<li>Conjunto de ferramentas para construção de compiladoress
+<li>Conjunto de ferramentas para construção de compiladores
 (<strong>frameworks</strong>).</li>
 </ul>
 <h2 id="evolução-das-linguagens-de-programação">1.3 Evolução das
@@ -307,12 +329,12 @@ Linguagens de Programação</h2>
 eram programados em linguagem de máquina por sequências de 0s e 1s que
 diziam explicitamente ao computador quais operações deveriam ser
 executadas e em que ordem. Isso era lento, cansativo e passível de
-erros. Um vez escrito, os programas eram difíceis de entender e
+erros. Uma vez escrito, os programas eram difíceis de entender e
 modificar.</p>
 <h3 id="mudança-para-linguagens-de-alto-nível">1.3.1 Mudança para
 Linguagens de Alto Nível</h3>
 <p>O primeiro passo foi a criação de linguagens assembly (início da
-década 1950). No começo contiam apenas mnemômicos das intruções de
+década 1950). No começo contém apenas mnemônicos das instruções de
 máquina. Mais tarde foram acrescentadas instruções de macro.</p>
 <p>Um passo importante (metade da década 1950) foi a criação do <a
 href="https://pt.wikipedia.org/wiki/Fortran">Fortran</a> para computação
@@ -336,7 +358,7 @@ restrição (Prolog, …).</li>
 <ul>
 <li><strong>Imperativas</strong> (procedurais): descrevem como suas
 instruções funcionam, estado e mudança de estado (C, C++, C#);</li>
-<li><strong>Declarativas</strong> (funcional, lógicas, restritiva):
+<li><strong>Declarativas</strong> (funcional, lógica, restritiva):
 descrevem o que fazem e não exatamente como suas instruções funcionam
 (ML, Haskell, Prolog).</li>
 <li><strong>von Neumann</strong>: linguagens cujo modelo computacional
@@ -344,8 +366,8 @@ se baseia na arquitetura de computadores de von Neumann (Fortran, C,
 …);</li>
 <li><strong>Orientada por Objeto</strong>: estilo de programação baseada
 em coleções de objetos;</li>
-<li><strong>Scripting</strong>: Linguagens interpretadas com operadores
-de alto nível criados para juntar computações (Awk, JavaScript, …).</li>
+<li><strong>Scripting</strong>Linguagens interpretadas com operadores de
+alto nível criados para juntar computações (Awk, JavaScript, …).</li>
 </ul>
 <div class="h"><h3 id="impactos-nos-compiladores">1.3.2 Impactos nos Compiladores</h3><a aria-hidden="true" href="#impactos-nos-compiladores">[link]</a></div>
 <p>Os avanços nas linguagens de programação e nas arquiteturas de
@@ -387,7 +409,7 @@ do Código</h3>
 <p>As otimizações de um compilador precisam atender os seguintes
 objetivos de projeto:</p>
 <ul>
-<li>A otimização precisa presenvar a semântica do programa
+<li>A otimização precisa preservar a semântica do programa
 compilado;</li>
 <li>A otimização precisa melhorar o desempenho de muitos programas;</li>
 <li>O tempo de compilação precisa continuar razoável;</li>
@@ -395,7 +417,7 @@ compilado;</li>
 </ul>
 <h2 id="aplicações-da-tecnologia-de-compiladores">1.5 Aplicações da
 Tecnologia de Compiladores</h2>
-<p>O projeto de um compilador tem impacto em vários outras àreas da
+<p>O projeto de um compilador tem impacto em várias outras áreas da
 ciência da computação.</p>
 <h3 id="implementação-de-linguagens-de-programação-de-alto-nível">1.5.1
 Implementação de Linguagens de Programação de Alto nível</h3>
@@ -407,12 +429,12 @@ para Arquiteturas de Computador</h3>
 <h4 id="paralelismo">Paralelismo</h4>
 <p>Os programas são escritos como se todas as instruções fossem
 executadas sequencialmente; O hardware verifica dinamicamente se há
-dependências no fluxo sequêncial das instruções e, quando possível, as
+dependências no fluxo sequencial das instruções e, quando possível, as
 emite em paralelo.</p>
-<p>Códigos muiltithread é possível.</p>
+<p>Códigos multithread são possíveis.</p>
 <h4 id="hierarquias-de-memória">Hierarquias de Memória</h4>
 <p>O Uso eficaz dos registradores provavelmente é o problema mais
-importante no otimização de um programa.</p>
+importante na otimização de um programa.</p>
 <h3 id="projeto-de-novas-arquiteturas-de-computador">1.5.3 Projeto de
 Novas Arquiteturas de Computador</h3>
 <p>Atualmente os compiladores são desenvolvidos durante o projeto de um
@@ -446,13 +468,148 @@ do programa ser executado.</p>
 <h4 id="verificação-de-tipos">Verificação de Tipos</h4>
 <p>Pode ser usada para identificar erros e brechas de segurança.</p>
 <h4 id="verificação-de-limites">Verificação de Limites</h4>
-<p>Usuario pode facilmente manipular entradas e causar problemas no
+<p>O usuário pode facilmente manipular entradas e causar problemas no
 programa caso não tenha uma verificação de limites.</p>
 <p>A mesma análise de fluxo de dados pode ser usada para verificar
 estouros de buffer.</p>
 <h4 id="ferramentas-de-estouro-de-memória">Ferramentas de Estouro de
 Memória</h4>
 <p>Coleta de lixo suprime erros de vazamento de memória.</p>
+<h2 id="fundamentos-da-linguagem-de-programação">1.6 Fundamentos da
+Linguagem de Programação</h2>
+<h3 id="a-diferença-entre-estático-e-dinâmico">1.6.1 A Diferença entre
+Estático e Dinâmico</h3>
+<p>Um dos aspectos mais importantes ao projetar um compilador é sobre as
+decisões que o compilador pode fazer sobre um programa.</p>
+<ul>
+<li><strong>Escopo estático ou léxico</strong>: determinar o escopo de
+uma declaração examinando o programa;</li>
+<li><strong>Escopo dinâmico</strong>: enquanto o programa é executado, o
+uso de <code>x</code> poderia se referir a qualquer uma dentre as várias
+declarações de <code>x</code>.</li>
+</ul>
+<p>C e Java possuem escopo estático.</p>
+<div class="h"><h3 id="ambientes-e-estados">1.6.2 Ambientes e Estados</h3><a aria-hidden="true" href="#ambientes-e-estados">[link]</a></div>
+<ul>
+<li>O <strong>ambiente</strong> é um mapeamento de um nome para um
+posição de memória (<strong>left-value</strong>);</li>
+<li>O <strong>estado</strong> é um mapeamento de uma posição de memória
+ao valor que ela contém (<strong>right-value</strong>).</li>
+</ul>
+<h4 id="exemplo">Exemplo</h4>
+<p>Quando <code>f</code> está sendo executada, o
+<strong>ambiente</strong> se ajusta de modo que <code>i</code> se refira
+à localização reservada para <code>i</code> que é local a função
+<code>f</code>.</p>
+<pre><code>int i; // i global
+
+void f() {
+    int i; // i local
+    i = 3; // uso do i local
+}
+...
+    x = i + 1; // uso do i global</code></pre>
+<p>Na maioria das linguagens, as declarações precisam preceder seu uso,
+de modo que uma função que vem antes do <code>i</code> global não pode
+referir-se a ele (não é o caso do JavaScript).</p>
+<hr />
+<ul>
+<li>Nomes e variáveis: nomes usados em tempo de compilação;</li>
+<li>Identificador: cadeia de caracteres que se refere a uma
+entidade;</li>
+<li>Variável: refere-se a um endereço particular de memória.</li>
+</ul>
+<hr />
+<h3 id="escopo-estático-e-estrutura-de-blocos">1.6.3 Escopo estático e
+Estrutura de Blocos</h3>
+<p>A maioria das linguagens utilizam escopo estático. Algumas também
+oferecem controle explícito sobre escopos através de palavras-chave como
+<code>global</code>, <code>public</code>, <code>private</code> e
+<code>protected</code>.</p>
+<h4 id="exemplo-1">Exemplo</h4>
+<ol type="1">
+<li>Um programa C consiste em uma sequência de declarações globais
+(<strong>top-level</strong>) de variáveis e funções;</li>
+<li>As funções podem conter declarações de variável, o escopo é restrito
+a função;</li>
+</ol>
+<hr />
+<ul>
+<li>Função: geralmente retorna valor;</li>
+<li>Procedimento: geralmente não retorna nada;</li>
+<li>Métodos: podem se comportar das duas maneiras.</li>
+</ul>
+<p>C por exemplo só possui funções já que existe o tipo void.</p>
+<hr />
+<ol start="3" type="1">
+<li>O escopo de uma variável global <code>x</code> consiste de todo o
+programa que se segue.</li>
+</ol>
+<p>Syntax de blocos em C:</p>
+<ol type="1">
+<li>Bloco é um tipo de comando que podem aparecer em qualquer
+lugar;</li>
+<li>Um bloco é uma sequência de declarações seguida por uma sequência de
+comandos.</li>
+</ol>
+<h3 id="controle-de-acesso-explícito">1.6.4 Controle de Acesso
+Explícito</h3>
+<p>Palavras-chaves como <code>public</code>, <code>private</code> e
+<code>protected</code> oferecem controle explícito sobre acesso aos
+nomes de membros em uma superclasse.</p>
+<div class="h"><h3 id="escopo-dinâmico">1.6.5 Escopo Dinâmico</h3><a aria-hidden="true" href="#escopo-dinâmico">[link]</a></div>
+<p>Um uso de um nome <code>x</code> se refere à declaração de
+<code>x</code> no procedimento chamado mais recentemente com tal
+declaração.</p>
+<hr />
+<p>A regra dinâmica está para o tempo assim como a regra estática está
+para o espaço. Enquanto a regra estática nos pede para encontrar a
+declaração cuja unidade (bloco) cerca mais de perto a localização física
+do uso, a regra dinâmica nos pede para encontrar a declaração cuja
+unidade (chamada de procedimento) cerca mais de perto o tempo de
+uso.</p>
+<hr />
+<h3 id="mecanismos-de-passagem-de-parâmetros">1.6.6 Mecanismos de
+Passagem de Parâmetros</h3>
+<p>Chamada por valor (<strong>call by value</strong>): O parâmetro real
+é avaliado se for uma expressão ou copiado se for uma variável; Chamada
+por referência (<strong>call by reference</strong>): O endereço do
+parâmetro real é passado chamado como o valor do parâmetro formal
+correspondente.</p>
+<div class="h"><h3 id="sinônimos">1.6.7 Sinônimos</h3><a aria-hidden="true" href="#sinônimos">[link]</a></div>
+<p>dois ponteiros com o mesmo endereço.</p>
+<div class="h"><h3 id="exercícios-2">Exercícios</h3><a aria-hidden="true" href="#exercícios-2">[link]</a></div>
+<pre><code>1.6.1:
+w = 13
+x = 11
+y = 13
+z = 11
+
+1.6.2:
+w = 9
+x = 7
+y = 13
+z = 11
+
+1.6.3:
+| Declarção | Escopo         |
+|-----------|----------------|
+| int w     | b1 - (b3 e b4) |
+| int x     | b1 - (b2 e b4) |
+| int y     | b1 - b5        |
+| int z     | b1 - (b2 e b5) |
+| int x     | b2 - b3        |
+| int z     | b2             |
+| int w     | b3             |
+| int x     | b3             |
+| int w     | b4             |
+| int x     | b4             |
+| int y     | b5             |
+| int z     | b5             |
+
+1.6.4:
+3 e 2
+</code></pre>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
