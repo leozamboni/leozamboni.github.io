@@ -418,3 +418,83 @@ z = 11
 3 e 2
 
 ```
+
+## 2 Um Tradutor Simples Dirigido por Sintaxe
+
+### 2.1 Introdução
+
+A fase de análise de um compilador subdivide um programa fonte em partes constituintes e produz uma representação interna para ele, chamada de código intermediário.
+
+Um analisador léxico permite que um tradutor trate as construções de múltiplos caracteres como identificadores, que são escritos como sequência de caracteres, mas são tratados como unidades chamadas tokens durante a análise sintática.
+
+### 2.2 Definição da Sintaxe
+
+gramática livre de contexto -> gramática -> sintaxe.
+
+Uma gramática descreve a estrutura hierárquica da maioria das construções de linguagens de programação.
+
+## 2.2.1 Definição de Gramáticas
+
+## 2.2.2 Derivações
+
+## 2.2.3 Árvore de Derivação
+
+## 2.2.4 Ambiguidade
+
+## 2.2.5 Associatividade de Operadores
+
+## 2.2.6 Precedência de Operadores
+
+### 2.3 Tradução Dirigida por Sintaxe
+
+```
+expr -> expr + term
+
+```
+
+Atributos: Um atributo é qualquer valor associado a uma construção de programa;
+Esquemas de tradução (dirigidos por sintaxe): Um esquema de tradução é uma notação para conectar fragmentos de programa às produções de uma gramática.
+
+#### 2.3.1 [Notação Pós-fixada](https://pt.wikipedia.org/wiki/Nota%C3%A7%C3%A3o_polonesa_inversa)
+
+#### 2.3.2 Atributosss Sintetizados
+
+#### 2.3.3 Definições Dirigidas por Sintaxe Simples
+
+#### 2.3.4 Caminhamento em Árvore
+
+#### 2.3.5 Esquemas de Tradução
+
+A definição dirigida por sintaxe faz uma tradução anexando uma sequência de caracteres como atributos dos nós de derivação.
+
+### 2.4 Análise Sintática
+
+É conveniente pensarmos em uma árvore de derivação sendo construída, embora, na prática, um compilador nao precisas construí-la.
+
+#### 2.4.1 Análise Sintática Descendente
+
+#### 2.4.2 Analisador Sintático Preditivo
+
+Um conjunto de procedimentos **recursivos** é usado para processar a entrada. -> usa recursão.
+
+#### 2.4.3 Quando Usar Producoes-E
+
+#### 2.4.4 Projetando uma Analisador Preditivo
+
+#### 2.4.5 Recursão à Esquerda
+
+### 2.5 Um Tradutor para Expressões Simples
+
+#### 2.5.1 Sintaxe Abstrata e Concreta
+
+#### 2.5.2 Adaptando o Esquema de Tradução
+
+#### 2.5.3 Procedimentos para os Não-terminais
+
+#### 2.5.4 Simplificando o Tradutor
+
+#### 2.5.5 O Programa Completo
+
+[link para o código implementado em JavaScript](https://github.com/leozamboni/js-dragon-book-2nd/blob/main/2-27.m.js)
+
+### 2.6 Análise Léxica

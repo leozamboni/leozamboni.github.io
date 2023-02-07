@@ -130,6 +130,62 @@ Passagem de Parâmetros</a></li>
 <li><a href="#sinônimos">1.6.7 Sinônimos</a></li>
 <li><a href="#exercícios-2">Exercícios</a></li>
 </ul></li>
+<li><a href="#um-tradutor-simples-dirigido-por-sintaxe">2 Um Tradutor
+Simples Dirigido por Sintaxe</a>
+<ul>
+<li><a href="#introdução-1">2.1 Introdução</a></li>
+<li><a href="#definição-da-sintaxe">2.2 Definição da Sintaxe</a></li>
+</ul></li>
+<li><a href="#definição-de-gramáticas">2.2.1 Definição de
+Gramáticas</a></li>
+<li><a href="#derivações">2.2.2 Derivações</a></li>
+<li><a href="#árvore-de-derivação">2.2.3 Árvore de Derivação</a></li>
+<li><a href="#ambiguidade">2.2.4 Ambiguidade</a></li>
+<li><a href="#associatividade-de-operadores">2.2.5 Associatividade de
+Operadores</a></li>
+<li><a href="#precedência-de-operadores">2.2.6 Precedência de
+Operadores</a>
+<ul>
+<li><a href="#tradução-dirigida-por-sintaxe">2.3 Tradução Dirigida por
+Sintaxe</a>
+<ul>
+<li><a href="#notação-pós-fixada">2.3.1 <span>Notação
+Pós-fixada</span></a></li>
+<li><a href="#atributosss-sintetizados">2.3.2 Atributosss
+Sintetizados</a></li>
+<li><a href="#definições-dirigidas-por-sintaxe-simples">2.3.3 Definições
+Dirigidas por Sintaxe Simples</a></li>
+<li><a href="#caminhamento-em-árvore">2.3.4 Caminhamento em
+Árvore</a></li>
+<li><a href="#esquemas-de-tradução">2.3.5 Esquemas de Tradução</a></li>
+</ul></li>
+<li><a href="#análise-sintática-1">2.4 Análise Sintática</a>
+<ul>
+<li><a href="#análise-sintática-descendente">2.4.1 Análise Sintática
+Descendente</a></li>
+<li><a href="#analisador-sintático-preditivo">2.4.2 Analisador Sintático
+Preditivo</a></li>
+<li><a href="#quando-usar-producoes-e">2.4.3 Quando Usar
+Producoes-E</a></li>
+<li><a href="#projetando-uma-analisador-preditivo">2.4.4 Projetando uma
+Analisador Preditivo</a></li>
+<li><a href="#recursão-à-esquerda">2.4.5 Recursão à Esquerda</a></li>
+</ul></li>
+<li><a href="#um-tradutor-para-expressões-simples">2.5 Um Tradutor para
+Expressões Simples</a>
+<ul>
+<li><a href="#sintaxe-abstrata-e-concreta">2.5.1 Sintaxe Abstrata e
+Concreta</a></li>
+<li><a href="#adaptando-o-esquema-de-tradução">2.5.2 Adaptando o Esquema
+de Tradução</a></li>
+<li><a href="#procedimentos-para-os-não-terminais">2.5.3 Procedimentos
+para os Não-terminais</a></li>
+<li><a href="#simplificando-o-tradutor">2.5.4 Simplificando o
+Tradutor</a></li>
+<li><a href="#o-programa-completo">2.5.5 O Programa Completo</a></li>
+</ul></li>
+<li><a href="#análise-léxica-1">2.6 Análise Léxica</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -610,6 +666,72 @@ z = 11
 1.6.4:
 3 e 2
 </code></pre>
+<h2 id="um-tradutor-simples-dirigido-por-sintaxe">2 Um Tradutor Simples
+Dirigido por Sintaxe</h2>
+<div class="h"><h3 id="introdução-1">2.1 Introdução</h3><a aria-hidden="true" href="#introdução-1">[link]</a></div>
+<p>A fase de análise de um compilador subdivide um programa fonte em
+partes constituintes e produz uma representação interna para ele,
+chamada de código intermediário.</p>
+<p>Um analisador léxico permite que um tradutor trate as construções de
+múltiplos caracteres como identificadores, que são escritos como
+sequência de caracteres, mas são tratados como unidades chamadas tokens
+durante a análise sintática.</p>
+<div class="h"><h3 id="definição-da-sintaxe">2.2 Definição da Sintaxe</h3><a aria-hidden="true" href="#definição-da-sintaxe">[link]</a></div>
+<p>gramática livre de contexto -&gt; gramática -&gt; sintaxe.</p>
+<p>Uma gramática descreve a estrutura hierárquica da maioria das
+construções de linguagens de programação.</p>
+<div class="h"><h2 id="definição-de-gramáticas">2.2.1 Definição de Gramáticas</h2><a aria-hidden="true" href="#definição-de-gramáticas">[link]</a></div>
+<div class="h"><h2 id="derivações">2.2.2 Derivações</h2><a aria-hidden="true" href="#derivações">[link]</a></div>
+<div class="h"><h2 id="árvore-de-derivação">2.2.3 Árvore de Derivação</h2><a aria-hidden="true" href="#árvore-de-derivação">[link]</a></div>
+<div class="h"><h2 id="ambiguidade">2.2.4 Ambiguidade</h2><a aria-hidden="true" href="#ambiguidade">[link]</a></div>
+<h2 id="associatividade-de-operadores">2.2.5 Associatividade de
+Operadores</h2>
+<div class="h"><h2 id="precedência-de-operadores">2.2.6 Precedência de Operadores</h2><a aria-hidden="true" href="#precedência-de-operadores">[link]</a></div>
+<h3 id="tradução-dirigida-por-sintaxe">2.3 Tradução Dirigida por
+Sintaxe</h3>
+<pre><code>expr -&gt; expr + term
+</code></pre>
+<p>Atributos: Um atributo é qualquer valor associado a uma construção de
+programa; Esquemas de tradução (dirigidos por sintaxe): Um esquema de
+tradução é uma notação para conectar fragmentos de programa às produções
+de uma gramática.</p>
+<h4 id="notação-pós-fixada">2.3.1 <a
+href="https://pt.wikipedia.org/wiki/Nota%C3%A7%C3%A3o_polonesa_inversa">Notação
+Pós-fixada</a></h4>
+<h4 id="atributosss-sintetizados">2.3.2 Atributosss Sintetizados</h4>
+<h4 id="definições-dirigidas-por-sintaxe-simples">2.3.3 Definições
+Dirigidas por Sintaxe Simples</h4>
+<h4 id="caminhamento-em-árvore">2.3.4 Caminhamento em Árvore</h4>
+<h4 id="esquemas-de-tradução">2.3.5 Esquemas de Tradução</h4>
+<p>A definição dirigida por sintaxe faz uma tradução anexando uma
+sequência de caracteres como atributos dos nós de derivação.</p>
+<div class="h"><h3 id="análise-sintática-1">2.4 Análise Sintática</h3><a aria-hidden="true" href="#análise-sintática-1">[link]</a></div>
+<p>É conveniente pensarmos em uma árvore de derivação sendo construída,
+embora, na prática, um compilador nao precisas construí-la.</p>
+<h4 id="análise-sintática-descendente">2.4.1 Análise Sintática
+Descendente</h4>
+<h4 id="analisador-sintático-preditivo">2.4.2 Analisador Sintático
+Preditivo</h4>
+<p>Um conjunto de procedimentos <strong>recursivos</strong> é usado para
+processar a entrada. -&gt; usa recursão.</p>
+<h4 id="quando-usar-producoes-e">2.4.3 Quando Usar Producoes-E</h4>
+<h4 id="projetando-uma-analisador-preditivo">2.4.4 Projetando uma
+Analisador Preditivo</h4>
+<h4 id="recursão-à-esquerda">2.4.5 Recursão à Esquerda</h4>
+<h3 id="um-tradutor-para-expressões-simples">2.5 Um Tradutor para
+Expressões Simples</h3>
+<h4 id="sintaxe-abstrata-e-concreta">2.5.1 Sintaxe Abstrata e
+Concreta</h4>
+<h4 id="adaptando-o-esquema-de-tradução">2.5.2 Adaptando o Esquema de
+Tradução</h4>
+<h4 id="procedimentos-para-os-não-terminais">2.5.3 Procedimentos para os
+Não-terminais</h4>
+<h4 id="simplificando-o-tradutor">2.5.4 Simplificando o Tradutor</h4>
+<h4 id="o-programa-completo">2.5.5 O Programa Completo</h4>
+<p><a
+href="https://github.com/leozamboni/js-dragon-book-2nd/blob/main/2-27.m.js">link
+para o código implementado em JavaScript</a></p>
+<div class="h"><h3 id="análise-léxica-1">2.6 Análise Léxica</h3><a aria-hidden="true" href="#análise-léxica-1">[link]</a></div>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
