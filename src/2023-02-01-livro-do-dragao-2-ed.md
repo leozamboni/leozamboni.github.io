@@ -399,7 +399,7 @@ y = 13
 z = 11
 
 1.6.3:
-| Declarção | Escopo         |
+| Declaração | Escopo         |
 |-----------|----------------|
 | int w     | b1 - (b3 e b4) |
 | int x     | b1 - (b2 e b4) |
@@ -416,7 +416,6 @@ z = 11
 
 1.6.4:
 3 e 2
-
 ```
 
 ## 2 Um Tradutor Simples Dirigido por Sintaxe
@@ -433,23 +432,22 @@ gramática livre de contexto -> gramática -> sintaxe.
 
 Uma gramática descreve a estrutura hierárquica da maioria das construções de linguagens de programação.
 
-## 2.2.1 Definição de Gramáticas
+#### 2.2.1 Definição de Gramáticas
 
-## 2.2.2 Derivações
+#### 2.2.2 Derivações
 
-## 2.2.3 Árvore de Derivação
+#### 2.2.3 Árvore de Derivação
 
-## 2.2.4 Ambiguidade
+#### 2.2.4 Ambiguidade
 
-## 2.2.5 Associatividade de Operadores
+#### 2.2.5 Associatividade de Operadores
 
-## 2.2.6 Precedência de Operadores
+#### 2.2.6 Precedência de Operadores
 
 ### 2.3 Tradução Dirigida por Sintaxe
 
 ```
 expr -> expr + term
-
 ```
 
 Atributos: Um atributo é qualquer valor associado a uma construção de programa;
@@ -495,6 +493,22 @@ Um conjunto de procedimentos **recursivos** é usado para processar a entrada. -
 
 #### 2.5.5 O Programa Completo
 
-[link para o código implementado em JavaScript](https://github.com/leozamboni/js-dragon-book-2nd/blob/main/2-27.m.js)
+[link para o código implementado em JavaScript](https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-5)
 
 ### 2.6 Análise Léxica
+
+#### 2.6.1 Remoção de Espaço em Braco e Comentário
+
+#### 2.6.2 Lendo Adiante
+
+#### 2.6.3 Constantes
+
+#### 2.6.4 Reconhecendo Palavras-Chave e Identificadores
+
+#### 2.6.5 Um Analisador Léxico
+
+[link para o código implementado em JavaScript](https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-6)
+
+### 2.7 Tabelas de Símbolos
+
+[link para o código implementado em JavaScript](https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-7)

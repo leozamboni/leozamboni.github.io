@@ -134,8 +134,8 @@ Passagem de Parâmetros</a></li>
 Simples Dirigido por Sintaxe</a>
 <ul>
 <li><a href="#introdução-1">2.1 Introdução</a></li>
-<li><a href="#definição-da-sintaxe">2.2 Definição da Sintaxe</a></li>
-</ul></li>
+<li><a href="#definição-da-sintaxe">2.2 Definição da Sintaxe</a>
+<ul>
 <li><a href="#definição-de-gramáticas">2.2.1 Definição de
 Gramáticas</a></li>
 <li><a href="#derivações">2.2.2 Derivações</a></li>
@@ -144,8 +144,8 @@ Gramáticas</a></li>
 <li><a href="#associatividade-de-operadores">2.2.5 Associatividade de
 Operadores</a></li>
 <li><a href="#precedência-de-operadores">2.2.6 Precedência de
-Operadores</a>
-<ul>
+Operadores</a></li>
+</ul></li>
 <li><a href="#tradução-dirigida-por-sintaxe">2.3 Tradução Dirigida por
 Sintaxe</a>
 <ul>
@@ -184,7 +184,17 @@ para os Não-terminais</a></li>
 Tradutor</a></li>
 <li><a href="#o-programa-completo">2.5.5 O Programa Completo</a></li>
 </ul></li>
-<li><a href="#análise-léxica-1">2.6 Análise Léxica</a></li>
+<li><a href="#análise-léxica-1">2.6 Análise Léxica</a>
+<ul>
+<li><a href="#remoção-de-espaço-em-braco-e-comentário">2.6.1 Remoção de
+Espaço em Braco e Comentário</a></li>
+<li><a href="#lendo-adiante">2.6.2 Lendo Adiante</a></li>
+<li><a href="#constantes">2.6.3 Constantes</a></li>
+<li><a href="#reconhecendo-palavras-chave-e-identificadores">2.6.4
+Reconhecendo Palavras-Chave e Identificadores</a></li>
+<li><a href="#um-analisador-léxico">2.6.5 Um Analisador Léxico</a></li>
+</ul></li>
+<li><a href="#tabelas-de-símbolos">2.7 Tabelas de Símbolos</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -648,7 +658,7 @@ y = 13
 z = 11
 
 1.6.3:
-| Declarção | Escopo         |
+| Declaração | Escopo         |
 |-----------|----------------|
 | int w     | b1 - (b3 e b4) |
 | int x     | b1 - (b2 e b4) |
@@ -680,13 +690,13 @@ durante a análise sintática.</p>
 <p>gramática livre de contexto -&gt; gramática -&gt; sintaxe.</p>
 <p>Uma gramática descreve a estrutura hierárquica da maioria das
 construções de linguagens de programação.</p>
-<div class="h"><h2 id="definição-de-gramáticas">2.2.1 Definição de Gramáticas</h2><a aria-hidden="true" href="#definição-de-gramáticas">[link]</a></div>
-<div class="h"><h2 id="derivações">2.2.2 Derivações</h2><a aria-hidden="true" href="#derivações">[link]</a></div>
-<div class="h"><h2 id="árvore-de-derivação">2.2.3 Árvore de Derivação</h2><a aria-hidden="true" href="#árvore-de-derivação">[link]</a></div>
-<div class="h"><h2 id="ambiguidade">2.2.4 Ambiguidade</h2><a aria-hidden="true" href="#ambiguidade">[link]</a></div>
-<h2 id="associatividade-de-operadores">2.2.5 Associatividade de
-Operadores</h2>
-<div class="h"><h2 id="precedência-de-operadores">2.2.6 Precedência de Operadores</h2><a aria-hidden="true" href="#precedência-de-operadores">[link]</a></div>
+<h4 id="definição-de-gramáticas">2.2.1 Definição de Gramáticas</h4>
+<h4 id="derivações">2.2.2 Derivações</h4>
+<h4 id="árvore-de-derivação">2.2.3 Árvore de Derivação</h4>
+<h4 id="ambiguidade">2.2.4 Ambiguidade</h4>
+<h4 id="associatividade-de-operadores">2.2.5 Associatividade de
+Operadores</h4>
+<h4 id="precedência-de-operadores">2.2.6 Precedência de Operadores</h4>
 <h3 id="tradução-dirigida-por-sintaxe">2.3 Tradução Dirigida por
 Sintaxe</h3>
 <pre><code>expr -&gt; expr + term
@@ -729,9 +739,23 @@ Não-terminais</h4>
 <h4 id="simplificando-o-tradutor">2.5.4 Simplificando o Tradutor</h4>
 <h4 id="o-programa-completo">2.5.5 O Programa Completo</h4>
 <p><a
-href="https://github.com/leozamboni/js-dragon-book-2nd/blob/main/2-27.m.js">link
+href="https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-5">link
 para o código implementado em JavaScript</a></p>
 <div class="h"><h3 id="análise-léxica-1">2.6 Análise Léxica</h3><a aria-hidden="true" href="#análise-léxica-1">[link]</a></div>
+<h4 id="remoção-de-espaço-em-braco-e-comentário">2.6.1 Remoção de Espaço
+em Braco e Comentário</h4>
+<h4 id="lendo-adiante">2.6.2 Lendo Adiante</h4>
+<h4 id="constantes">2.6.3 Constantes</h4>
+<h4 id="reconhecendo-palavras-chave-e-identificadores">2.6.4
+Reconhecendo Palavras-Chave e Identificadores</h4>
+<h4 id="um-analisador-léxico">2.6.5 Um Analisador Léxico</h4>
+<p><a
+href="https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-6">link
+para o código implementado em JavaScript</a></p>
+<div class="h"><h3 id="tabelas-de-símbolos">2.7 Tabelas de Símbolos</h3><a aria-hidden="true" href="#tabelas-de-símbolos">[link]</a></div>
+<p><a
+href="https://github.com/leozamboni/js-dragon-book-2nd/tree/main/2-7">link
+para o código implementado em JavaScript</a></p>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
