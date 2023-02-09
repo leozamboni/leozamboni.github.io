@@ -674,8 +674,7 @@ z = 11
 | int z     | b5             |
 
 1.6.4:
-3 e 2
-</code></pre>
+3 e 2</code></pre>
 <h2 id="um-tradutor-simples-dirigido-por-sintaxe">2 Um Tradutor Simples
 Dirigido por Sintaxe</h2>
 <div class="h"><h3 id="introdução-1">2.1 Introdução</h3><a aria-hidden="true" href="#introdução-1">[link]</a></div>
@@ -690,17 +689,54 @@ durante a análise sintática.</p>
 <p>gramática livre de contexto -&gt; gramática -&gt; sintaxe.</p>
 <p>Uma gramática descreve a estrutura hierárquica da maioria das
 construções de linguagens de programação.</p>
+<hr />
+<ul>
+<li><strong>Tokens</strong>: consistem em dois componentes (nome e valor
+atribuido);</li>
+<li><strong>Terminais</strong>: nome dos tokens (símbolos abstratos
+definidos pelo programa fonte).</li>
+</ul>
+<hr />
 <h4 id="definição-de-gramáticas">2.2.1 Definição de Gramáticas</h4>
+<ul>
+<li>Conjuntos de símbolos terminais;</li>
+<li>Conjunto de não terminais (variáveis sintáticas);</li>
+<li>Conjunto de produções (não-terminal -&gt; sequência de
+terminais);</li>
+<li>Designação de não-terminais (símbolo inicial da gramática).</li>
+</ul>
 <h4 id="derivações">2.2.2 Derivações</h4>
+<p>Uma gramática deriva cadeias começando com o símbolo inicial e
+substituindo repetidamente um não-terminal.</p>
+<pre><code>call -&gt; id
+
+optparams -&gt; params
+| E (cadeia de símbolos vazia, ou seja, chamada de função)
+
+params -&gt; param
+| params params</code></pre>
 <h4 id="árvore-de-derivação">2.2.3 Árvore de Derivação</h4>
+<p>Representação das derivações</p>
 <h4 id="ambiguidade">2.2.4 Ambiguidade</h4>
+<p>Uma gramática pode ter mais de uma arvore de derivação gerando a
+mesma coisa.</p>
 <h4 id="associatividade-de-operadores">2.2.5 Associatividade de
 Operadores</h4>
+<p>1+2+3 -&gt; (1+2)+3</p>
+<p>+,-,*,/ -&gt; esquerda; **,= -&gt; direita.</p>
 <h4 id="precedência-de-operadores">2.2.6 Precedência de Operadores</h4>
+<pre><code>expr -&gt; expr + term
+| expr - term
+| term
+
+term -&gt; term * factor
+| term / factor
+| factor
+
+factor -&gt; digit | ( expr )</code></pre>
 <h3 id="tradução-dirigida-por-sintaxe">2.3 Tradução Dirigida por
 Sintaxe</h3>
-<pre><code>expr -&gt; expr + term
-</code></pre>
+<pre><code>expr -&gt; expr + term</code></pre>
 <p>Atributos: Um atributo é qualquer valor associado a uma construção de
 programa; Esquemas de tradução (dirigidos por sintaxe): Um esquema de
 tradução é uma notação para conectar fragmentos de programa às produções

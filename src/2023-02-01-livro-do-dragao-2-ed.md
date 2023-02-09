@@ -432,17 +432,62 @@ gramática livre de contexto -> gramática -> sintaxe.
 
 Uma gramática descreve a estrutura hierárquica da maioria das construções de linguagens de programação.
 
+---
+
+- **Tokens**: consistem em dois componentes (nome e valor atribuido);
+- **Terminais**: nome dos tokens (símbolos abstratos definidos pelo programa fonte).
+
+---
+
 #### 2.2.1 Definição de Gramáticas
+
+- Conjuntos de símbolos terminais;
+- Conjunto de não terminais (variáveis sintáticas);
+- Conjunto de produções (não-terminal -> sequência de terminais);
+- Designação de não-terminais (símbolo inicial da gramática).
 
 #### 2.2.2 Derivações
 
+Uma gramática deriva cadeias começando com o símbolo inicial e substituindo repetidamente um não-terminal.
+
+```
+call -> id
+
+optparams -> params
+| E (cadeia de símbolos vazia, ou seja, chamada de função)
+
+params -> param
+| params params
+```
+
 #### 2.2.3 Árvore de Derivação
+
+Representação das derivações
 
 #### 2.2.4 Ambiguidade
 
+Uma gramática pode ter mais de uma arvore de derivação gerando a mesma coisa.
+
 #### 2.2.5 Associatividade de Operadores
 
+1+2+3 -> (1+2)+3
+
++,-,\*,/ -> esquerda;
+\*\*,= -> direita.
+
 #### 2.2.6 Precedência de Operadores
+
+```
+expr -> expr + term
+| expr - term
+| term
+
+term -> term * factor
+| term / factor
+| factor
+
+factor -> digit | ( expr )
+```
 
 ### 2.3 Tradução Dirigida por Sintaxe
 
