@@ -10,6 +10,10 @@ This blog is for my computer stuff
 -------------------------------------------------------------------------------
 Subscribe to RSS: [feed.xml](feed.xml)
 
+[[pt-br] Notas e Estudos _Structure and Interpretation of Computer Programs: JavaScript Edition_](2023-05-22-sicpjs.md){.title}
+[22/05/2023s]{.date}
+
+
 [[pt-br] Notas e Estudos _Compiladores Princípios, técnicas e ferramentas 2ª Edição_](2023-02-01-livro-do-dragao-2-ed.md){.title}
 [01/02/2023]{.date}
 
