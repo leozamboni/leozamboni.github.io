@@ -7,13 +7,18 @@
     <title>leonardo.moe</title>
     <style>
         @font-face {
-            font-family: cmunbx;
-            src: url('./font/cmunrm.ttf');
+            font-family: cmunti;
+            src: url('./font/cmunti.ttf');
         }
 
         @font-face {
             font-family: cmunbi;
             src: url('./font/cmunbi.ttf');
+        }
+
+        @font-face {
+            font-family: cmunui;
+            src: url('./font/cmunui.ttf');
         }
 
         h1,
@@ -22,27 +27,29 @@
         h4,
         h5,
         h6 {
-            font-family: cmunbi;
+            font-family: cmunui;
 
         }
 
         * {
+            text-align: center;
             margin: 0;
             padding: 0;
-            font-family: cmunbx;
+            font-family: cmunui;
         }
 
-        main {
-            text-align: center;
+        header {
+            margin-top: 5%;
         }
 
-        hr {
-            width: 50vw;
+        header ul li {
             display: inline-block;
         }
 
-        .inline_list li {
-            display: inline;
+        .jsws {
+            color: yellow;
+            border: 1 solid black;
+            text-shadow: 1px 1px 0px black;
         }
 
         .software_i_use {
@@ -54,63 +61,117 @@
             text-align: left;
             font-family: monospace;
         }
+
+        .computers ul {
+            overflow-x: scroll;
+            width: 50%;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .computers ul li {
+            display: inline-block;
+        }
+
+        .computers ul li span {
+            float: left;
+            width: 50%;
+        }
+
+        .computers ul li pre {
+            float: right;
+            width: 50%;
+            text-align: left;
+        }
+
+        .computers ul li span img {
+            float: left;
+            width: 150px;
+        }
+
+        .trackpoint {
+            color: red;
+            text-shadow: 0px 0px 10px red;
+        }
     </style>
 </head>
 
 <body>
-    <main>
-        <h1>leonardo.moe</h1>
-        <p>Welcome to my website</p>
-        <ul class="inline_list">
-            <li><a href="./js.html">JS enabled</a></li>
+    <header>
+        <ul>
+            <li>
+                <h1>Welcome to my website</h1>
+            </li>
+            <li><a class="jsws" href="./js.html">JS website</a></li>
             <li><a href="/blog/index.html">Blog</a></li>
             <li><a href="https://github.com/leozamboni/leozamboni.github.io">Source</a></li>
         </ul>
-        <br>
-        <h2>About</h2>
-        <p>I am a 20 years old software developer</p>
-        <h3>Websites I Like</h3>
-        <ul>
-            <li><a href="http://clhs.lisp.se/">Common Lisp HyperSpec</a></li>
-            <li><a href="https://www.howarddavidjohnson.com/">Howard David Johnson website</a></li>
-        </ul>
-        <br>
-        <h2>Software I Use</h2>
+    </header>
+    <main>
+        <h2></h2>
         <div class="software_i_use">
             <pre>
-                    ::::.    ':::::     ::::'           Desktop
-                    ':::::    ':::::.  ::::'            OS: NixOS
-                      :::::     '::::.:::::             Terminal: Kitty
-                .......:::::..... ::::::::              Shell: Fish
-               ::::::::::::::::::. ::::::    ::::.      WM: dwm
-              ::::::::::::::::::::: :::::.  .::::'      Editor: Emacs
-                     .....           ::::' :::::'       
-                    :::::            '::' :::::'        Main notebook
-            ........:::::               ' :::::::::::.  OS: NixOS (no GUI)
-            :::::::::::::                 ::::::::::::: Shell: Fish
-            ::::::::::: ..              :::::           Editor: Neovim
+                    ::::.    ':::::     ::::'           Software I Use 
+                    ':::::    ':::::.  ::::'            
+                      :::::     '::::.:::::             OS: NixOS
+                .......:::::..... ::::::::              Terminal: Kitty
+               ::::::::::::::::::. ::::::    ::::.      Shell: Fish
+              ::::::::::::::::::::: :::::.  .::::'      WM: dwm
+                     .....           ::::' :::::'       Editor: Emacs/vim
+                    :::::            '::' :::::'        IRC: irssi
+            ........:::::               ' :::::::::::.  
+            :::::::::::::                 ::::::::::::: 
+            ::::::::::: ..              :::::           
                .::::: .:::            :::::             
-              .:::::  :::::          '''''    .....     ThinkPad G40
-              :::::   ':::::.  ......:::::::::::::'     OS: <a href="http://kurumin-ng.c3sl.ufpr.br/">Kurumin NG</a> 
-               :::     ::::::. ':::::::::::::::::'      Terminal: Konsole
-                      .:::::::: '::::::::::             Shell: Bash 
-                     .::::''::::.     '::::.            DE: KDE
-                    .::::'   ::::.     '::::.           WM: Kwin
-                   .::::      ::::      '::::.          Editor: vim
+              .:::::  :::::          '''''    .....     
+              :::::   ':::::.  ......:::::::::::::'     
+               :::     ::::::. ':::::::::::::::::'      
+                      .:::::::: '::::::::::             
+                     .::::''::::.     '::::.            
+                    .::::'   ::::.     '::::.           
+                   .::::      ::::      '::::.          
                 </pre>
-            <p>Last update: 05/02/23</p>
         </div>
-        <br>
-        <h2>Links</h2>
-        <ul class="inline_list">
-            <li><a href="https://gitlab.leonardo.moe/leonardo">GitLab</a></li>
-            <li><a href="https://github.com/leozamboni">GitHub</a></li>
-            <li><a href="https://twitter.com/intent/user?user_id=4700433616">Twitter</a></li>
-            <li><a href="http://irc.leonardo.moe">IRC</a></li>
-        </ul>
-        <br>
-        <p>© Copyright 2023 Leonardo Z. N..</p>
+        <h2><span class="trackpoint">●</span> ThinkPads</h2>
+        <div class="computers">
+            <ul>
+                <li>
+                    <span>
+                        <img src="https://www.thinkwiki.org/w/images/archive/c/cf/20181123115500%21ThinkPadG40.jpg"
+                            alt="" srcset="">
+                    </span>
+                    <pre>
+G40
+OS: <a href="http://kurumin-ng.c3sl.ufpr.br/">Kurumin NG</a>
+Terminal: Konsole
+Shell: Bash
+DE: KDE
+WM: Kwin
+Editor: vim
+                            </pre>
+
+                </li>
+                <li>
+                    <span>
+                        <img src="https://www.thinkwiki.org/w/images/4/48/ThinkPadT400.jpg" alt="" srcset="">
+                    </span>
+                    <pre>
+T400
+OS: NixOS
+Terminal: st
+Shell: Fish
+WM: dwm
+Editor: vim
+                        </pre>
+                </li>
+            </ul>
+        </div>
     </main>
+    <footer>
+        <p>© Copyright 2023 Leonardo Z. N..</p>
+    </footer>
 </body>
 
 </html>
