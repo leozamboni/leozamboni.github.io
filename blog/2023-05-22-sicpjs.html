@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Leonardo Z. N.">
+  <title>Leonardo – [pt-br] Notas e Estudos Structure and Interpretation of Computer Programs: JavaScript Edition</title>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="global.css">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed.xml"/>
+</head>
+<body>
+<div class="page">
+<header>
+<div class="title">
+<h1 class="title">[pt-br] Notas e Estudos <em>Structure and
+Interpretation of Computer Programs: JavaScript Edition</em></h1>
+</div>
+<p class="author">Leonardo Z. N.</p>
+<p class="date">22/05/2023s</p>
+<ul>
+<li><a href="https://leonardo.moe/blog/index.html">Home</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="https://github.com/leozamboni/leozamboni.github.io">Source</a></li>
+<li><strong><a href="donate.html">Donate</a></strong></li>
+</ul>
+<hr/>
+</header>
+<nav id="TOC">
+<h1>Navigate this page:</h1>
+<ul>
+<li><a
+href="#notas-e-estudos-structure-and-interpretation-of-computer-programs-javascript-edition">Notas
+e Estudos <em>Structure and Interpretation of Computer Programs:
+JavaScript Edition</em></a>
+<ul>
+<li><a href="#construindo-abstrações-com-funções">1 - Construindo
+abstrações com funções</a>
+<ul>
+<li><a href="#os-elementos-da-programação">1.1 - Os Elementos da
+Programação</a></li>
+<li><a href="#expressões">1.1.1 Expressões</a></li>
+<li><a href="#nomeação-e-ambiente">1.1.2 Nomeação e ambiente</a></li>
+<li><a href="#avaliando-combinacões-de-operadores">1.1.3 Avaliando
+Combinacões de Operadores</a></li>
+<li><a href="#funcões-compostas">1.1.4 Funcões Compostas</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<div class="pagetext">
+<p><a href="./">Return to index</a></p>
+<p>Article published by: Leonardo Z. N.</p>
+<p>Date of publication: 22/05/2023s</p>
+<h1
+id="notas-e-estudos-structure-and-interpretation-of-computer-programs-javascript-edition">Notas
+e Estudos <em>Structure and Interpretation of Computer Programs:
+JavaScript Edition</em></h1>
+<p>O objetivo desse artigo é fazer anotações sobre o livro, tentar
+clarificar alguns termos e adicionar alguns links úteis em palavras
+chaves.</p>
+<h2 id="construindo-abstrações-com-funções">1 - Construindo abstrações
+com funções</h2>
+<h3 id="os-elementos-da-programação">1.1 - Os Elementos da
+Programação</h3>
+<ul>
+<li><strong>expressões primitivas</strong>: que representam as entidades
+mais simples da linguagem.</li>
+<li><strong>meios de combinação</strong>: pelo qual os elementos
+compostos são construídos a partir dos mais simples.</li>
+<li><strong>meios de abstração</strong>: pelo qual os elementos
+compostos podem ser nomeados e manipulados como unidades.</li>
+</ul>
+<div class="h"><h3 id="expressões">1.1.1 Expressões</h3><a aria-hidden="true" href="#expressões">[link]</a></div>
+<table>
+<thead>
+<tr class="header">
+<th>en</th>
+<th>pt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>statement</td>
+<td>declaração</td>
+</tr>
+<tr class="even">
+<td>evaluating</td>
+<td>avaliacão</td>
+</tr>
+<tr class="odd">
+<td>expression</td>
+<td>expressão</td>
+</tr>
+</tbody>
+</table>
+<pre><code>486;
+- o interpretador responderá imprimindo:
+
+486
+
+- As expressões que representam números podem ser combinadas com operadores (como + ou *) para formar uma expressão composta que representa a aplicação de uma função primitiva correspondente a esses números. Por exemplo:
+
+137 + 349;
+486
+
+1000 - 334;
+666
+
+5 * 99;
+495
+
+10 / 4;
+2.5
+
+2.7 + 10;
+12.7
+
+- Como de costume, os parênteses são usados para agrupar combinações de operadores para evitar ambiguidades:
+
+(3 * 5) + (10 - 6);
+19
+
+- O JavaScript também segue as convenções usuais quando os parênteses são omitidos: a multiplicação e a divisão antes de adição e a subtração. Por exemplo:
+
+3 * 5 + 10 / 2;
+
+- ou:
+
+(3 * 5) + (10 / 2);
+</code></pre>
+<div class="h"><h3 id="nomeação-e-ambiente">1.1.2 Nomeação e ambiente</h3><a aria-hidden="true" href="#nomeação-e-ambiente">[link]</a></div>
+<table>
+<thead>
+<tr class="header">
+<th>en</th>
+<th>pt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>constant</td>
+<td>constante</td>
+</tr>
+</tbody>
+</table>
+<p>O nome identifica uma constante onde o valor é o objeto.</p>
+<pre><code>const size = 2;</code></pre>
+<pre><code>size;
+2
+
+5 * size;
+10
+
+- Exemplo de uso de constante:
+
+const pi = 3.14159;
+
+const radius = 10;
+
+pi * radius * radius;
+314.159
+
+const circumference = 2 * pi * radius;
+
+circumference;
+62.8318
+</code></pre>
+<p>Declaracões de constantes são a forma mais simples de abstracão em
+JS.</p>
+<p>associacão nome-objeto</p>
+<h3 id="avaliando-combinacões-de-operadores">1.1.3 Avaliando Combinacões
+de Operadores</h3>
+<ol type="1">
+<li>Avalie as expressões as combinação de operadores.</li>
+<li>Aplique a função que é denotada pelo operador aos argumentos que são
+os valores dos operandos.</li>
+</ol>
+<pre><code>(2 + 4 * 6) * (3 + 12);</code></pre>
+<ul>
+<li>os valores dos numerais são os números que eles nomeiam, e</li>
+<li>os valores dos nomes são os objetos associados a esses nomes no
+ambiente.</li>
+</ul>
+<div class="h"><h3 id="funcões-compostas">1.1.4 Funcões Compostas</h3><a aria-hidden="true" href="#funcões-compostas">[link]</a></div>
+<table>
+<thead>
+<tr class="header">
+<th>en</th>
+<th>pt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>compound function</td>
+<td>funcão composta</td>
+</tr>
+<tr class="even">
+<td>symbol</td>
+<td>simbolo</td>
+</tr>
+<tr class="odd">
+<td>parameters</td>
+<td>parametros</td>
+</tr>
+<tr class="even">
+<td>body</td>
+<td>corpo</td>
+</tr>
+</tbody>
+</table>
+<p>Elementos que aparecem em toda linguagem poderosa:</p>
+<ul>
+<li>Números e operações aritméticas são dados e funções primitivas.</li>
+<li>O aninhamento de combinações fornece um meio de combinar
+operações.</li>
+<li>Declarações constantes que associam nomes a valores fornecem um meio
+limitado de abstração.</li>
+</ul>
+<p>“To square something, take it times itself.” “Para elevar algo ao
+quadrado, multiplique ele por ele mesmo.”</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">square</span>(x) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>function square(   x   ) { return x   *     x; }
+   |        |      |              |   |     |
+   v        v      v              v   v     v
+  To      Square  Something, take it time itself.</code></pre>
+<p>Temos aqui uma funcão composta.</p>
+<p>A maneira mais simples para declarar uma funcão é:</p>
+<pre><code>function nome(parametros) { return expressao; }</code></pre>
+<ul>
+<li>nome: é um simbolo associado a definicão da funcão;</li>
+<li>parametros: sao os nomes usados no corpo da funcão para se referir
+ao seu argumento correspondente</li>
+<li>corpo: o corpo dessa funcão é uma simples expressão de return</li>
+</ul>
+<p>Aplicacão de funcão:</p>
+<pre><code>square(21);
+441</code></pre>
+<p>Depois de combinacões de operadores, aplicacões de funcões é o
+segundo tipo de combinacão de expressões que encontramos. A forma geral
+para aplicacão de funcão é:</p>
+<pre><code>function-expression(argument-expressions)</code></pre>
+<p>Para avaliar a aplicacão de uma funcão:</p>
+<ol type="1">
+<li>Avalie as subexpressões do aplicacão, ou seja, a expressão de função
+e as expressões de argumento.</li>
+<li>Aplique a função que é o valor da expressão de função aos valores
+das expressões de argumento.</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">square</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dv">49</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">square</span>(x) <span class="op">+</span> <span class="fu">square</span>(y)<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sum_of_squares</span>(x<span class="op">,</span> y) {</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">square</span>(x) <span class="op">+</span> <span class="fu">square</span>(y)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum_of_squares</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span><span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(a) {</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">sum_of_squares</span>(a <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> a <span class="op">*</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="dv">136</span><span class="op">;</span></span></code></pre></div>
+<div id="footer">
+<hr />
+<p>Unless otherwise stated, documents/pages/images on this
+website/repository are released under the terms of the GNU Free
+Documentation License, either version 1.3 or any later version as
+published by the Free Software Foundation, with no Invariant Sections,
+no Back Cover Texts and no Front Cover Texts. View the license here: <a
+href="license.html">license.html</a></p>
+<p>🇧🇷</p>
+</div>
+<p>Markdown file for this page: <a
+href="http://leonardo.moe/src/2023-05-22-sicpjs.md"
+class="uri">http://leonardo.moe/src/2023-05-22-sicpjs.md</a></p>
+<p><a href="feed.xml">Subscribe to RSS for this site</a></p>
+<p>This HTML page was generated by the <a
+href="https://untitled.vimuser.org/">untitled static site
+generator</a>.</p>
+</div>
+</div>
+</body>
+</html>
