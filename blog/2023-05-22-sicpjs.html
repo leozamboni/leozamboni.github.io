@@ -99,18 +99,30 @@ href="#notas-e-estudos-structure-and-interpretation-of-computer-programs-javascr
 e Estudos <em>Structure and Interpretation of Computer Programs:
 JavaScript Edition</em></a>
 <ul>
-<li><a href="#construindo-abstrações-com-funções">1 - Construindo
-abstrações com funções</a>
+<li><a href="#building-abstractions-with-functions">1 Building
+Abstractions with Functions</a>
 <ul>
-<li><a href="#os-elementos-da-programação">1.1 - Os Elementos da
-Programação</a></li>
-<li><a href="#expressões">1.1.1 Expressões</a></li>
-<li><a href="#nomeação-e-ambiente">1.1.2 Nomeação e ambiente</a></li>
-<li><a href="#avaliando-combinacões-de-operadores">1.1.3 Avaliando
-Combinacões de Operadores</a></li>
-<li><a href="#funcões-compostas">1.1.4 Funcões Compostas</a></li>
+<li><a href="#the-elements-of-programming">1.1 The Elements of
+Programming</a></li>
+<li><a href="#expressions">1.1.1 Expressions</a></li>
+<li><a href="#naming-and-the-environment">1.1.2 Naming and the
+Environment</a></li>
+<li><a href="#evaluating-operator-combinations">1.1.3 Evaluating
+Operator Combinations</a></li>
+<li><a href="#compound-functions">1.1.4 Compound Functions</a></li>
+<li><a href="#the-substitution-model-for-function-application">1.1.5 The
+Substitution Model for Function Application</a></li>
+<li><a href="#conditional-expressions-and-predicates">1.1.6 Conditional
+Expressions and Predicates</a></li>
 <li><a href="#example-square-roots-by-newtons-method">1.1.7 Example:
 Square Roots by Newton’s Method</a></li>
+<li><a href="#functions-as-black-box-abstractions">1.1.8 Functions as
+Black-Box Abstractions</a>
+<ul>
+<li><a href="#local-names">Local names</a></li>
+<li><a href="#internal-declarations-and-block-structure">Internal
+declarations and block structure</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -126,10 +138,10 @@ JavaScript Edition</em></h1>
 <p>O objetivo desse artigo é fazer anotações sobre o livro, tentar
 clarificar alguns termos e adicionar alguns links úteis em palavras
 chaves.</p>
-<h2 id="construindo-abstrações-com-funções">1 - Construindo abstrações
-com funções</h2>
-<h3 id="os-elementos-da-programação">1.1 - Os Elementos da
-Programação</h3>
+<h2 id="building-abstractions-with-functions">1 Building Abstractions
+with Functions</h2>
+<h3 id="the-elements-of-programming">1.1 The Elements of
+Programming</h3>
 <ul>
 <li><strong>expressões primitivas</strong>: que representam as entidades
 mais simples da linguagem.</li>
@@ -138,7 +150,7 @@ compostos são construídos a partir dos mais simples.</li>
 <li><strong>meios de abstração</strong>: pelo qual os elementos
 compostos podem ser nomeados e manipulados como unidades.</li>
 </ul>
-<div class="h"><h3 id="expressões">1.1.1 Expressões</h3><a aria-hidden="true" href="#expressões">[link]</a></div>
+<div class="h"><h3 id="expressions">1.1.1 Expressions</h3><a aria-hidden="true" href="#expressions">[link]</a></div>
 <table>
 <thead>
 <tr class="header">
@@ -196,7 +208,8 @@ compostos podem ser nomeados e manipulados como unidades.</li>
 
 (3 * 5) + (10 / 2);
 </code></pre>
-<div class="h"><h3 id="nomeação-e-ambiente">1.1.2 Nomeação e ambiente</h3><a aria-hidden="true" href="#nomeação-e-ambiente">[link]</a></div>
+<h3 id="naming-and-the-environment">1.1.2 Naming and the
+Environment</h3>
 <table>
 <thead>
 <tr class="header">
@@ -236,8 +249,8 @@ circumference;
 <p>Declaracões de constantes são a forma mais simples de abstracão em
 JS.</p>
 <p>associacão nome-objeto</p>
-<h3 id="avaliando-combinacões-de-operadores">1.1.3 Avaliando Combinacões
-de Operadores</h3>
+<h3 id="evaluating-operator-combinations">1.1.3 Evaluating Operator
+Combinations</h3>
 <ol type="1">
 <li>Avalie as expressões as combinação de operadores.</li>
 <li>Aplique a função que é denotada pelo operador aos argumentos que são
@@ -249,7 +262,7 @@ os valores dos operandos.</li>
 <li>os valores dos nomes são os objetos associados a esses nomes no
 ambiente.</li>
 </ul>
-<div class="h"><h3 id="funcões-compostas">1.1.4 Funcões Compostas</h3><a aria-hidden="true" href="#funcões-compostas">[link]</a></div>
+<div class="h"><h3 id="compound-functions">1.1.4 Compound Functions</h3><a aria-hidden="true" href="#compound-functions">[link]</a></div>
 <table>
 <thead>
 <tr class="header">
@@ -334,6 +347,10 @@ class="sourceCode ts"><code class="sourceCode typescript"><span id="cb10-1"><a h
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">5</span>)<span class="op">;</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="dv">136</span><span class="op">;</span></span></code></pre></div>
+<h3 id="the-substitution-model-for-function-application">1.1.5 The
+Substitution Model for Function Application</h3>
+<h3 id="conditional-expressions-and-predicates">1.1.6 Conditional
+Expressions and Predicates</h3>
 <h3 id="example-square-roots-by-newtons-method">1.1.7 Example: Square
 Roots by Newton’s Method</h3>
 <p>Importante diferenca entre funcões matemáticas e funcões de
@@ -350,6 +367,34 @@ como fazer as coisas. Essa é a diferenca entre declarativo e
 imperativo.</p>
 <p>Funcões matemáticas são declarativas (o que fazer) e computadores
 imperativos (como fazer).</p>
+<h3 id="functions-as-black-box-abstractions">1.1.8 Functions as
+Black-Box Abstractions</h3>
+<p>Estratégia de decompor o problema em partes menores onde cada funcão
+realiza uma tarefa identificável que possa ser usada como um módulo na
+definicão de outras funcões.</p>
+<p>A funcão <code>is_good_enough</code> é uma caixa preta, de cara nós
+não precisamos entender o que ela faz, apenas saber que ela computa a
+raiz quadrada de alguma forma.</p>
+<h4 id="local-names">Local names</h4>
+<p>Nomes usandos como parametros sao locais ao corpo da funcão e nao
+devem ser palavras reservadas ou nomes de funcoes ja existestem.</p>
+<h4 id="internal-declarations-and-block-structure">Internal declarations
+and block structure</h4>
+<p>Declaracões de funcões internas para evitar conflitos.</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sqrt</span>(x) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">is_good_enough</span>(guess<span class="op">,</span> x) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">abs</span>(<span class="fu">square</span>(guess) <span class="op">-</span> x) <span class="op">&lt;</span> <span class="fl">0.001</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">improve</span>(guess<span class="op">,</span> x) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">average</span>(guess<span class="op">,</span> x <span class="op">/</span> guess)<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">sqrt_iter</span>(guess<span class="op">,</span> x) {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">is_good_enough</span>(guess<span class="op">,</span> x) <span class="op">?</span> guess <span class="op">:</span> <span class="fu">sqrt_iter</span>(<span class="fu">improve</span>(guess<span class="op">,</span> x)<span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">sqrt_iter</span>(<span class="dv">1</span><span class="op">,</span> x)<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Cada par de chaves são um block.</p>
 <div id="footer">
 <hr />
 <p>Unless otherwise stated, documents/pages/images on this
