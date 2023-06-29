@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>leonardo.moe</title>
+  <link rel="icon" type="image/x-icon" href="/assets/memoji.99a43fc9.png">
+  <title>Leonardo</title>
   <style>
     :root {
       --p-strawberry: #c6262e;
@@ -678,10 +679,6 @@
       color: #fff;
     }
 
-    :root {
-      --status-color: rgba(255, 255, 255, 0.86);
-    }
-
     body {
       padding: 0;
       margin: 0;
@@ -696,7 +693,6 @@
     }
 
     header {
-      background-color: var(--p-dark-900);
       transition: stroke-dasharray 200s ease-in, opacity 10000ms ease-in;
       font-size: 10pt;
       position: absolute;
@@ -738,14 +734,16 @@
       vertical-align: middle;
       position: relative;
       display: inline-block;
-      background-color: var(--status-color);
+      background-color: rgba(255, 255, 255, 0.3);
       padding: 9px;
       border-radius: 10px;
       font-size: 9pt;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(4.8px);
-      -webkit-backdrop-filter: blur(4.8px);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+      color: #ffffff;
     }
 
     .tooltip-left::before {
@@ -758,7 +756,7 @@
       border-radius: 5px;
       border: 10px solid transparent;
       border-left: 0;
-      border-right: 10px solid var(--status-color);
+      border-right: 10px solid rgba(255, 255, 255, 0.2);
       transform: translate(calc(-100% - 5px), -50%);
     }
 
@@ -852,16 +850,6 @@
       status.innerHTML = 'Just a software craftsman.'
     }
 
-    // function link() {
-    //   const status = document.getElementsByClassName('status')[0]
-    //   status.innerHTML = `
-    //   <a href="https://github.com/leozamboni" title="GitHub"><span class="emoji">&#128025;</span>GitHub</a>
-    //   <a href="https://twitter.com/intent/user?user_id=4700433616" title="Twitter"><span class="emoji">&#128038;</span></a>
-    //   <a href="http://irc.leonardo.moe" title="IRC"><span class="emoji">&#128172;</span></a>
-    //   `
-    //   emoji_parse()
-    // }
-
     function software_i_use() {
       const status = document.getElementsByClassName('status')[0]
       status.innerHTML = `
@@ -886,21 +874,17 @@
   </script>
 
   <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
-  <script type="module" crossorigin src="/assets/index.f81b6b9e.js"></script>
+  <script type="module" crossorigin src="/assets/index.b65ccb55.js"></script>
 </head>
 
 <body>
-  <noscript>
-    This site needs JavaScript to work.
-  </noscript>
   <header>
     <ul>
       <li><a onclick="about()">About</a></li>
-      <li><a onclick="software_i_use()">Software</a></li>
-      <!-- <li><a onclick="link()">Links</a></li> -->
+      <li><a onclick="software_i_use()">Sotfware</a></li>
       <li><a href="/blog/index.html">Blog</a></li>
       <li><a href="https://github.com/leozamboni/ws23">Source</a></li>
-      <li><a href="https://www.youtube.com/watch?v=Ctykf8qh288" onClick="improve()" target="_blank">Improve the
+      <li><a href="https://www.youtube.com/watch?v=AZ2p1dWiFu8" onClick="improve()" target="_blank">Improve
           experience</a></li>
       <li>
         <div class="dark-mode-toggle">
@@ -928,11 +912,11 @@
   <earth />
   <main>
     <img id="memoji" src="/assets/memoji.99a43fc9.png" alt="">
-    <div class="status tooltip-left">working hard to make the world a better place with tech <span
+    <div class="status tooltip-left">Working hard to make the world a better place with tech. <span
         class="emoji">👨‍🚀</span></div>
   </main>
   <footer style=" position: absolute; bottom: 0; right: 0; color: black; font-weight: bold; font-size: 9pt;">
-    © Copyright 2023 Leonardo Z. N..
+    © Copyright 2023 Leonardo Z. N.. All rights reserved.
   </footer>
   <script defer>
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
