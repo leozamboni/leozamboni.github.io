@@ -677,9 +677,12 @@
   color: #fff;
 }
 
-body {
-        padding: 0;
+* {
         margin: 0;
+        padding: 0;
+      }
+
+body {
         overflow: hidden;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         /* transition: 3s filter ease-out;
@@ -703,11 +706,45 @@ header {
         text-align: center;
       }
 
-header ul {
+header #burger-menu {
+        display: none;
+      }
+
+header #burger-menu #burger-menu-svg {
+        position: absolute;
+        margin: 10px;
+        z-index: 99999;
+      }
+
+header #burger-menu #burger-menu-div {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        font-size: 24pt;
+      }
+
+header #burger-menu #burger-menu-div ul {
+        list-style: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+header #burger-menu #burger-menu-div ul li {
+        margin: 80px;
+      }
+
+header #list_menu {
+        margin-top: 20px;
         margin-left: -30px;
       }
 
-header ul li {
+header #list_menu li {
         display: inline-block;
         padding-left: 30px;
       }
@@ -778,12 +815,12 @@ a {
       }
 
 button {
-        top: 10px;
-        position: absolute;
         border: none;
         background-color: inherit;
         cursor: pointer;
         border-radius: 9px;
+        position: absolute;
+        top: 20px;
       }
 
 .dark-mode-toggle {
@@ -820,15 +857,30 @@ footer {
         transition: stroke-dasharray 200s ease-in, opacity 10000ms ease-in;
       }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
+        main #memoji {
+          left: 0;
+          right: 0;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          margin-top: 50px;
+        }
+
         header {
+          text-align: left;
+        }
+
+        header #list_menu {
           display: none;
         }
-      }
 
-@media only screen and (max-width: 400px) {
-        header {
-          display: none;
+        header #burger-menu {
+          display: initial;
+        }
+
+        main .status {
+          margin-top: -270px;
         }
 
         .tooltip-left::before {
@@ -838,14 +890,13 @@ footer {
           width: 0px;
           left: 50%;
           text-align: center;
-          top: -10px;
+          top: 130%;
           border-radius: 5px;
           border: 10px solid transparent;
 
           border-left: 10px solid transparent;
           border-right: 10px solid transparent;
-
-          border-bottom: 10px solid rgba(255, 255, 255, 0.2);
+          border-top: 10px solid rgba(255, 255, 255, 0.2);
 
           transform: translate(-50%, -50%);
         }
@@ -853,20 +904,25 @@ footer {
     </style>
     <script>
       let toggled = false;
+      let burger_toggled = false;
 
       function darkMode() {
         const sunEls = document.getElementsByClassName("sun");
         const moon = document.getElementsByClassName("moon")[0];
+        const burgerDark = document.getElementById("burger-menu-dark-mode");
+
         if (toggled) {
           moon.style.opacity = 0;
           for (let sun of sunEls) {
             sun.style.opacity = 1;
           }
+          burgerDark.innerText = "Dark mode";
         } else {
           moon.style.opacity = 1;
           for (let sun of sunEls) {
             sun.style.opacity = 0;
           }
+          burgerDark.innerText = "White mode";
         }
         toggled = !toggled;
       }
@@ -875,11 +931,19 @@ footer {
         document.getElementsByTagName("header")[0].style.opacity = 0;
         document.getElementsByTagName("main")[0].style.opacity = 0;
         document.getElementsByTagName("footer")[0].style.opacity = 0;
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
       }
 
       function about() {
         const status = document.getElementsByClassName("status")[0];
         status.innerHTML = "Just a software craftsman.";
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
       }
 
       function software_i_use() {
@@ -902,6 +966,25 @@ footer {
         <p>Editor: Vim/Emacs</p></span>
     </div>
       `;
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
+      }
+
+      function handle_burger_menu() {
+        const burgerDiv = document.getElementById("burger-menu-div");
+        const burgerSvg = document.getElementById("burger-menu-svg");
+        if (burger_toggled) {
+          burgerDiv.style.display = "none";
+          burgerSvg.innerHTML =
+            '<g id="SVGRepo_bgCarrier" stroke-width="0"></g> <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" ></g> <g id="SVGRepo_iconCarrier"> <path d="M21 12.6L20.3086 13.2568C19.5652 13.9631 18.4081 13.9926 17.6295 13.3253L16.8016 12.6156C16.0526 11.9737 14.9474 11.9737 14.1984 12.6156L13.3016 13.3844C12.5526 14.0263 11.4474 14.0263 10.6984 13.3844L9.80158 12.6156C9.0526 11.9737 7.9474 11.9737 7.19842 12.6156L6.37045 13.3253C5.5919 13.9926 4.4348 13.963 3.69138 13.2568L3 12.6M12 4C6.73593 4 4.5508 5.71052 3.64374 7.13061C3.04915 8.06149 3.89543 9 5 9H19C20.1046 9 20.9508 8.06149 20.3563 7.13061C19.4492 5.71052 17.2641 4 12 4ZM4.5 17H19.5C20.3284 17 21 17.6716 21 18.5V18.5C21 19.3284 20.3284 20 19.5 20H4.5C3.67157 20 3 19.3284 3 18.5V18.5C3 17.6716 3.67157 17 4.5 17Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></path> </g>';
+        } else {
+          burgerDiv.style.display = "initial";
+          burgerSvg.innerHTML =
+            '<g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>';
+        }
+        burger_toggled = !burger_toggled;
       }
     </script>
     
@@ -915,12 +998,64 @@ footer {
   <body>
     <p
       id="loading_text"
-      style="position: absolute; color: white; left: 50%; top: 30%; transform: translate(-50%, -50%);"
+      style="
+        position: absolute;
+        color: white;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      "
     >
       Loading...
     </p>
     <header>
-      <ul>
+      <div id="burger-menu" onclick="handle_burger_menu()">
+        <div id="burger-menu-div">
+          <ul>
+            <li><a onclick="about()">About</a></li>
+            <li><a onclick="software_i_use()">Sotfware</a></li>
+            <li><a href="/blog/index.html">Blog</a></li>
+            <li><a href="https://github.com/leozamboni/ws23">Source</a></li>
+            <li>
+              <a
+                href="https://www.youtube.com/watch?v=AZ2p1dWiFu8"
+                onClick="improve()"
+                target="_blank"
+                >Improve experience</a
+              >
+            </li>
+            <li>
+              <a onclick="darkMode()" id="burger-menu-dark-mode">Dark mode</a>
+            </li>
+          </ul>
+        </div>
+        <svg
+          id="burger-menu-svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M21 12.6L20.3086 13.2568C19.5652 13.9631 18.4081 13.9926 17.6295 13.3253L16.8016 12.6156C16.0526 11.9737 14.9474 11.9737 14.1984 12.6156L13.3016 13.3844C12.5526 14.0263 11.4474 14.0263 10.6984 13.3844L9.80158 12.6156C9.0526 11.9737 7.9474 11.9737 7.19842 12.6156L6.37045 13.3253C5.5919 13.9926 4.4348 13.963 3.69138 13.2568L3 12.6M12 4C6.73593 4 4.5508 5.71052 3.64374 7.13061C3.04915 8.06149 3.89543 9 5 9H19C20.1046 9 20.9508 8.06149 20.3563 7.13061C19.4492 5.71052 17.2641 4 12 4ZM4.5 17H19.5C20.3284 17 21 17.6716 21 18.5V18.5C21 19.3284 20.3284 20 19.5 20H4.5C3.67157 20 3 19.3284 3 18.5V18.5C3 17.6716 3.67157 17 4.5 17Z"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+      </div>
+      <ul id="list_menu">
         <li><a onclick="about()">About</a></li>
         <li><a onclick="software_i_use()">Sotfware</a></li>
         <li><a href="/blog/index.html">Blog</a></li>
@@ -1056,6 +1191,8 @@ footer {
         window.matchMedia("(prefers-color-scheme: dark)").matches
       ) {
         toggled = true;
+        const burgerDark = document.getElementById("burger-menu-dark-mode");
+        burgerDark.innerText = "White mode";
         const sunEls = document.getElementsByClassName("sun");
         const moon = document.getElementsByClassName("moon")[0];
         moon.style.opacity = 1;
