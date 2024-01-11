@@ -1,109 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LEOZAMBONI.DEV</title>
     <style>
-        @font-face {
-            font-family: Stolzl;
-            src: url("./Stolzl\ Book.ttf");
-        }
+      @font-face {
+        font-family: Stolzl;
+        src: url("./Stolzl\ Book.ttf");
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
+      body {
+        font-family: "Stolzl";
+      }
 
-            font-family: 'Stolzl';
-        }
+      main {
+        color: white;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+      }
+      
+      main .noise {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background: url(./noise.png);
+      }
 
-        .noise {
-            width: 100vw;
-            height: 100vh;
-            position: absolute;
-            background:
-                url(./noise.png);
-        }
+      main #home .text {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+      }
 
-        main {
-            color: white;
-            width: 100vw;
-            height: 100vh;
-            position: absolute;
-        }
+      main #home .text.left p {
+        /* font-weight: bold; */
+        font-size: 8em;
+        margin-left: 100px;
+      }
 
-        main .text {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-        }
+      main #home .text.left p .and {
+        background: -webkit-linear-gradient(
+          326deg,
+          rgba(255, 0, 26, 1) 0%,
+          rgba(255, 218, 0, 1) 19%,
+          rgba(134, 255, 0, 1) 39%,
+          rgba(0, 255, 158, 1) 61%,
+          rgba(0, 155, 255, 1) 88%,
+          rgba(124, 0, 255, 1) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
+      main #home .text.right {
+        font-weight: bold;
+        justify-content: right;
+      }
+
+      main #home .text.right p {
+        font-size: 2em;
+        margin-right: 100px;
+      }
+
+      main #home .scroll {
+        position: relative;
+        top: 90%;
+        text-align: center;
+        transform: translateY(-90%);
+      }
+
+      /* main #icon-burger {
+        position: absolute;
+        right: 0;
+        margin-left: auto;
+        width: 400px;
+        height: 70px;
+        background-color: white;
+      } */
+
+      main #burger {
+        display: none;
+        z-index: 99;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: pink;
+      }
+
+      @media only screen and (max-width: 800px) {
         main .text.left p {
-            font-weight: bold;
-            font-size: 8em;
-            margin-left: 100px
-        }
-
-        main .text.left p .and {
-            background: -webkit-linear-gradient(326deg, rgba(255, 0, 26, 1) 0%, rgba(255, 218, 0, 1) 19%, rgba(134, 255, 0, 1) 39%, rgba(0, 255, 158, 1) 61%, rgba(0, 155, 255, 1) 88%, rgba(124, 0, 255, 1) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        main .text.right {
-            justify-content: right;
+          font-size: 36pt;
+          margin-left: 10px;
         }
 
         main .text.right p {
-            font-size: 2em;
-            margin-right: 100px;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%);
+          font-size: 24pt;
+          margin-right: 0px;
         }
-
-        .scroll {
-            position: relative;
-            top: 90%;
-            text-align: center;
-            transform: translateY(-90%);
-        }
-
-        @media only screen and (max-width: 700px) {
-            main .text.left p {
-                font-size: 42pt;
-                margin-left: 10px
-            }
-
-            main .text.right {
-                position: absolute;
-                align-items: baseline;
-                top: 10px;
-            }
-
-            main .text.right p {
-                font-size: 2em;
-                margin-right: 0px;
-            }
-        }
+      }
     </style>
-  <script type="module" crossorigin src="./assets/index-O8Rsm8yH.js"></script>
-</head>
+    <script type="module" crossorigin src="./assets/index-O8Rsm8yH.js"></script>
+  </head>
 
-<body>
-    <div class="noise"></div>
+  <body>
     <main>
+      <div class="noise"></div>
+      <!-- <section id="icon-burger"></section> -->
+      <section id="burger"></section>
+      <section id="home">
         <div class="text left">
-            <p>MERGING <br /> CREATIVITY <span class="and">&</span> <br /> TECHNOLOGY</p>
+          <p>
+            MERGING <br />
+            CREATIVITY <span class="and">&</span> <br />
+            TECHNOLOGY
+          </p>
         </div>
         <div class="text right">
-            <p>LEOZAMBONI.DEV</p>
+          <p>LEOZAMBONI.DEV</p>
         </div>
         <!-- <p class="scroll">Scroll</p> -->
+      </section>
+     
     </main>
-</body>
-
+  </body>
 </html>
