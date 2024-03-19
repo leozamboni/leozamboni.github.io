@@ -3,137 +3,1209 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LEOZAMBONI.DEV</title>
-    <style>
-      @font-face {
-        font-family: Stolzl;
-        src: url("./Stolzl\ Book.ttf");
-      }
+    <link rel="icon" type="image/x-icon" href="/assets/memoji.99a43fc9.png" />
+    <title>Leonardo</title>
+    <style>:root {
+  --p-strawberry: #c6262e;
+  --p-strawberry-100: #ff8c82;
+  --p-strawberry-300: #ed5353;
+  --p-strawberry-500: #c6262e;
+  --p-strawberry-700: #a10705;
+  --p-strawberry-900: #7a0000;
 
-      * {
+  --p-orange: #f37329;
+  --p-orange-100: #ffc27d;
+  --p-orange-300: #ffa154;
+  --p-orange-500: #f37329;
+  --p-orange-700: #cc3b02;
+  --p-orange-900: #a62100;
+
+  --p-banana: #f9c440;
+  --p-banana-100: #fff394;
+  --p-banana-300: #ffe16b;
+  --p-banana-500: #f9c440;
+  --p-banana-700: #d48e15;
+  --p-banana-900: #ad5f00;
+
+  --p-lime: #68b723;
+  --p-lime-100: #d1ff82;
+  --p-lime-300: #9bdb4d;
+  --p-lime-500: #68b723;
+  --p-lime-700: #3a9104;
+  --p-lime-900: #206b00;
+
+  --p-mint: #28bca3;
+  --p-mint-100: #89ffdd;
+  --p-mint-300: #43d6b5;
+  --p-mint-500: #28bca3;
+  --p-mint-700: #0e9a83;
+  --p-mint-900: #007367;
+
+  --p-blueberry: #3689e6;
+  --p-blueberry-100: #8cd5ff;
+  --p-blueberry-300: #64baff;
+  --p-blueberry-500: #3689e6;
+  --p-blueberry-700: #0d52bf;
+  --p-blueberry-900: #002e99;
+
+  --p-grape: #a56de2;
+  --p-grape-100: #e4c6fa;
+  --p-grape-300: #cd9ef7;
+  --p-grape-500: #a56de2;
+  --p-grape-700: #7239b3;
+  --p-grape-900: #452981;
+
+  --p-bubblegum: #de3e80;
+  --p-bubblegum-100: #fe9ab8;
+  --p-bubblegum-300: #f4679d;
+  --p-bubblegum-500: #de3e80;
+  --p-bubblegum-700: #bc245d;
+  --p-bubblegum-900: #910e38;
+
+  --p-cocoa: #715344;
+  --p-cocoa-100: #a3907c;
+  --p-cocoa-300: #8a715e;
+  --p-cocoa-500: #715344;
+  --p-cocoa-700: #57392d;
+  --p-cocoa-900: #3d211b;
+
+  --p-silver: #abacae;
+  --p-silver-100: #fafafa;
+  --p-silver-300: #d4d4d4;
+  --p-silver-500: #abacae;
+  --p-silver-700: #7e8087;
+  --p-silver-900: #555761;
+
+  --p-slate: #485a6c;
+  --p-slate-100: #95a3ab;
+  --p-slate-300: #667885;
+  --p-slate-500: #485a6c;
+  --p-slate-700: #273445;
+  --p-slate-900: #0e141f;
+
+  --p-dark: #333;
+  --p-dark-100: #666;
+  --p-dark-300: #4d4d4d;
+  --p-dark-500: #333;
+  --p-dark-700: #1a1a1a;
+  --p-dark-900: #000;
+}
+
+.p-strawberry {
+  background: #c6262e;
+}
+
+.p-strawberry-100 {
+  background: #ff8c82;
+}
+
+.p-strawberry-300 {
+  background: #ed5353;
+}
+
+.p-strawberry-500 {
+  background: #c6262e;
+}
+
+.p-strawberry-700 {
+  background: #a10705;
+}
+
+.p-strawberry-900 {
+  background: #7a0000;
+}
+
+.p-orange {
+  background: #f37329;
+}
+
+.p-orange-100 {
+  background: #ffc27d;
+}
+
+.p-orange-300 {
+  background: #ffa154;
+}
+
+.p-orange-500 {
+  background: #f37329;
+}
+
+.p-orange-700 {
+  background: #cc3b02;
+}
+
+.p-orange-900 {
+  background: #a62100;
+}
+
+.p-banana {
+  background: #f9c440;
+}
+
+.p-banana-100 {
+  background: #fff394;
+}
+
+.p-banana-300 {
+  background: #ffe16b;
+}
+
+.p-banana-500 {
+  background: #f9c440;
+}
+
+.p-banana-700 {
+  background: #d48e15;
+}
+
+.p-banana-900 {
+  background: #ad5f00;
+}
+
+.p-lime {
+  background: #68b723;
+}
+
+.p-lime-100 {
+  background: #d1ff82;
+}
+
+.p-lime-300 {
+  background: #9bdb4d;
+}
+
+.p-lime-500 {
+  background: #68b723;
+}
+
+.p-lime-700 {
+  background: #3a9104;
+}
+
+.p-lime-900 {
+  background: #206b00;
+}
+
+.p-mint {
+  background: #28bca3;
+}
+
+.p-mint-100 {
+  background: #89ffdd;
+}
+
+.p-mint-300 {
+  background: #43d6b5;
+}
+
+.p-mint-500 {
+  background: #28bca3;
+}
+
+.p-mint-700 {
+  background: #0e9a83;
+}
+
+.p-mint-900 {
+  background: #007367;
+}
+
+.p-blueberry {
+  background: #3689e6;
+}
+
+.p-blueberry-100 {
+  background: #8cd5ff;
+}
+
+.p-blueberry-300 {
+  background: #64baff;
+}
+
+.p-blueberry-500 {
+  background: #3689e6;
+}
+
+.p-blueberry-700 {
+  background: #0d52bf;
+}
+
+.p-blueberry-900 {
+  background: #002e99;
+}
+
+.p-grape {
+  background: #a56de2;
+}
+
+.p-grape-100 {
+  background: #e4c6fa;
+}
+
+.p-grape-300 {
+  background: #cd9ef7;
+}
+
+.p-grape-500 {
+  background: #a56de2;
+}
+
+.p-grape-700 {
+  background: #7239b3;
+}
+
+.p-grape-900 {
+  background: #452981;
+}
+
+.p-bubblegum {
+  background: #de3e80;
+}
+
+.p-bubblegum-100 {
+  background: #fe9ab8;
+}
+
+.p-bubblegum-300 {
+  background: #f4679d;
+}
+
+.p-bubblegum-500 {
+  background: #de3e80;
+}
+
+.p-bubblegum-700 {
+  background: #bc245d;
+}
+
+.p-bubblegum-900 {
+  background: #910e38;
+}
+
+.p-cocoa {
+  background: #715344;
+}
+
+.p-cocoa-100 {
+  background: #a3907c;
+}
+
+.p-cocoa-300 {
+  background: #8a715e;
+}
+
+.p-cocoa-500 {
+  background: #715344;
+}
+
+.p-cocoa-700 {
+  background: #57392d;
+}
+
+.p-cocoa-900 {
+  background: #3d211b;
+}
+
+.p-silver {
+  background: #abacae;
+}
+
+.p-silver-100 {
+  background: #fafafa;
+}
+
+.p-silver-300 {
+  background: #d4d4d4;
+}
+
+.p-silver-500 {
+  background: #abacae;
+}
+
+.p-silver-700 {
+  background: #7e8087;
+}
+
+.p-silver-900 {
+  background: #555761;
+}
+
+.p-slate {
+  background: #485a6c;
+}
+
+.p-slate-100 {
+  background: #95a3ab;
+}
+
+.p-slate-300 {
+  background: #667885;
+}
+
+.p-slate-500 {
+  background: #485a6c;
+}
+
+.p-slate-700 {
+  background: #273445;
+}
+
+.p-slate-900 {
+  background: #0e141f;
+}
+
+.p-dark {
+  background: #333;
+}
+
+.p-dark-100 {
+  background: #666;
+  /* hehe */
+}
+
+.p-dark-300 {
+  background: #4d4d4d;
+}
+
+.p-dark-500 {
+  background: #333;
+}
+
+.p-dark-700 {
+  background: #1a1a1a;
+}
+
+.p-dark-900 {
+  background: #000;
+}
+
+.p-white {
+  background: #fff;
+}
+
+.p-strawberry-color {
+  color: #c6262e;
+}
+
+.p-strawberry-100-color {
+  color: #ff8c82;
+}
+
+.p-strawberry-300-color {
+  color: #ed5353;
+}
+
+.p-strawberry-500-color {
+  color: #c6262e;
+}
+
+.p-strawberry-700-color {
+  color: #a10705;
+}
+
+.p-strawberry-900-color {
+  color: #7a0000;
+}
+
+.p-orange-color {
+  color: #f37329;
+}
+
+.p-orange-100-color {
+  color: #ffc27d;
+}
+
+.p-orange-300-color {
+  color: #ffa154;
+}
+
+.p-orange-500-color {
+  color: #f37329;
+}
+
+.p-orange-700-color {
+  color: #cc3b02;
+}
+
+.p-orange-900-color {
+  color: #a62100;
+}
+
+.p-banana-color {
+  color: #f9c440;
+}
+
+.p-banana-100-color {
+  color: #fff394;
+}
+
+.p-banana-300-color {
+  color: #ffe16b;
+}
+
+.p-banana-500-color {
+  color: #f9c440;
+}
+
+.p-banana-700-color {
+  color: #d48e15;
+}
+
+.p-banana-900-color {
+  color: #ad5f00;
+}
+
+.p-lime-color {
+  color: #68b723;
+}
+
+.p-lime-100-color {
+  color: #d1ff82;
+}
+
+.p-lime-300-color {
+  color: #9bdb4d;
+}
+
+.p-lime-500-color {
+  color: #68b723;
+}
+
+.p-lime-700-color {
+  color: #3a9104;
+}
+
+.p-lime-900-color {
+  color: #206b00;
+}
+
+.p-mint-color {
+  color: #28bca3;
+}
+
+.p-mint-100-color {
+  color: #89ffdd;
+}
+
+.p-mint-300-color {
+  color: #43d6b5;
+}
+
+.p-mint-500-color {
+  color: #28bca3;
+}
+
+.p-mint-700-color {
+  color: #0e9a83;
+}
+
+.p-mint-900-color {
+  color: #007367;
+}
+
+.p-blueberry-color {
+  color: #3689e6;
+}
+
+.p-blueberry-100-color {
+  color: #8cd5ff;
+}
+
+.p-blueberry-300-color {
+  color: #64baff;
+}
+
+.p-blueberry-500-color {
+  color: #3689e6;
+}
+
+.p-blueberry-700-color {
+  color: #0d52bf;
+}
+
+.p-blueberry-900-color {
+  color: #002e99;
+}
+
+.p-grape-color {
+  color: #a56de2;
+}
+
+.p-grape-100-color {
+  color: #e4c6fa;
+}
+
+.p-grape-300-color {
+  color: #cd9ef7;
+}
+
+.p-grape-500-color {
+  color: #a56de2;
+}
+
+.p-grape-700-color {
+  color: #7239b3;
+}
+
+.p-grape-900-color {
+  color: #452981;
+}
+
+.p-bubblegum-color {
+  color: #de3e80;
+}
+
+.p-bubblegum-100-color {
+  color: #fe9ab8;
+}
+
+.p-bubblegum-300-color {
+  color: #f4679d;
+}
+
+.p-bubblegum-500-color {
+  color: #de3e80;
+}
+
+.p-bubblegum-700-color {
+  color: #bc245d;
+}
+
+.p-bubblegum-900-color {
+  color: #910e38;
+}
+
+.p-cocoa-color {
+  color: #715344;
+}
+
+.p-cocoa-100-color {
+  color: #a3907c;
+}
+
+.p-cocoa-300-color {
+  color: #8a715e;
+}
+
+.p-cocoa-500-color {
+  color: #715344;
+}
+
+.p-cocoa-700-color {
+  color: #57392d;
+}
+
+.p-cocoa-900-color {
+  color: #3d211b;
+}
+
+.p-silver-color {
+  color: #abacae;
+}
+
+.p-silver-100-color {
+  color: #fafafa;
+}
+
+.p-silver-300-color {
+  color: #d4d4d4;
+}
+
+.p-silver-500-color {
+  color: #abacae;
+}
+
+.p-silver-700-color {
+  color: #7e8087;
+}
+
+.p-silver-900-color {
+  color: #555761;
+}
+
+.p-slate-color {
+  color: #485a6c;
+}
+
+.p-slate-100-color {
+  color: #95a3ab;
+}
+
+.p-slate-300-color {
+  color: #667885;
+}
+
+.p-slate-500-color {
+  color: #485a6c;
+}
+
+.p-slate-700-color {
+  color: #273445;
+}
+
+.p-slate-900-color {
+  color: #0e141f;
+}
+
+.p-dark-color {
+  color: #333;
+}
+
+.p-dark-100-color {
+  color: #666;
+  /* hehe */
+}
+
+.p-dark-300-color {
+  color: #4d4d4d;
+}
+
+.p-dark-500-color {
+  color: #333;
+}
+
+.p-dark-700-color {
+  color: #1a1a1a;
+}
+
+.p-dark-900-color {
+  color: #000;
+}
+
+.p-white-color {
+  color: #fff;
+}
+
+* {
         margin: 0;
         padding: 0;
       }
 
-      body {
-        font-family: "Stolzl";
+body {
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        /* transition: 3s filter ease-out;
+      filter: blur(2px) */
       }
 
-      main {
-        color: white;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-      }
-      
-      main .noise {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        background: url(./noise.png);
-      }
-
-      main #home .text {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        height: 100vh;
+earth {
+        display: block;
+        height: 200vh;
         width: 100vw;
       }
 
-      main #home .text.left p {
-        /* font-weight: bold; */
-        font-size: 8em;
-        margin-left: 100px;
-      }
-
-      main #home .text.left p .and {
-        background: -webkit-linear-gradient(
-          326deg,
-          rgba(255, 0, 26, 1) 0%,
-          rgba(255, 218, 0, 1) 19%,
-          rgba(134, 255, 0, 1) 39%,
-          rgba(0, 255, 158, 1) 61%,
-          rgba(0, 155, 255, 1) 88%,
-          rgba(124, 0, 255, 1) 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      main #home .text.right {
-        font-weight: bold;
-        justify-content: right;
-      }
-
-      main #home .text.right p {
-        font-size: 2em;
-        margin-right: 100px;
-      }
-
-      main #home .scroll {
-        position: relative;
-        top: 90%;
-        text-align: center;
-        transform: translateY(-90%);
-      }
-
-      /* main #icon-burger {
+header {
+        transition: stroke-dasharray 200s ease-in, opacity 10000ms ease-in;
+        font-size: 10pt;
         position: absolute;
-        right: 0;
         margin-left: auto;
-        width: 400px;
-        height: 70px;
-        background-color: white;
-      } */
-
-      main #burger {
-        display: none;
-        z-index: 99;
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        background-color: pink;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
       }
 
-      @media only screen and (max-width: 800px) {
-        main #home .text.left p {
-          font-size: 42pt;
-          margin-left: 10px;
+header #burger-menu {
+        display: none;
+      }
+
+header #burger-menu #burger-menu-svg {
+        position: absolute;
+        margin: 10px;
+        z-index: 99999;
+      }
+
+header #burger-menu #burger-menu-div {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        font-size: 24pt;
+      }
+
+header #burger-menu #burger-menu-div ul {
+        list-style: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+header #burger-menu #burger-menu-div ul li {
+        margin: 80px;
+      }
+
+header #list_menu {
+        margin-top: 20px;
+        margin-left: -30px;
+      }
+
+header #list_menu li {
+        display: inline-block;
+        padding-left: 30px;
+      }
+
+main {
+        transition: stroke-dasharray 200s ease-in, opacity 10000ms ease-in;
+        top: 20vh;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        width: 100vw;
+        right: 0;
+        text-align: center;
+        position: absolute;
+        display: table;
+      }
+
+main #memoji {
+        vertical-align: middle;
+        height: 100px;
+      }
+
+main .status {
+        margin-top: 25px;
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 9px;
+        border-radius: 10px;
+        font-size: 9pt;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+      }
+
+.tooltip-left::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0px;
+        left: 5px;
+        top: 50%;
+        border-radius: 5px;
+        border: 10px solid transparent;
+        border-left: 0;
+        border-right: 10px solid rgba(255, 255, 255, 0.2);
+        transform: translate(calc(-100% - 5px), -50%);
+      }
+
+a:hover {
+        color: var(--p-silver-100);
+      }
+
+a {
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        font-style: normal;
+        color: var(--p-silver-300);
+        -webkit-transition: opacity 0.6s linear;
+        transition: opacity 0.6s linear;
+        -webkit-transition: color 0.25s ease;
+        transition: color 0.25s ease;
+      }
+
+button {
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+        border-radius: 9px;
+        position: absolute;
+        top: 20px;
+      }
+
+.dark-mode-toggle {
+        transition: color, background-color 400ms;
+      }
+
+.dark-mode-toggle svg {
+        transition: stroke 400ms;
+        stroke: var(--p-silver-300);
+      }
+
+.dark-mode-toggle svg:hover {
+        transition: stroke 400ms;
+        stroke: var(--p-silver-100);
+      }
+
+.dark-mode-toggle .moon {
+        stroke-dasharray: 1px 1px;
+        opacity: 0;
+        transition: stroke-dasharray 0.5s ease-in, opacity 300ms ease-in;
+      }
+
+.dark-mode-toggle .sun {
+        stroke-dasharray: 1px 1px;
+        opacity: 1;
+        transition: stroke-dasharray 0.5s ease-in, opacity 300ms ease-in;
+      }
+
+.emoji {
+        height: 15px;
+      }
+
+footer {
+        transition: stroke-dasharray 200s ease-in, opacity 10000ms ease-in;
+      }
+
+@media only screen and (max-width: 700px) {
+        main #memoji {
+          left: 0;
+          right: 0;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          margin-top: 50px;
         }
 
-        main #home .text.right p {
+        header {
+          text-align: left;
+        }
+
+        header #list_menu {
+          display: none;
+        }
+
+        header #burger-menu {
+          display: initial;
+        }
+
+        main .status {
+          margin-top: -270px;
+        }
+
+        .tooltip-left::before {
+          content: "";
           position: absolute;
-          top: 0;
+          display: block;
+          width: 0px;
           left: 50%;
-          transform: translate(-50%);
-          font-size: 24pt;
-          margin-right: 0px;
+          text-align: center;
+          top: 130%;
+          border-radius: 5px;
+          border: 10px solid transparent;
+
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid rgba(255, 255, 255, 0.2);
+
+          transform: translate(-50%, -50%);
         }
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-O8Rsm8yH.js"></script>
+    <script>
+      let toggled = false;
+      let burger_toggled = false;
+
+      function darkMode() {
+        const sunEls = document.getElementsByClassName("sun");
+        const moon = document.getElementsByClassName("moon")[0];
+        const burgerDark = document.getElementById("burger-menu-dark-mode");
+
+        if (toggled) {
+          moon.style.opacity = 0;
+          for (let sun of sunEls) {
+            sun.style.opacity = 1;
+          }
+          burgerDark.innerText = "Dark mode";
+        } else {
+          moon.style.opacity = 1;
+          for (let sun of sunEls) {
+            sun.style.opacity = 0;
+          }
+          burgerDark.innerText = "White mode";
+        }
+        toggled = !toggled;
+      }
+
+      function improve() {
+        document.getElementsByTagName("header")[0].style.opacity = 0;
+        document.getElementsByTagName("main")[0].style.opacity = 0;
+        document.getElementsByTagName("footer")[0].style.opacity = 0;
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
+      }
+
+      function about() {
+        const status = document.getElementsByClassName("status")[0];
+        status.innerHTML = "Just a software craftsman.";
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
+      }
+
+      function software_i_use() {
+        const status = document.getElementsByClassName("status")[0];
+        status.innerHTML = `
+      <div style="display: table-cell; vertical-align: middle; text-align: right; width: 300px">
+        <span style='width: 50%; display: table-cell;'> 
+          <svg style="color: #7da4b6;" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>NixOS</title>
+              <path
+                d="M7.352 1.592l-1.364.002L5.32 2.75l1.557 2.713-3.137-.008-1.32 2.34H14.11l-1.353-2.332-3.192-.006-2.214-3.865zm6.175 0l-2.687.025 5.846 10.127 1.341-2.34-1.59-2.765 2.24-3.85-.683-1.182h-1.336l-1.57 2.705-1.56-2.72zm6.887 4.195l-5.846 10.125 2.696-.008 1.601-2.76 4.453.016.682-1.183-.666-1.157-3.13-.008L21.778 8.1l-1.365-2.313zM9.432 8.086l-2.696.008-1.601 2.76-4.453-.016L0 12.02l.666 1.157 3.13.008-1.575 2.71 1.365 2.315L9.432 8.086zM7.33 12.25l-.006.01-.002-.004-1.342 2.34 1.59 2.765-2.24 3.85.684 1.182H7.35l.004-.006h.001l1.567-2.698 1.558 2.72 2.688-.026-.004-.006h.01L7.33 12.25zm2.55 3.93l1.354 2.332 3.192.006 2.215 3.865 1.363-.002.668-1.156-1.557-2.713 3.137.008 1.32-2.34H9.881Z"
+                fill="#7da4b6"></path>
+            </svg></span>
+        <span style='padding-left: 15px; display: table-cell; vertical-align: middle; text-align: left;'> Software I Use 
+        <br/>
+        <p>NixOS</p>
+        <p>WM: dwm</p>
+        <p>Shell: Fish</p>
+        <p>Terminal: Kitty</p>
+        <p>Editor: Vim/Emacs</p></span>
+    </div>
+      `;
+        if (burger_toggled) {
+          const burgerDiv = document.getElementById("burger-menu-div");
+          burgerDiv.style.display = "none";
+        }
+      }
+
+      function handle_burger_menu() {
+        const burgerDiv = document.getElementById("burger-menu-div");
+        const burgerSvg = document.getElementById("burger-menu-svg");
+        if (burger_toggled) {
+          burgerDiv.style.display = "none";
+          burgerSvg.innerHTML =
+            '<g id="SVGRepo_bgCarrier" stroke-width="0"></g> <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" ></g> <g id="SVGRepo_iconCarrier"> <path d="M21 12.6L20.3086 13.2568C19.5652 13.9631 18.4081 13.9926 17.6295 13.3253L16.8016 12.6156C16.0526 11.9737 14.9474 11.9737 14.1984 12.6156L13.3016 13.3844C12.5526 14.0263 11.4474 14.0263 10.6984 13.3844L9.80158 12.6156C9.0526 11.9737 7.9474 11.9737 7.19842 12.6156L6.37045 13.3253C5.5919 13.9926 4.4348 13.963 3.69138 13.2568L3 12.6M12 4C6.73593 4 4.5508 5.71052 3.64374 7.13061C3.04915 8.06149 3.89543 9 5 9H19C20.1046 9 20.9508 8.06149 20.3563 7.13061C19.4492 5.71052 17.2641 4 12 4ZM4.5 17H19.5C20.3284 17 21 17.6716 21 18.5V18.5C21 19.3284 20.3284 20 19.5 20H4.5C3.67157 20 3 19.3284 3 18.5V18.5C3 17.6716 3.67157 17 4.5 17Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ></path> </g>';
+        } else {
+          burgerDiv.style.display = "initial";
+          burgerSvg.innerHTML =
+            '<g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>';
+        }
+        burger_toggled = !burger_toggled;
+      }
+    </script>
+    
+    <script
+      src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" crossorigin src="/assets/index.6ec27888.js"></script>
   </head>
 
   <body>
+    <p
+      id="loading_text"
+      style="
+        position: absolute;
+        color: white;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      "
+    >
+      Loading...
+    </p>
+    <header>
+      <div id="burger-menu" onclick="handle_burger_menu()">
+        <div id="burger-menu-div">
+          <ul>
+            <li><a onclick="about()">About</a></li>
+            <li><a onclick="software_i_use()">Sotfware</a></li>
+            <li><a href="/blog/index.html">Blog</a></li>
+            <li><a href="https://github.com/leozamboni/ws23">Source</a></li>
+            <li>
+              <a
+                href="https://www.youtube.com/watch?v=AZ2p1dWiFu8"
+                onClick="improve()"
+                target="_blank"
+                >Improve experience</a
+              >
+            </li>
+            <li>
+              <a onclick="darkMode()" id="burger-menu-dark-mode">Dark mode</a>
+            </li>
+          </ul>
+        </div>
+        <svg
+          id="burger-menu-svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M21 12.6L20.3086 13.2568C19.5652 13.9631 18.4081 13.9926 17.6295 13.3253L16.8016 12.6156C16.0526 11.9737 14.9474 11.9737 14.1984 12.6156L13.3016 13.3844C12.5526 14.0263 11.4474 14.0263 10.6984 13.3844L9.80158 12.6156C9.0526 11.9737 7.9474 11.9737 7.19842 12.6156L6.37045 13.3253C5.5919 13.9926 4.4348 13.963 3.69138 13.2568L3 12.6M12 4C6.73593 4 4.5508 5.71052 3.64374 7.13061C3.04915 8.06149 3.89543 9 5 9H19C20.1046 9 20.9508 8.06149 20.3563 7.13061C19.4492 5.71052 17.2641 4 12 4ZM4.5 17H19.5C20.3284 17 21 17.6716 21 18.5V18.5C21 19.3284 20.3284 20 19.5 20H4.5C3.67157 20 3 19.3284 3 18.5V18.5C3 17.6716 3.67157 17 4.5 17Z"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+      </div>
+      <ul id="list_menu">
+        <li><a onclick="about()">About</a></li>
+        <li><a onclick="software_i_use()">Sotfware</a></li>
+        <li><a href="/blog/index.html">Blog</a></li>
+        <li><a href="https://github.com/leozamboni/ws23">Source</a></li>
+        <li>
+          <a
+            href="https://www.youtube.com/watch?v=AZ2p1dWiFu8"
+            onClick="improve()"
+            target="_blank"
+            >Improve experience</a
+          >
+        </li>
+        <li>
+          <div class="dark-mode-toggle">
+            <button title="Toggle Theme" onclick="darkMode()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <!-- Moon -->
+                <path
+                  pathLength="1"
+                  class="moon"
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path>
+                <!-- Sun -->
+                <circle
+                  pathLength="1"
+                  class="sun"
+                  cx="12"
+                  cy="12"
+                  r="5"
+                ></circle>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="12"
+                  y1="1"
+                  x2="12"
+                  y2="3"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="12"
+                  y1="21"
+                  x2="12"
+                  y2="23"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="4.22"
+                  y1="4.22"
+                  x2="5.64"
+                  y2="5.64"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="18.36"
+                  y1="18.36"
+                  x2="19.78"
+                  y2="19.78"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="1"
+                  y1="12"
+                  x2="3"
+                  y2="12"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="21"
+                  y1="12"
+                  x2="23"
+                  y2="12"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="4.22"
+                  y1="19.78"
+                  x2="5.64"
+                  y2="18.36"
+                ></line>
+                <line
+                  pathLength="1"
+                  class="sun"
+                  x1="18.36"
+                  y1="5.64"
+                  x2="19.78"
+                  y2="4.22"
+                ></line>
+              </svg>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </header>
+    <earth />
     <main>
-      <div class="noise"></div>
-      <!-- <section id="icon-burger"></section> -->
-      <section id="burger"></section>
-      <section id="home">
-        <div class="text left">
-          <p>
-            MERGING <br />
-            CREATIVITY <span class="and">&</span> <br />
-            TECHNOLOGY
-          </p>
-        </div>
-        <div class="text right">
-          <p>LEOZAMBONI.DEV</p>
-        </div>
-        <p class="scroll">Scroll</p>
-      </section>
-     
+      <img id="memoji" src="/assets/memoji.99a43fc9.png" alt="" />
+      <div class="status tooltip-left">
+        Working hard to make the world better with tech.
+        <span class="emoji">👨‍🚀</span>
+      </div>
     </main>
+    <footer
+      style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: black;
+        font-weight: bold;
+        font-size: 9pt;
+      "
+    >
+      © Copyright 2023 Leonardo Z. N..
+    </footer>
+    <script defer>
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        toggled = true;
+        const burgerDark = document.getElementById("burger-menu-dark-mode");
+        burgerDark.innerText = "White mode";
+        const sunEls = document.getElementsByClassName("sun");
+        const moon = document.getElementsByClassName("moon")[0];
+        moon.style.opacity = 1;
+        for (let sun of sunEls) {
+          sun.style.opacity = 0;
+        }
+      }
+      function emoji_parse() {
+        twemoji.parse(document.body, {
+          base: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/",
+        });
+      }
+      emoji_parse();
+    </script>
   </body>
 </html>
