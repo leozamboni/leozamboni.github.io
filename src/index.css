@@ -1,0 +1,31 @@
+@font-face {
+  font-family: cmunrm;
+  src: url("cmunrm.ttf");
+}
+
+@font-face {
+  font-family: cmunbi;
+  src: url("cmunbi.ttf");
+}
+
+@font-face {
+  font-family: cmunbx;
+  src: url("cmunbx.ttf");
+}
+
+@font-face {
+  font-family: StolzlBook;
+  src: url("StolzlBook.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+}

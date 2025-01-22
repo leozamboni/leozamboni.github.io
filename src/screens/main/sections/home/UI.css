@@ -1,0 +1,15 @@
+.and {
+  background: -webkit-linear-gradient(
+    326deg,
+    rgba(255, 0, 26, 1) 0%,
+    rgba(255, 218, 0, 1) 19%,
+    rgba(134, 255, 0, 1) 39%,
+    rgba(0, 255, 158, 1) 61%,
+    rgba(0, 155, 255, 1) 88%,
+    rgba(124, 0, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
