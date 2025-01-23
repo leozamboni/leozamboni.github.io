@@ -37,7 +37,7 @@ export function UI() {
                   "main main main"
                   "footer footer footer"`}
         gridTemplateRows={"100px 1fr 10vh"}
-        gridTemplateColumns={isMobile ? "250px 1fr 250px" : "300px 1fr 300px"}
+        gridTemplateColumns={isMobile ? "1fr 0px 1fr" : "300px 1fr 300px"}
         color="white"
         fontFamily="sans-serif"
         w="100vw"
@@ -89,7 +89,7 @@ export function UI() {
                 display="inline-block"
               >
                 <Link
-                  _hover={{ color: "white !important" }}
+                  _hover={{ color: "black !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Blog" && enblHover
@@ -109,7 +109,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "white !important" }}
+                  _hover={{ color: "black !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Portfolio" && enblHover
@@ -129,7 +129,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "white !important" }}
+                  _hover={{ color: "black !important" }}
                   _groupHover={{
                     color:
                       currHover !== "About" && enblHover
@@ -149,7 +149,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "white !important" }}
+                  _hover={{ color: "black !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Source" && enblHover

@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { ShaderMaterial, Vector2, Vector3 } from "three";
 import * as THREE from "three";
+import { useIsMobile } from "../../../../../utils/isMobile";
 
 const vertexShader = `
 varying vec2 vUv;
@@ -77,44 +78,48 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 void main() { 
     mainImage(gl_FragColor, gl_FragCoord.xy); 
 }
-
 `;
 
 function Shader() {
   const materialRef = useRef<ShaderMaterial>(null);
-  let mouseCords = {x:0,y:0};
+  let mouseCords = { x: 0, y: 0 };
   let mouseClick = false;
 
   useFrame(({ clock, size }) => {
     if (materialRef.current) {
       materialRef.current.uniforms.iResolution.value.set(
-        size.width,
+        size.width, 
         size.height
-      );
+      ); 
       materialRef.current.uniforms.iTime.value = clock.elapsedTime;
       materialRef.current.uniforms.iFrame.value++;
-      if (mouseClick) {
-        materialRef.current.uniforms.iMouse.value = {
-          x: mouseCords.x,
-          y: size.height - mouseCords.y,
-          z: mouseClick
-        };
-      }
+      materialRef.current.uniforms.iMouse.value = {
+        x: mouseCords.x,
+        y: size.height - mouseCords.y,
+        z: mouseClick,
+      };
     }
   });
 
-  document.addEventListener("mousemove", (event) => {
-    mouseCords.x = event.clientX
-    mouseCords.y = event.clientY
-  });
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseCords.x = event.clientX;
+      mouseCords.y = event.clientY;
+    };
 
-  document.addEventListener("mousedown", (event) => {
-    mouseClick = true
-  });
+    const handleMouseDown = () => (mouseClick = true);
+    const handleMouseUp = () => (mouseClick = false);
 
-  document.addEventListener("mouseup", (event) => {
-    mouseClick = false
-  });
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   const uniforms = {
     iResolution: { value: new Vector2() },
@@ -139,14 +144,22 @@ function Shader() {
 
 interface BgProps {
   ref: Ref<HTMLCanvasElement> | undefined;
-  style: CSSProperties;
 }
 
-export default function Bg({ ref, style }: BgProps) {
+export default function Bg({ ref }: BgProps) {
+  const isMobile = useIsMobile();
+
   return (
     <Canvas
       ref={ref}
-      style={style}
+      style={{
+        width: "100vw", 
+        height: isMobile ? "200vh" : '100vh',
+        marginTop: isMobile ? "-100vh" : '',
+        position: "absolute",
+        top: 0,
+        left: 0,
+      }}
     >
       <Shader />
     </Canvas>

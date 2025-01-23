@@ -5,10 +5,10 @@ import { VStack } from "@chakra-ui/react";
 
 function App() {
   return (
-    <VStack>
+    <>
       <Home />
       {/* <Portfolio /> */}
-    </VStack>
+    </>
   );
 }
 

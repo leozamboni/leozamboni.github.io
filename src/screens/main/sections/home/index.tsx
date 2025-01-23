@@ -5,12 +5,10 @@ import { useRef } from "react";
 
 export function Home() {
   const canvasRef = useRef(null);
+
   return (
     <Box w="100vw" h="100vh">
-      <Bg
-        ref={canvasRef}
-        style={{ width: "100vw", height: "100vh", position: "absolute" }}
-      />
+      <Bg ref={canvasRef} />
       <UI />
     </Box>
   );
