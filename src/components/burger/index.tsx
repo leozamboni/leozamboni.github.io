@@ -38,7 +38,7 @@ export function Burger({ inProp, setInProp }: BurgerProps) {
     transition: `height ${timeout}ms ease-out`,
     height: "0px",
     position: "fixed",
-    backgroundColor: "white",
+    backgroundColor: "LemonChiffon",
     width: "30vw",
     zIndex: 8888,
   };

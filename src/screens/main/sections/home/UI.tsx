@@ -38,7 +38,7 @@ export function UI() {
                   "footer footer footer"`}
         gridTemplateRows={"100px 1fr 10vh"}
         gridTemplateColumns={isMobile ? "1fr 0px 1fr" : "300px 1fr 300px"}
-        color="white"
+        color="LemonChiffon"
         fontFamily="sans-serif"
         w="100vw"
         h="100vh"
@@ -48,7 +48,7 @@ export function UI() {
           zIndex={isMobile ? "1" : "99999"}
           h="80px"
           area="left-header"
-          bg="white"
+          bg="LemonChiffon"
           display="table"
           fontWeight="bold"
           textAlign="center"
@@ -89,7 +89,7 @@ export function UI() {
                 display="inline-block"
               >
                 <Link
-                  _hover={{ color: "black !important" }}
+                  _hover={{ color: "OrangeRed !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Blog" && enblHover
@@ -109,7 +109,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "black !important" }}
+                  _hover={{ color: "OrangeRed !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Portfolio" && enblHover
@@ -129,7 +129,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "black !important" }}
+                  _hover={{ color: "OrangeRed !important" }}
                   _groupHover={{
                     color:
                       currHover !== "About" && enblHover
@@ -149,7 +149,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "black !important" }}
+                  _hover={{ color: "OrangeRed !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Source" && enblHover
@@ -167,8 +167,8 @@ export function UI() {
           zIndex="99"
           h="80px"
           area="right-header"
-          bg="white"
-          pt='20px'
+          bg="LemonChiffon"
+          pt="20px"
           onClick={() => {
             setInProp(!inProp);
           }}
@@ -184,7 +184,7 @@ export function UI() {
           mb="auto"
         >
           {isMobile ? (
-            <Text fontSize={"10vw"} color="white">
+            <Text fontSize={"8vw"} color="LemonChiffon">
               Crafting software <br /> merging <br /> creativity{" "}
               <span
                 style={{
@@ -201,7 +201,7 @@ export function UI() {
               technology
             </Text>
           ) : (
-            <Text fontSize={"6vw"} color="white">
+            <Text fontSize={"6vw"} color="LemonChiffon">
               Crafting software merging <br /> creativity{" "}
               <span
                 style={{

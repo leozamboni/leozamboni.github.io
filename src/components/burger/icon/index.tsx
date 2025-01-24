@@ -20,15 +20,15 @@ export function BurgerIcon({ isOpen }: BurgerIconProps) {
       // marginLeft: isMobile ? '-100px' : '',
       cursor: "pointer",
       zIndex: "9999",
-      backgroundColor: "white",
+      backgroundColor: "LemonChiffon",
     },
     open: {
       // position: "absolute",
       zIndex: "9999",
       width: "100%",
-      height: "25vh",
+      height: "30vh",
       margin: "auto",
-      backgroundColor: "white",
+      backgroundColor: "LemonChiffon",
       cursor: "pointer",
     },
   };

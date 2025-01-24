@@ -8,6 +8,7 @@ export function Home() {
 
   return (
     <Box w="100vw" h="100vh">
+      
       <Bg ref={canvasRef} />
       <UI />
     </Box>
