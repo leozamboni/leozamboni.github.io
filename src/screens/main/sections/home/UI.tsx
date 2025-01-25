@@ -38,32 +38,13 @@ export function UI() {
                   "footer footer footer"`}
         gridTemplateRows={"100px 1fr 10vh"}
         gridTemplateColumns={isMobile ? "1fr 0px 1fr" : "300px 1fr 300px"}
-        color="LemonChiffon"
+        color="OldLace"
         fontFamily="sans-serif"
         w="100vw"
         h="100vh"
         position="absolute"
       >
-        <GridItem
-          zIndex={isMobile ? "1" : "99999"}
-          h="80px"
-          area="left-header"
-          bg="LemonChiffon"
-          display="table"
-          fontWeight="bold"
-          textAlign="center"
-        >
-          {/* <Image src="memoji.png" h="80px"></Image> */}
-
-          <Text
-            color="black"
-            display="table-cell"
-            verticalAlign="middle"
-            pr="10px"
-          >
-            LEOZAMBONI.DEV
-          </Text>
-        </GridItem>
+        <GridItem>{/* <Image src="memoji.png" h="80px"></Image> */}</GridItem>
         {isMobile ? (
           <></>
         ) : (
@@ -73,7 +54,6 @@ export function UI() {
             fontSize="18pt"
             mt="auto"
             mb="auto"
-            mr="5vw"
           >
             <OrderedList
               role="group"
@@ -89,7 +69,7 @@ export function UI() {
                 display="inline-block"
               >
                 <Link
-                  _hover={{ color: "OrangeRed !important" }}
+                  _hover={{ color: "white !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Blog" && enblHover
@@ -109,7 +89,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "OrangeRed !important" }}
+                  _hover={{ color: "white !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Portfolio" && enblHover
@@ -129,7 +109,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "OrangeRed !important" }}
+                  _hover={{ color: "white !important" }}
                   _groupHover={{
                     color:
                       currHover !== "About" && enblHover
@@ -149,7 +129,7 @@ export function UI() {
                 }}
               >
                 <Link
-                  _hover={{ color: "OrangeRed !important" }}
+                  _hover={{ color: "white !important" }}
                   _groupHover={{
                     color:
                       currHover !== "Source" && enblHover
@@ -163,59 +143,97 @@ export function UI() {
             </OrderedList>
           </GridItem>
         )}
-        <GridItem
+        {/* <GridItem
           zIndex="99"
           h="80px"
           area="right-header"
-          bg="LemonChiffon"
+          bg="OldLace"
           pt="20px"
           onClick={() => {
             setInProp(!inProp);
           }}
         >
           <BurgerIcon isOpen={!inProp} />
-        </GridItem>
-        <GridItem
-          fontFamily="StolzlBook"
-          area={"main"}
-          fontWeight="bold"
-          textAlign="center"
-          mt="auto"
-          mb="auto"
-        >
+        </GridItem> */}
+        <GridItem area={"main"} textAlign="center" mt="auto" mb="auto">
           {isMobile ? (
-            <Text fontSize={"8vw"} color="LemonChiffon">
-              Crafting software <br /> merging <br /> creativity{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(34deg, rgba(232,197,71,1) 0%, rgba(194,1,20,1) 100%)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                }}
+            <>
+              <Text fontSize={"22pt"} color="OldLace">
+                LEOZAMBONI
+                <Text
+                  as="span"
+                  bg="OldLace"
+                  ml="5px"
+                  pr="5px"
+                  pl="50px"
+                  color="#c1c6ff"
+                >
+                  .DEV
+                </Text>
+              </Text>
+              <Text
+                fontFamily="StolzlBook"
+                fontSize={"16pt"}
+                color="OldLace"
+                position="absolute"
+                left="20%"
+                mt="120px"
+                right="0"
               >
-                &
-              </span>{" "}
-              <br />
-              technology
-            </Text>
+                Crafting software merging <br /> creativity{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(151deg, rgba(0,173,250,1) 0%, rgba(5,64,255,1) 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  &
+                </span>{" "}
+                technology.
+              </Text>
+            </>
           ) : (
-            <Text fontSize={"6vw"} color="LemonChiffon">
-              Crafting software merging <br /> creativity{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(34deg, rgba(232,197,71,1) 0%, rgba(194,1,20,1) 100%)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                }}
+            <>
+              <Text fontSize={"32pt"} color="OldLace">
+                LEOZAMBONI
+                <Text
+                  as="span"
+                  bg="OldLace"
+                  ml="5px"
+                  pr="5px"
+                  pl="50px"
+                  color="#c1c6ff"
+                >
+                  .DEV
+                </Text>
+              </Text>
+              <Text
+                fontFamily="StolzlBook"
+                fontSize={"18pt"}
+                color="OldLace"
+                position="absolute"
+                left="20%"
+                mt="120px"
+                right="0"
               >
-                &
-              </span>{" "}
-              technology
-            </Text>
+                Crafting software merging <br /> creativity{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(151deg, rgba(0,173,250,1) 0%, rgba(5,64,255,1) 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  &
+                </span>{" "}
+                technology.
+              </Text>
+            </>
           )}
         </GridItem>
         <GridItem area="footer" ml="auto" mr="auto">
